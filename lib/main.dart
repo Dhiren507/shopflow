@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shopflow/core/constants/app_colors.dart';
-import 'package:shopflow/features/onboarding/screens/splash_screen.dart';
+import 'package:shopflow/core/constants/app_routes.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +17,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: .fromSeed(seedColor: AppColors.primaryColor),
       ),
-      home: SplashScreen(),
+      debugShowCheckedModeBanner: false,
+      routes: AppRoutes.routes,
     );
   }
 }
