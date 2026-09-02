@@ -8,4 +8,7 @@ class AppImages {
   static const String introImageThree = '$_commonImagePath/introImageThree.jpg';
 
   static const String loginTopLogo = '$_commonImagePath/login_top_logo.svg';
+  static const String ratingStar = '$_commonImagePath/rating_star.svg';
+
+  static const String likeHeart = '$_commonImagePath/like_heart.svg';
 }

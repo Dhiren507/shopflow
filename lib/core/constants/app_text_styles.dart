@@ -21,6 +21,27 @@ class AppTextStyles {
     color: AppColors.headerDarkBlackText,
   );
 
+  static const TextStyle displaySmall = TextStyle(
+    fontFamily: _fontFamily,
+    fontSize: 14,
+    fontWeight: FontWeight.w400,
+    color: AppColors.headerDarkBlackText,
+  );
+
+  static const TextStyle displaySmallBold = TextStyle(
+    fontFamily: _fontFamily,
+    fontSize: 14,
+    fontWeight: FontWeight.w500,
+    color: AppColors.headerDarkBlackText,
+  );
+
+  static const TextStyle displayMediumBold = TextStyle(
+    fontFamily: _fontFamily,
+    fontSize: 18,
+    fontWeight: FontWeight.w600,
+    color: AppColors.headerDarkBlackText,
+  );
+
   static const TextStyle coloredDisplayText = TextStyle(
     fontFamily: _fontFamily,
     fontSize: 28,
@@ -34,7 +55,6 @@ class AppTextStyles {
     fontWeight: FontWeight.w700,
     color: AppColors.primaryColor,
   );
-
 
   // Subheading small text styles
   static const TextStyle bodyMedium = TextStyle(
@@ -65,7 +85,6 @@ class AppTextStyles {
     color: AppColors.errorColor,
   );
 
-
   // Button Text Styles
   static const TextStyle buttonText = TextStyle(
     fontFamily: _fontFamily,
@@ -88,9 +107,27 @@ class AppTextStyles {
     color: AppColors.offGreyColor,
   );
 
+  static const TextStyle mutedGreyTextSmall = TextStyle(
+    fontFamily: _fontFamily,
+    fontSize: 12,
+    fontWeight: FontWeight.w500,
+    color: AppColors.offGreyColor,
+  );
+
+  static const TextStyle mutedGreyTextSmallLineThrough = TextStyle(
+    fontFamily: _fontFamily,
+    fontSize: 12,
+    fontWeight: FontWeight.w500,
+    color: AppColors.offGreyColor,
+    decoration: TextDecoration.lineThrough,
+    decorationColor: Colors.grey,
+    decorationStyle:
+    TextDecorationStyle.solid,
+    decorationThickness: 2.0,
+  );
 
   // input field text Styles
-  static const TextStyle inputLabel =  TextStyle(
+  static const TextStyle inputLabel = TextStyle(
     color: AppColors.subheadingDarkGreyText,
     fontWeight: FontWeight.w500,
     fontSize: 12,
@@ -101,5 +138,13 @@ class AppTextStyles {
     color: AppColors.greyColor,
     fontWeight: FontWeight.w400,
     fontSize: 14,
+  );
+
+
+  static const TextStyle smallChipText = TextStyle(
+    color: AppColors.lightGreyColor,
+    fontWeight: FontWeight.w500,
+    fontSize: 12,
+    letterSpacing: 0.12,
   );
 }

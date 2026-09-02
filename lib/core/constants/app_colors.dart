@@ -11,9 +11,13 @@ class AppColors {
 
   static const Color offGreyColor = Color(0xFF777588);
   static const Color greyDotColor = Color(0xFFE4E0EF);
+  static const Color scaffoldBgColor = Color(0xFFFCF8FF);
 
   // input field colors
   static const Color greyColor = Color(0xFFC7C4D9);
   static const Color errorColor = Color(0xFFBA1A1A);
   static const Color lightRedBgColor = Color(0xFFFFDAD6);
+
+
+  static const Color lightGreyColor = Color(0xFFEEEAFF);
 }

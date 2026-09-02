@@ -21,7 +21,8 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      scrolledUnderElevation: 0,
+     backgroundColor: AppColors.scaffoldBgColor,
+      scrolledUnderElevation: 0 ,
       title: Text(title ?? 'ShopFlow', style: AppTextStyles.coloredDisplayTextMedium),
       centerTitle: centerTitle,
       leading: leading ?? IconButton(onPressed: () {}, icon: Icon(Icons.search)),

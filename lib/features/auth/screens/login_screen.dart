@@ -146,7 +146,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     onPressed: () {
                       Navigator.pushReplacementNamed(
                         context,
-                        AppRoutes.homeScreen,
+                        AppRoutes.mainScreen,
                       );
                     },
                     child: Text(
