@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shopflow/core/constants/app_colors.dart';
+import 'package:shopflow/core/constants/app_text_styles.dart';
 
 class CommonInputField extends StatelessWidget {
   final String? labelText;
@@ -44,13 +45,6 @@ class CommonInputField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const labelStyle = TextStyle(
-      color: AppColors.subheadingDarkGreyText,
-      fontWeight: FontWeight.w500,
-      fontSize: 12,
-      letterSpacing: 0.5,
-    );
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
@@ -62,7 +56,7 @@ class CommonInputField extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(labelText!, style: labelStyle),
+              Text(labelText ?? '', style: AppTextStyles.inputLabel),
               ?labelTrailing,
             ],
           ),
@@ -89,11 +83,7 @@ class CommonInputField extends StatelessWidget {
             filled: true,
             fillColor: AppColors.white,
             hintText: hintText,
-            hintStyle: const TextStyle(
-              color: AppColors.greyColor,
-              fontWeight: FontWeight.w400,
-              fontSize: 14,
-            ),
+            hintStyle: AppTextStyles.hintText,
             suffixIcon: isDate ? const Icon(Icons.calendar_month) : suffixIcon,
             enabledBorder: const OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(12)),

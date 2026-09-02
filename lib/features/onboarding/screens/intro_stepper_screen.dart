@@ -71,10 +71,7 @@ class _IntroStepperScreenState extends State<IntroStepperScreen> {
                 },
                 child: Text(
                   AppStrings.skipText,
-                  style: AppTextStyles.bodySmall.copyWith(
-                    color: AppColors.offGreyColor,
-                    fontWeight: FontWeight.w600,
-                  ),
+                  style: AppTextStyles.mutedGreyText,
                 ),
               ),
             ),
@@ -155,11 +152,7 @@ class _IntroStepperScreenState extends State<IntroStepperScreen> {
                         isLastPage
                             ? AppStrings.getStartedText
                             : AppStrings.nextText,
-                        style: AppTextStyles.bodySmall.copyWith(
-                          color: AppColors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
-                        ),
+                        style: AppTextStyles.buttonText,
                       ),
                     ),
                   ),

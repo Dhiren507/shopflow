@@ -6,11 +6,11 @@ import 'package:shopflow/features/shop/screens/home_screen.dart';
 import 'package:shopflow/features/shop/screens/product_detail_screen.dart';
 
 class AppRoutes {
-  static final String splashScreen = '/';
-  static final String introScreen = '/introScreen';
-  static final String loginScreen = '/loginScreen';
-  static final String homeScreen = '/homeScreen';
-  static final String productDetailScreen = '/productDetailScreen';
+  static const String splashScreen = '/';
+  static const String introScreen = '/introScreen';
+  static const String loginScreen = '/loginScreen';
+  static const String homeScreen = '/homeScreen';
+  static const String productDetailScreen = '/productDetailScreen';
 
   static final Map<String, Widget Function(BuildContext context)> routes = {
     splashScreen: (context) => const SplashScreen(),

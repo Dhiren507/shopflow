@@ -23,16 +23,24 @@ class HomeScreen extends StatelessWidget {
                   return GestureDetector(
                     onTap: () {},
                     child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 8,
+                      ),
                       decoration: BoxDecoration(
-                          border: Border.all(color: AppColors.offGreyColor, width: 1),
-                        borderRadius: BorderRadius.circular(16)
+                        border: Border.all(
+                          color: AppColors.offGreyColor,
+                          width: 1,
+                        ),
+                        borderRadius: BorderRadius.circular(16),
                       ),
                       child: Text(AppStrings.allowedFilterOptions[index]),
                     ),
                   );
                 },
-                separatorBuilder: (context, index) => const SizedBox(width: 10),
+                separatorBuilder:
+
+(context, index) => const SizedBox(width: 10),
                 itemCount: AppStrings.allowedFilterOptions.length,
               ),
             ),

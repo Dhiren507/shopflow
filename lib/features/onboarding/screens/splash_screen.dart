@@ -52,9 +52,7 @@ class _SplashScreenState extends State<SplashScreen> {
             SvgPicture.asset(AppImages.appIconLogo),
             Text(
               AppStrings.appName,
-              style: AppTextStyles.display.copyWith(
-                color: AppColors.primaryColor,
-              ),
+              style: AppTextStyles.coloredDisplayText,
             ),
             const SizedBox(height: 16),
             const Text(

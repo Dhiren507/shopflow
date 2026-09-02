@@ -45,19 +45,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   SvgPicture.asset(AppImages.loginTopLogo),
                   Text(
                     AppStrings.appName,
-                    style: AppTextStyles.display.copyWith(
-                      fontSize: 24,
-                      color: AppColors.coloredText,
-                    ),
+                    style: AppTextStyles.coloredDisplayTextMedium,
                   ),
                   const SizedBox(height: 10),
-                  Text(
-                    'Welcome Back',
-                    style: AppTextStyles.bodySmall.copyWith(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
+                  Text('Welcome Back', style: AppTextStyles.bodyMedium),
                   const SizedBox(height: 20),
 
                   CommonInputField(
@@ -107,9 +98,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         const SizedBox(width: 5),
                         Text(
                           'Invalid Credentials',
-                          style: AppTextStyles.bodySmall.copyWith(
-                            color: AppColors.errorColor,
-                          ),
+                          style: AppTextStyles.errorText,
                         ),
                       ],
                     ),
@@ -121,7 +110,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
-                        Navigator.pushReplacementNamed(context, AppRoutes.homeScreen);
+                        Navigator.pushReplacementNamed(
+                          context,
+                          AppRoutes.homeScreen,
+                        );
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.coloredText,
@@ -136,11 +128,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           children: [
                             Text(
                               'Log In',
-                              style: AppTextStyles.bodySmall.copyWith(
-                                color: AppColors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                              ),
+                              style: AppTextStyles.buttonTextMedium,
                             ),
                             const SizedBox(width: 5),
                             const Icon(
@@ -163,9 +151,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                     child: Text(
                       'Use demo account',
-                      style: AppTextStyles.bodySmall.copyWith(
-                        color: AppColors.coloredText,
-                      ),
+                      style: AppTextStyles.coloredBodySmall,
                     ),
                   ),
                 ],
