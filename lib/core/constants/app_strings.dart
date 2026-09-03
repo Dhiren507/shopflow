@@ -26,4 +26,40 @@ class AppStrings {
     'Home',
     'Beauty',
   ];
+
+  // Login Screen Text
+  static const String usernameText = 'Username';
+  static const String usernameHintText = 'Enter your Username';
+
+  static const String passwordText = 'Password';
+  static const String passwordHintText = 'Enter your Password';
+
+  static const String loginErrorText = 'Invalid Credentials';
+  static const String loginButtonText = 'Log In';
+
+  static const String helperText = 'Use Demo Account';
+  static const String  greetingText = 'Welcome Back';
+
+  // Tab Bar Bottom Label Text
+  static const String tabBarLabelOne = 'Home';
+  static const String tabBarLabelTwo = 'Cart';
+  static const String tabBarLabelThree = 'My Products';
+  static const String tabBarLabelFour = 'Profile';
+
+
+  // Product Detail Screen Text
+  static const String addToCartText = 'Add to Cart';
+  static const String totalPriceText = 'Total Price';
+  static const String reviewSectionHeaderText = 'Customer Reviews';
+  static const String showLessReviewsText = 'Show Less Reviews';
+  static const String viewAllReviews = 'View All Reviews';
+  static const String productDescriptionHeaderText = 'Product Description';
+  static const String quantitySectionText = 'Quantity';
+
+  // Empty Cart Screen Text
+  static const String startShoppingText = 'Start Shopping';
+  static const String emptyCartMainText = 'Your cart is empty';
+  static const String emptyCartSubText =  "Looks like you haven't added anything to your cart yet.";
+
+
 }

@@ -1,8 +1,14 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:shopflow/core/constants/app_colors.dart';
+import 'package:shopflow/core/constants/app_strings.dart';
+import 'package:shopflow/core/widgets/common_divider.dart';
+import 'package:shopflow/core/widgets/common_expansion_tile.dart';
+import 'package:shopflow/core/widgets/numeric_stepper_button.dart';
 import 'package:shopflow/core/widgets/product_rating_stars.dart';
+import 'package:shopflow/core/widgets/rating_section.dart';
 
 import '../../../core/constants/app_images.dart';
 import '../../../core/constants/app_text_styles.dart';
@@ -16,127 +22,260 @@ class ProductDetailScreen extends StatefulWidget {
 
 class _ProductDetailScreenState extends State<ProductDetailScreen> {
   int _currentImageIndex = 0;
+  int _quantity = 1;
+  int reviewListLength = 2;
+  bool isReviewListExpanded = false;
+
   final List<String> imgList = [
     'https://www.imageurlgenerator.com/_next/image?url=%2Fassets%2Ffree_tool.png&w=3840&q=75',
     'https://www.imageurlgenerator.com/_next/image?url=%2Fassets%2Ffree_tool.png&w=3840&q=75',
     'https://www.imageurlgenerator.com/_next/image?url=%2Fassets%2Ffree_tool.png&w=3840&q=75',
   ];
 
+  final Map<String, dynamic> mockProduct = {
+    "success": true,
+    "message": "Product details fetched successfully",
+    "data": {
+      "id": "watch_001",
+      "brand": "LUMINA TECH",
+      "name": "Aura Horizon Smartwatch Series 7",
+
+      "images": [
+        "https://example.com/watch-1.jpg",
+        "https://example.com/watch-2.jpg",
+        "https://example.com/watch-3.jpg",
+        "https://example.com/watch-4.jpg",
+      ],
+
+      "rating": {
+        "average": 4.8,
+        "totalReviews": 1284,
+        "distribution": {"5": 1120, "4": 95, "3": 40, "2": 18, "1": 11},
+      },
+
+      "availability": {"inStock": true, "label": "In Stock"},
+
+      "pricing": {
+        "currentPrice": 299.00,
+        "originalPrice": 349.00,
+        "currency": "USD",
+        "discount": {"amount": 50.00, "label": "Save \$50"},
+      },
+
+      "quantity": {"minimum": 1, "maximum": 10, "default": 1},
+
+      "description": "<p>Experience the next generation of <strong>wearable technology</strong>.</p><p>The Aura Horizon features a stunning edge-to-edge AMOLED display, advanced health tracking sensors, and a premium titanium casing designed for both durability and elegance.</p><ul><li>Always-on Retina display with 2000 nits peak brightness.</li><li>Advanced ECG and blood oxygen monitoring.</li><li>Up to 36 hours of battery life on a single charge.</li><li>Water-resistant up to 50 meters.</li></ul>",
+
+      "reviews": [
+        {
+          "id": "review_001",
+          "user": {
+            "name": "Sarah Jenkins",
+            "avatar": "https://example.com/sarah.jpg",
+          },
+          "rating": 5,
+          "date": "2023-10-12",
+          "comment":
+              "Absolutely love the build quality. The battery easily "
+              "lasts a day and a half with heavy usage. The sleep tracking "
+              "is surprisingly accurate compared to my previous device.",
+        },
+        {
+          "id": "review_002",
+          "user": {
+            "name": "Michael T.",
+            "avatar": "https://example.com/michael.jpg",
+          },
+          "rating": 4,
+          "date": "2023-10-05",
+          "comment":
+              "Great watch overall. The screen is incredibly bright even "
+              "in direct sunlight. My only minor complaint is that the "
+              "included strap could be slightly more breathable.",
+        },
+        {
+          "id": "review_001",
+          "user": {
+            "name": "Sarah Jenkins",
+            "avatar": "https://example.com/sarah.jpg",
+          },
+          "rating": 5,
+          "date": "2023-10-12",
+          "comment":
+              "Absolutely love the build quality. The battery easily "
+              "lasts a day and a half with heavy usage. The sleep tracking "
+              "is surprisingly accurate compared to my previous device.",
+        },
+        {
+          "id": "review_002",
+          "user": {
+            "name": "Michael T.",
+            "avatar": "https://example.com/michael.jpg",
+          },
+          "rating": 4,
+          "date": "2023-10-05",
+          "comment":
+              "Great watch overall. The screen is incredibly bright even "
+              "in direct sunlight. My only minor complaint is that the "
+              "included strap could be slightly more breathable.",
+        },
+        {
+          "id": "review_001",
+          "user": {
+            "name": "Sarah Jenkins",
+            "avatar": "https://example.com/sarah.jpg",
+          },
+          "rating": 5,
+          "date": "2023-10-12",
+          "comment":
+              "Absolutely love the build quality. The battery easily "
+              "lasts a day and a half with heavy usage. The sleep tracking "
+              "is surprisingly accurate compared to my previous device.",
+        },
+        {
+          "id": "review_002",
+          "user": {
+            "name": "Michael T.",
+            "avatar": "https://example.com/michael.jpg",
+          },
+          "rating": 4,
+          "date": "2023-10-05",
+          "comment":
+              "Great watch overall. The screen is incredibly bright even "
+              "in direct sunlight. My only minor complaint is that the "
+              "included strap could be slightly more breathable.",
+        },
+      ],
+    },
+  };
+
+  void _handleReviewToggleButton() {
+    setState(() {
+      isReviewListExpanded = !isReviewListExpanded;
+      if (isReviewListExpanded) {
+        reviewListLength = product['reviews'].length;
+      } else {
+        reviewListLength = 2;
+      }
+    });
+  }
+
+  late final product = mockProduct['data'];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.scaffoldBgColor,
-      body: Column(
-        children: [
-          Stack(
-            children: [
-              CarouselSlider(
-                items: imgList
-                    .map(
-                      (image) => Container(
-                        color: Colors.grey,
-                        child: Image.network(
-                          image,
-                          fit: BoxFit.cover,
-                          width: double.infinity,
-                          height: 450,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Stack(
+              children: [
+                CarouselSlider(
+                  items: imgList
+                      .map(
+                        (image) => Container(
+                          color: Colors.grey,
+                          child: Image.network(
+                            image,
+                            fit: BoxFit.cover,
+                            width: double.infinity,
+                            height: 450,
+                          ),
                         ),
-                      ),
-                    )
-                    .toList(),
-                options: CarouselOptions(
-                  height: null,
-                  aspectRatio: 390 / 400,
-                  viewportFraction: 1,
-                  onPageChanged: (index, reason) {
-                    setState(() {
-                      _currentImageIndex = index;
-                    });
-                  },
+                      )
+                      .toList(),
+                  options: CarouselOptions(
+                    height: null,
+                    aspectRatio: 390 / 400,
+                    viewportFraction: 1,
+                    onPageChanged: (index, reason) {
+                      setState(() {
+                        _currentImageIndex = index;
+                      });
+                    },
+                  ),
                 ),
-              ),
 
-              Positioned(
-                top: MediaQuery.of(context).padding.top + 10,
-                left: 25,
-                right: 25,
-                child: Row(
-                  mainAxisAlignment: .spaceBetween,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child: Container(
-                        height: 44,
-                        width: 44,
-                        decoration: BoxDecoration(
-                          color: AppColors.white,
-                          shape: BoxShape.circle,
+                Positioned(
+                  top: MediaQuery.of(context).padding.top + 10,
+                  left: 25,
+                  right: 25,
+                  child: Row(
+                    mainAxisAlignment: .spaceBetween,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: Container(
+                          height: 44,
+                          width: 44,
+                          decoration: BoxDecoration(
+                            color: AppColors.white,
+                            shape: BoxShape.circle,
+                          ),
+                          child: Icon(Icons.arrow_back, color: AppColors.black),
                         ),
-                        child: Icon(Icons.arrow_back, color: AppColors.black),
                       ),
-                    ),
-                    GestureDetector(
-                      onTap: () {},
-                      child: Container(
-                        height: 44,
-                        width: 44,
-                        decoration: BoxDecoration(
-                          color: AppColors.white,
-                          shape: BoxShape.circle,
-                        ),
-                        child: SvgPicture.asset(
-                          AppImages.likeHeart,
-                          fit: BoxFit.scaleDown,
-                          colorFilter: ColorFilter.mode(
-                            AppColors.black,
-                            BlendMode.srcIn,
+                      GestureDetector(
+                        onTap: () {},
+                        child: Container(
+                          height: 44,
+                          width: 44,
+                          decoration: BoxDecoration(
+                            color: AppColors.white,
+                            shape: BoxShape.circle,
+                          ),
+                          child: SvgPicture.asset(
+                            AppImages.likeHeart,
+                            fit: BoxFit.scaleDown,
+                            colorFilter: ColorFilter.mode(
+                              AppColors.black,
+                              BlendMode.srcIn,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
 
-              Positioned(
-                bottom: 25,
-                right: 0,
-                left: 0,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: List.generate(
-                    imgList.length,
-                    (index) => Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 4.0),
-                      height: 8,
-                      width: 8,
-                      decoration: BoxDecoration(
-                        color: _currentImageIndex == index
-                            ? AppColors.primaryColor
-                            : AppColors.greyDotColor,
-                        borderRadius: BorderRadius.circular(4),
+                Positioned(
+                  bottom: 25,
+                  right: 0,
+                  left: 0,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: List.generate(
+                      imgList.length,
+                      (index) => Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 4.0),
+                        height: 8,
+                        width: 8,
+                        decoration: BoxDecoration(
+                          color: _currentImageIndex == index
+                              ? AppColors.primaryColor
+                              : AppColors.greyDotColor,
+                          borderRadius: BorderRadius.circular(4),
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-            ],
-          ),
+              ],
+            ),
 
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 24),
-            child: Container(
-              width: double.maxFinite,
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
               child: Column(
                 crossAxisAlignment: .start,
                 children: [
-                  Text('LUMINA TECH', style: AppTextStyles.mutedGreyTextSmall),
                   Text(
-                    'Aura Horizon Smartwatch Series 7',
-                    style: AppTextStyles.displayMedium,
+                    product['brand'],
+                    style: AppTextStyles.mutedGreyTextSmall,
                   ),
+                  Text(product['name'], style: AppTextStyles.displayMedium),
                   Row(
                     spacing: 6,
                     children: [
@@ -163,7 +302,37 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           borderRadius: BorderRadiusGeometry.circular(16),
                         ),
                         child: Text(
-                          'In Stock',
+                          product['availability']['label'],
+                          style: AppTextStyles.smallChipText,
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  const SizedBox(height: 12),
+
+                  Row(
+                    spacing: 15,
+                    children: [
+                      Text(
+                        '\$${product['pricing']['currentPrice']}',
+                        style: AppTextStyles.displayMedium,
+                      ),
+                      Text(
+                        '\$${product['pricing']['originalPrice']}',
+                        style: AppTextStyles.mutedGreyTextMediumLineThrough,
+                      ),
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                          vertical: 2,
+                          horizontal: 8,
+                        ),
+                        decoration: BoxDecoration(
+                          color: AppColors.redBgColor,
+                          borderRadius: BorderRadiusGeometry.circular(16),
+                        ),
+                        child: Text(
+                          r"Save $50",
                           style: AppTextStyles.smallChipText,
                         ),
                       ),
@@ -172,8 +341,192 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 ],
               ),
             ),
+            const CommonDivider(),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
+              child: Row(
+                mainAxisAlignment: .spaceBetween,
+                children: [
+                  Text(AppStrings.quantitySectionText, style: AppTextStyles.displayMediumSemiBold),
+                  NumericStepperButton(
+                    onChanged: (int newValue) {
+                      setState(() => _quantity = newValue);
+                    },
+                    value: _quantity,
+                  ),
+                ],
+              ),
+            ),
+            const CommonDivider(),
+
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 24),
+              child: CommonExpansionTile(
+                headerTitle: AppStrings.productDescriptionHeaderText,
+                inputFields: [
+                  HtmlWidget(
+                    product['description'],
+                    textStyle: AppTextStyles.bodySmall,
+                  ),
+                ],
+              ),
+            ),
+
+            const CommonDivider(),
+
+            Container(
+              decoration: BoxDecoration(color: AppColors.reviewSectionBgColor),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 24,
+                  vertical: 20,
+                ),
+
+                child: Column(
+                  crossAxisAlignment: .start,
+                  children: [
+                    Text(
+                      AppStrings.reviewSectionHeaderText,
+                      style: AppTextStyles.displayMediumSemiBold,
+                    ),
+                    const SizedBox(height: 10),
+                    RatingSection(totalRating: 4.5, totalReviews: 1050),
+                    const SizedBox(height: 20),
+                    ListView.separated(
+                      padding: EdgeInsets.zero,
+                      itemCount: reviewListLength,
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      separatorBuilder: (context, index) =>
+                          const SizedBox(height: 5),
+                      itemBuilder: (context, index) {
+                        return Card(
+                          color: AppColors.white,
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Column(
+                              children: [
+                                Row(
+                                  crossAxisAlignment: .start,
+                                  children: [
+                                    CircleAvatar(
+                                      radius: 20,
+                                      backgroundImage: NetworkImage(
+                                        'https://www.imageurlgenerator.com/_next/image?url=%2Fassets%2Ffree_tool.png&w=3840&q=75',
+                                      ),
+                                    ),
+                                    const SizedBox(width: 10),
+                                    Column(
+                                      crossAxisAlignment: .start,
+                                      children: [
+                                        Text(
+                                          'Sarah Jenkins',
+                                          style: AppTextStyles
+                                              .displaySmallSemiBold,
+                                        ),
+                                        Text(
+                                          'Oct 12, 2023',
+                                          style:
+                                              AppTextStyles.mutedGreyTextSmall,
+                                        ),
+                                      ],
+                                    ),
+                                    const Spacer(),
+                                    ProductRatingStars(rating: 5),
+                                  ],
+                                ),
+
+                                Padding(
+                                  padding: const EdgeInsets.all(8),
+                                  child: Text(
+                                    'Absolutely love the build quality. The battery easily lasts a day and a half with heavy usage. The sleep tracking is surprisingly accurate compared to my previous device.',
+                                    style: AppTextStyles.displaySmall,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+
+                    const SizedBox(height: 10),
+
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: _handleReviewToggleButton,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.reviewSectionBgColor,
+                          elevation: 0,
+                          side: BorderSide(color: AppColors.greyColor),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadiusGeometry.circular(22),
+                          ),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 13),
+                          child: Text(
+                            isReviewListExpanded
+                                ? AppStrings.showLessReviewsText
+                                : AppStrings.viewAllReviews,
+                            style: AppTextStyles.buttonTextMediumBlack,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        color: AppColors.white,
+        child: Padding(
+          padding: const EdgeInsets.all(6.0),
+          child: Row(
+            children: [
+              Column(
+                children: [
+                  Text(AppStrings.totalPriceText, style: AppTextStyles.mutedGreyTextSmall),
+                  Text('\$299.00', style: AppTextStyles.displayMediumSemiBold),
+                ],
+              ),
+              const SizedBox(width: 10,),
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.coloredText,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadiusGeometry.circular(22),
+                    ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 11),
+                    child: Row(
+                      mainAxisAlignment: .center,
+                      children: [
+                        const Icon(
+                          Icons.shopping_cart_outlined,
+                          color: AppColors.white,
+                          size: 20,
+                        ),
+                        const SizedBox(width: 5),
+                        Text(
+                          AppStrings.addToCartText,
+                          style: AppTextStyles.buttonTextMediumWhite,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

@@ -11,4 +11,5 @@ class AppImages {
   static const String ratingStar = '$_commonImagePath/rating_star.svg';
 
   static const String likeHeart = '$_commonImagePath/like_heart.svg';
+  static const String emptyCartImage = '$_commonImagePath/empty_cart.svg';
 }

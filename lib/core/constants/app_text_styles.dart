@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:shopflow/core/constants/app_colors.dart';
 
 class AppTextStyles {
-  AppTextStyles._();
-
   static const String _fontFamily = 'Inter';
 
   // heading large text styles
@@ -18,6 +16,21 @@ class AppTextStyles {
     fontFamily: _fontFamily,
     fontSize: 24,
     fontWeight: FontWeight.w700,
+    color: AppColors.headerDarkBlackText,
+  );
+
+  static const TextStyle displayMediumSemiBold = TextStyle(
+    fontFamily: _fontFamily,
+    fontSize: 18,
+    fontWeight: FontWeight.w600,
+    color: AppColors.headerDarkBlackText,
+  );
+
+
+  static const TextStyle displaySmallSemiBold = TextStyle(
+    fontFamily: _fontFamily,
+    fontSize: 16,
+    fontWeight: FontWeight.w600,
     color: AppColors.headerDarkBlackText,
   );
 
@@ -53,6 +66,13 @@ class AppTextStyles {
     fontFamily: _fontFamily,
     fontSize: 24,
     fontWeight: FontWeight.w700,
+    color: AppColors.primaryColor,
+  );
+
+  static const TextStyle coloredDisplayTextSmallSemiBold = TextStyle(
+    fontFamily: _fontFamily,
+    fontSize: 18,
+    fontWeight: FontWeight.w600,
     color: AppColors.primaryColor,
   );
 
@@ -93,11 +113,18 @@ class AppTextStyles {
     color: AppColors.white,
   );
 
-  static const TextStyle buttonTextMedium = TextStyle(
+  static const TextStyle buttonTextMediumWhite = TextStyle(
     fontFamily: _fontFamily,
     fontSize: 16,
     fontWeight: FontWeight.w600,
     color: AppColors.white,
+  );
+
+  static const TextStyle buttonTextMediumBlack = TextStyle(
+    fontFamily: _fontFamily,
+    fontSize: 16,
+    fontWeight: FontWeight.w600,
+    color: AppColors.black,
   );
 
   static const TextStyle mutedGreyText = TextStyle(
@@ -120,10 +147,23 @@ class AppTextStyles {
     fontWeight: FontWeight.w500,
     color: AppColors.offGreyColor,
     decoration: TextDecoration.lineThrough,
-    decorationColor: Colors.grey,
+    decorationColor: AppColors.offGreyColor,
     decorationStyle:
     TextDecorationStyle.solid,
-    decorationThickness: 2.0,
+    decorationThickness: 1.0,
+  );
+
+
+  static const TextStyle mutedGreyTextMediumLineThrough = TextStyle(
+    fontFamily: _fontFamily,
+    fontSize: 16,
+    fontWeight: FontWeight.w600,
+    color: AppColors.offGreyColor,
+    decoration: TextDecoration.lineThrough,
+    decorationColor: AppColors.offGreyColor,
+    decorationStyle:
+    TextDecorationStyle.solid,
+    decorationThickness: 1.0,
   );
 
   // input field text Styles

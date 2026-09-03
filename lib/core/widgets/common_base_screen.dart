@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shopflow/core/constants/app_colors.dart';
+import 'package:shopflow/core/constants/app_strings.dart';
 import 'package:shopflow/core/widgets/common_app_bar.dart';
+import 'package:shopflow/features/shop/screens/cart_screen.dart';
 import 'package:shopflow/features/shop/screens/home_screen.dart';
 
 class CommonBaseScreen extends StatefulWidget {
@@ -38,7 +40,7 @@ class _CommonBaseScreenState extends State<CommonBaseScreen>
     return Scaffold(
       appBar: CommonAppBar(),
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.symmetric(horizontal:8, vertical: 6),
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
         child: SizedBox(
           height: 60,
           child: TabBar(
@@ -46,8 +48,6 @@ class _CommonBaseScreenState extends State<CommonBaseScreen>
             labelColor: AppColors.white,
             unselectedLabelColor: AppColors.subheadingDarkGreyText,
             dividerColor: Colors.transparent,
-            splashFactory: NoSplash.splashFactory,
-            overlayColor: WidgetStateProperty.all(Colors.transparent),
             indicator: BoxDecoration(
               color: AppColors.primaryColor,
               borderRadius: BorderRadius.circular(12),
@@ -56,7 +56,7 @@ class _CommonBaseScreenState extends State<CommonBaseScreen>
             tabs: [
               Tab(
                 icon: Icon(activeIndex == 0 ? Icons.home : Icons.home_outlined),
-                text: 'Home',
+                text: AppStrings.tabBarLabelOne,
               ),
               Tab(
                 icon: Icon(
@@ -64,7 +64,7 @@ class _CommonBaseScreenState extends State<CommonBaseScreen>
                       ? Icons.shopping_cart
                       : Icons.shopping_cart_outlined,
                 ),
-                text: 'Cart',
+                text: AppStrings.tabBarLabelTwo,
               ),
               Tab(
                 icon: Icon(
@@ -72,14 +72,13 @@ class _CommonBaseScreenState extends State<CommonBaseScreen>
                       ? Icons.inventory_2
                       : Icons.inventory_2_outlined,
                 ),
-                text: 'Products',
-                iconMargin: const EdgeInsets.only(bottom: 2.0),
+                text: AppStrings.tabBarLabelThree,
               ),
               Tab(
                 icon: Icon(
                   activeIndex == 3 ? Icons.person : Icons.person_outline,
                 ),
-                text: 'Profile',
+                text: AppStrings.tabBarLabelFour,
               ),
             ],
           ),
@@ -88,11 +87,11 @@ class _CommonBaseScreenState extends State<CommonBaseScreen>
       body: TabBarView(
         controller: _tabController,
         physics: NeverScrollableScrollPhysics(),
-        children: const [
-          HomeScreen(),
-          Center(child: Text('Cart Screen')),
-          Center(child: Text('My Products Screen')),
-          Center(child: Text('Profile Screen')),
+        children: [
+          const HomeScreen(),
+          CartScreen(),
+          const Center(child: Text('My Products Screen')),
+          const Center(child: Text('Profile Screen')),
         ],
       ),
     );

@@ -13,9 +13,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+
       title: 'Shop Flow',
       theme: ThemeData(
         colorScheme: .fromSeed(seedColor: AppColors.primaryColor),
+        splashFactory: NoSplash.splashFactory,
+        highlightColor: Colors.transparent,
       ),
       debugShowCheckedModeBanner: false,
       routes: AppRoutes.routes,

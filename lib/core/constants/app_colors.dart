@@ -17,6 +17,12 @@ class AppColors {
   static const Color greyColor = Color(0xFFC7C4D9);
   static const Color errorColor = Color(0xFFBA1A1A);
   static const Color lightRedBgColor = Color(0xFFFFDAD6);
+  static const Color redBgColor = Color(0xFFFF6B6B);
+  static const Color stepperBgColor = Color(0xFFF0ECFA);
+
+  static const Color reviewSectionBgColor = Color(0xFFF6F2FF);
+
+
 
 
   static const Color lightGreyColor = Color(0xFFEEEAFF);

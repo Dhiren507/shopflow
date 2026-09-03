@@ -48,13 +48,13 @@ class _LoginScreenState extends State<LoginScreen> {
                     style: AppTextStyles.coloredDisplayTextMedium,
                   ),
                   const SizedBox(height: 10),
-                  Text('Welcome Back', style: AppTextStyles.bodyMedium),
+                  Text(AppStrings.greetingText, style: AppTextStyles.bodyMedium),
                   const SizedBox(height: 20),
 
                   CommonInputField(
                     hasLabelPadding: true,
-                    labelText: 'Username',
-                    hintText: 'Enter your Username',
+                    labelText: AppStrings.usernameText,
+                    hintText: AppStrings.usernameHintText,
                     leadingIcon: Icon(
                       Icons.person_2_outlined,
                       color: AppColors.greyColor,
@@ -66,8 +66,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   CommonInputField(
                     hasLabelPadding: true,
                     isPasswordField: _isPasswordVisible,
-                    labelText: 'Password',
-                    hintText: 'Enter your Password',
+                    labelText: AppStrings.passwordText,
+                    hintText: AppStrings.passwordHintText,
                     suffixIcon: IconButton(
                       onPressed: () {
                         setState(() {
@@ -97,7 +97,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         Icon(Icons.info_outline, color: AppColors.errorColor),
                         const SizedBox(width: 5),
                         Text(
-                          'Invalid Credentials',
+                          AppStrings.loginErrorText,
                           style: AppTextStyles.errorText,
                         ),
                       ],
@@ -127,8 +127,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           mainAxisAlignment: .center,
                           children: [
                             Text(
-                              'Log In',
-                              style: AppTextStyles.buttonTextMedium,
+                              AppStrings.loginButtonText,
+                              style: AppTextStyles.buttonTextMediumWhite,
                             ),
                             const SizedBox(width: 5),
                             const Icon(
@@ -150,7 +150,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       );
                     },
                     child: Text(
-                      'Use demo account',
+                      AppStrings.helperText,
                       style: AppTextStyles.coloredBodySmall,
                     ),
                   ),

@@ -4,7 +4,6 @@ import 'package:shopflow/core/constants/app_colors.dart';
 import 'package:shopflow/core/constants/app_images.dart';
 import 'package:shopflow/core/constants/app_routes.dart';
 import 'package:shopflow/core/constants/app_strings.dart';
-import 'package:shopflow/core/widgets/common_app_bar.dart';
 
 import '../../../core/constants/app_text_styles.dart';
 
@@ -81,7 +80,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       padding: const EdgeInsets.all(12.0),
                       child: GestureDetector(
                         onTap: () {
-                          Navigator.pushNamed(context, AppRoutes.productDetailScreen);
+                          Navigator.pushNamed(
+                            context,
+                            AppRoutes.productDetailScreen,
+                          );
                         },
                         child: Column(
                           children: [
@@ -96,11 +98,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                     borderRadius: BorderRadius.circular(6),
                                   ),
                                   child: ClipRRect(
-                                    borderRadius: BorderRadiusGeometry.circular(6),
-                                    child: Image.network('https://www.imageurlgenerator.com/_next/image?url=%2Fassets%2Ffree_tool.png&w=3840&q=75',),
+                                    borderRadius: BorderRadiusGeometry.circular(
+                                      6,
+                                    ),
+                                    child: Image.network(
+                                      'https://www.imageurlgenerator.com/_next/image?url=%2Fassets%2Ffree_tool.png&w=3840&q=75',
+                                    ),
                                   ),
                                 ),
-                        
+
                                 Positioned(
                                   top: 10,
                                   right: 10,
@@ -121,9 +127,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                               ],
                             ),
-                        
+
                             const SizedBox(height: 6),
-                        
+
                             Column(
                               crossAxisAlignment: .start,
                               children: [
@@ -131,7 +137,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   'Tech',
                                   style: AppTextStyles.mutedGreyTextSmall,
                                 ),
-                        
+
                                 const SizedBox(height: 3),
                                 const Text(
                                   'Too much long Product name should wrap',

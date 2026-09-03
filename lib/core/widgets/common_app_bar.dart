@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shopflow/core/constants/app_colors.dart';
+import 'package:shopflow/core/constants/app_strings.dart';
 import 'package:shopflow/core/constants/app_text_styles.dart';
 
 class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -23,7 +24,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
      backgroundColor: AppColors.scaffoldBgColor,
       scrolledUnderElevation: 0 ,
-      title: Text(title ?? 'ShopFlow', style: AppTextStyles.coloredDisplayTextMedium),
+      title: Text(title ?? AppStrings.appName, style: AppTextStyles.coloredDisplayTextMedium),
       centerTitle: centerTitle,
       leading: leading ?? IconButton(onPressed: () {}, icon: Icon(Icons.search)),
       actions: actions ?? [IconButton(onPressed: () {}, icon: Icon(Icons.tune_outlined))],
