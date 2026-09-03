@@ -3,13 +3,15 @@ import 'package:shopflow/core/constants/app_colors.dart';
 import 'package:shopflow/core/constants/app_text_styles.dart';
 
 class NumericStepperButton extends StatelessWidget {
-  final ValueChanged<int> onChanged;
+  final VoidCallback onDecrement;
+  final VoidCallback onIncrement;
   final bool isSmall;
   final int value;
 
   const NumericStepperButton({
     super.key,
-    required this.onChanged,
+    required this.onDecrement,
+    required this.onIncrement,
     required this.value,
     this.isSmall = false,
   });
@@ -29,9 +31,7 @@ class NumericStepperButton extends StatelessWidget {
         children: [
           IconButton(
             onPressed: () {
-              if (value > 1) {
-                onChanged(value - 1);
-              }
+              onDecrement();
             },
             iconSize: isSmall ? 16 : 24,
             constraints: isSmall ? const BoxConstraints() : null,
@@ -48,7 +48,7 @@ class NumericStepperButton extends StatelessWidget {
           ),
           IconButton(
             onPressed: () {
-              onChanged(value + 1);
+              onIncrement();
             },
             iconSize: isSmall ? 16 : 24,
             constraints: isSmall ? const BoxConstraints() : null,

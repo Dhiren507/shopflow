@@ -26,6 +26,23 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   int reviewListLength = 2;
   bool isReviewListExpanded = false;
 
+  void _handleDecrement(){
+    if(_quantity > 1){
+      setState(() {
+        --_quantity;
+      });
+    }
+  }
+
+
+    void _handleIncrement(){
+    if(_quantity < 10){
+      setState(() {
+        ++_quantity;
+      });
+    }
+  }
+
   final List<String> imgList = [
     'https://www.imageurlgenerator.com/_next/image?url=%2Fassets%2Ffree_tool.png&w=3840&q=75',
     'https://www.imageurlgenerator.com/_next/image?url=%2Fassets%2Ffree_tool.png&w=3840&q=75',
@@ -349,9 +366,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 children: [
                   Text(AppStrings.quantitySectionText, style: AppTextStyles.displayMediumSemiBold),
                   NumericStepperButton(
-                    onChanged: (int newValue) {
-                      setState(() => _quantity = newValue);
-                    },
+                    onDecrement: _handleDecrement,
+                    onIncrement: _handleIncrement,
                     value: _quantity,
                   ),
                 ],
