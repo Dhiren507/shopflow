@@ -19,14 +19,6 @@ class AppStrings {
   static const String nextText = 'Next';
   static const String skipText = 'Skip';
 
-  static const List<String> allowedFilterOptions = [
-    'All',
-    'Tech',
-    'Fashion',
-    'Home',
-    'Beauty',
-  ];
-
   // Login Screen Text
   static const String usernameText = 'Username';
   static const String usernameHintText = 'Enter your Username';
@@ -38,14 +30,13 @@ class AppStrings {
   static const String loginButtonText = 'Log In';
 
   static const String helperText = 'Use Demo Account';
-  static const String  greetingText = 'Welcome Back';
+  static const String greetingText = 'Welcome Back';
 
   // Tab Bar Bottom Label Text
   static const String tabBarLabelOne = 'Home';
   static const String tabBarLabelTwo = 'Cart';
   static const String tabBarLabelThree = 'My Products';
   static const String tabBarLabelFour = 'Profile';
-
 
   // Product Detail Screen Text
   static const String addToCartText = 'Add to Cart';
@@ -59,7 +50,6 @@ class AppStrings {
   // Empty Cart Screen Text
   static const String startShoppingText = 'Start Shopping';
   static const String emptyCartMainText = 'Your cart is empty';
-  static const String emptyCartSubText =  "Looks like you haven't added anything to your cart yet.";
-
-
+  static const String emptyCartSubText =
+      "Looks like you haven't added anything to your cart yet.";
 }

@@ -8,7 +8,7 @@ import 'package:shopflow/core/widgets/common_divider.dart';
 import 'package:shopflow/core/widgets/common_expansion_tile.dart';
 import 'package:shopflow/core/widgets/numeric_stepper_button.dart';
 import 'package:shopflow/core/widgets/product_rating_stars.dart';
-import 'package:shopflow/core/widgets/rating_section.dart';
+import 'package:shopflow/features/shop/widgets/rating_section.dart';
 
 import '../../../core/constants/app_images.dart';
 import '../../../core/constants/app_text_styles.dart';

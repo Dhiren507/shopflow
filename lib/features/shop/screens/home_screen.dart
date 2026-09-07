@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shopflow/core/constants/app_colors.dart';
 import 'package:shopflow/core/constants/app_images.dart';
 import 'package:shopflow/core/constants/app_routes.dart';
-import 'package:shopflow/core/constants/app_strings.dart';
+import 'package:shopflow/features/shop/constants/shop_constants.dart';
 
 import '../../../core/constants/app_text_styles.dart';
 
@@ -44,12 +44,12 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         borderRadius: BorderRadius.circular(16),
                       ),
-                      child: Text(AppStrings.allowedFilterOptions[index]),
+                      child: Text(ShopConstants.allowedFilterOptions[index]),
                     ),
                   );
                 },
                 separatorBuilder: (context, index) => const SizedBox(width: 10),
-                itemCount: AppStrings.allowedFilterOptions.length,
+                itemCount: ShopConstants.allowedFilterOptions.length,
               ),
             ),
             const SizedBox(height: 25),
@@ -139,7 +139,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
 
                                 const SizedBox(height: 3),
-                                const Text(
+                                Text(
                                   'Too much long Product name should wrap',
                                   style: AppTextStyles.bodySmall.copyWith(
                                     color: AppColors.headerDarkBlackText,
@@ -157,7 +157,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       width: 11,
                                       fit: BoxFit.scaleDown,
                                     ),
-                                    const Text(
+                                    Text(
                                       '4.8',
                                       style: AppTextStyles.bodyMedium.copyWith(
                                         color: AppColors.headerDarkBlackText,

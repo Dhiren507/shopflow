@@ -7,6 +7,7 @@ class NumericStepperButton extends StatelessWidget {
   final VoidCallback onIncrement;
   final bool isSmall;
   final int value;
+  final bool isStyled;
 
   const NumericStepperButton({
     super.key,
@@ -14,17 +15,16 @@ class NumericStepperButton extends StatelessWidget {
     required this.onIncrement,
     required this.value,
     this.isSmall = false,
+    this.isStyled = false,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.stepperBgColor,
-        border: Border.all(
-          color: AppColors.greyColor,
-        ),
-        borderRadius: BorderRadius.all(Radius.circular(isSmall ? 24 : 24)),
+        color: isStyled ? AppColors.white : AppColors.stepperBgColor,
+        border: Border.all(color: AppColors.greyColor),
+        borderRadius: BorderRadius.all(Radius.circular(isStyled ? 12 : 24)),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -35,15 +35,32 @@ class NumericStepperButton extends StatelessWidget {
             },
             iconSize: isSmall ? 16 : 24,
             constraints: isSmall ? const BoxConstraints() : null,
-            padding: isSmall ? const EdgeInsets.all(4) : const EdgeInsets.all(8),
+            padding: isSmall
+                ? const EdgeInsets.all(4)
+                : const EdgeInsets.all(8),
             visualDensity: isSmall ? VisualDensity.compact : null,
             icon: const Icon(Icons.remove),
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: isSmall ? 2.0 : 8.0),
-            child: Text(
-              '$value',
-              style: isSmall ? AppTextStyles.bodySmall : AppTextStyles.headingSmall.copyWith(color: AppColors.black),
+          Container(
+            decoration: isStyled
+                ? const BoxDecoration(
+                    color: AppColors.scaffoldBgColor,
+                    border: Border(
+                      left: BorderSide(color: AppColors.greyColor, width: 1.0),
+                      right: BorderSide(color: AppColors.greyColor, width: 1.0),
+                    ),
+                  )
+                : null,
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: isSmall ? 2.0 : 12.0),
+              child: Text(
+                '$value',
+                style: isSmall
+                    ? AppTextStyles.bodySmall
+                    : AppTextStyles.headingSmall.copyWith(
+                        color: AppColors.black,
+                      ),
+              ),
             ),
           ),
           IconButton(
@@ -52,7 +69,9 @@ class NumericStepperButton extends StatelessWidget {
             },
             iconSize: isSmall ? 16 : 24,
             constraints: isSmall ? const BoxConstraints() : null,
-            padding: isSmall ? const EdgeInsets.all(4) : const EdgeInsets.all(8),
+            padding: isSmall
+                ? const EdgeInsets.all(4)
+                : const EdgeInsets.all(8),
             visualDensity: isSmall ? VisualDensity.compact : null,
             icon: const Icon(Icons.add),
           ),

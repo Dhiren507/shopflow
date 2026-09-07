@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shopflow/core/constants/app_text_styles.dart';
 import 'package:shopflow/core/widgets/product_rating_stars.dart';
-import 'package:shopflow/core/widgets/rating_progress_row.dart';
+import 'package:shopflow/features/shop/widgets/rating_progress_row.dart';
 
 class RatingSection extends StatelessWidget {
   final int totalReviews;

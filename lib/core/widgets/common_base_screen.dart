@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:shopflow/core/constants/app_colors.dart';
 import 'package:shopflow/core/constants/app_strings.dart';
 import 'package:shopflow/core/widgets/common_app_bar.dart';
+import 'package:shopflow/features/profile/profile_screen.dart';
 import 'package:shopflow/features/shop/screens/cart_screen.dart';
 import 'package:shopflow/features/shop/screens/home_screen.dart';
+import 'package:shopflow/features/shop/screens/my_products_listing_screen.dart';
 
 class CommonBaseScreen extends StatefulWidget {
   const CommonBaseScreen({super.key});
@@ -90,10 +92,10 @@ class _CommonBaseScreenState extends State<CommonBaseScreen>
         controller: _tabController,
         physics: NeverScrollableScrollPhysics(),
         children: [
-          const HomeScreen(),
+          HomeScreen(),
           CartScreen(),
-          const Center(child: Text('My Products Screen')),
-          const Center(child: Text('Profile Screen')),
+          MyProductsListingScreen(),
+          ProfileScreen()
         ],
       ),
     );

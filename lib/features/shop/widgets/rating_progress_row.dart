@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shopflow/core/widgets/common_progress_indicator.dart';
 
-import '../constants/app_colors.dart';
+import '../../../core/constants/app_colors.dart';
 
 class RatingProgressRow extends StatelessWidget {
   final String leadingText;

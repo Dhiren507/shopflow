@@ -54,7 +54,6 @@ class CommonInputField extends StatelessWidget {
               ? const EdgeInsets.only(left: 8)
               : EdgeInsets.zero,
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(labelText ?? '', style: AppTextStyles.inputLabel),
               ?labelTrailing,

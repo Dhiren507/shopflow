@@ -3,7 +3,10 @@ import 'package:shopflow/core/widgets/common_base_screen.dart';
 import 'package:shopflow/features/auth/screens/login_screen.dart';
 import 'package:shopflow/features/onboarding/screens/intro_stepper_screen.dart';
 import 'package:shopflow/features/onboarding/screens/splash_screen.dart';
+import 'package:shopflow/features/profile/profile_screen.dart';
+import 'package:shopflow/features/shop/screens/add_product/product_add_screen.dart';
 import 'package:shopflow/features/shop/screens/home_screen.dart';
+import 'package:shopflow/features/shop/screens/my_products_listing_screen.dart';
 import 'package:shopflow/features/shop/screens/product_detail_screen.dart';
 
 class AppRoutes {
@@ -13,6 +16,9 @@ class AppRoutes {
   static const String mainScreen = '/mainScreen';
   static const String homeScreen = '/homeScreen';
   static const String productDetailScreen = '/productDetailScreen';
+  static const String myProductsListingScreen = '/myproducts';
+  static const String addProductScreen = '/addproduct';
+  static const String profileScreen = '/profile';
 
   static final Map<String, Widget Function(BuildContext context)> routes = {
     splashScreen: (context) => const SplashScreen(),
@@ -21,5 +27,8 @@ class AppRoutes {
     homeScreen: (context) => const HomeScreen(),
     mainScreen: (context) => const CommonBaseScreen(),
     productDetailScreen: (context) => const ProductDetailScreen(),
+    myProductsListingScreen : (context) => const MyProductsListingScreen(),
+    addProductScreen : (context) => const  ProductAddScreen(),
+    profileScreen : (context) => const ProfileScreen()
   };
 }

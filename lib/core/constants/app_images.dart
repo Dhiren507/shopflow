@@ -12,4 +12,9 @@ class AppImages {
 
   static const String likeHeart = '$_commonImagePath/like_heart.svg';
   static const String emptyCartImage = '$_commonImagePath/empty_cart.svg';
+
+  static const String defaultAvatar = '$_commonImagePath/defaultAvatar.svg';
+  static const String editPencil ='$_commonImagePath/editPencil.svg';
+
+  static const String addImageEmptyPlaceholder = '$_commonImagePath/add_image.svg';
 }

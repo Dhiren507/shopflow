@@ -46,10 +46,15 @@ class _LoginScreenState extends State<LoginScreen> {
                   SvgPicture.asset(AppImages.loginTopLogo),
                   Text(
                     AppStrings.appName,
-                    style: AppTextStyles.headingLarge.copyWith(color: AppColors.primaryColor),
+                    style: AppTextStyles.headingLarge.copyWith(
+                      color: AppColors.primaryColor,
+                    ),
                   ),
                   const SizedBox(height: 10),
-                  Text(AppStrings.greetingText, style: AppTextStyles.bodyMedium),
+                  Text(
+                    AppStrings.greetingText,
+                    style: AppTextStyles.bodyMedium,
+                  ),
                   const SizedBox(height: 20),
 
                   CommonInputField(
@@ -88,6 +93,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(height: 20),
 
                   Container(
+
                     padding: EdgeInsets.all(12),
                     decoration: BoxDecoration(
                       color: AppColors.lightRedBgColor,
@@ -131,7 +137,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                     child: Text(
                       AppStrings.helperText,
-                      style: AppTextStyles.bodySmall.copyWith(color: AppColors.primaryColor),
+                      style: AppTextStyles.bodySmall.copyWith(
+                        color: AppColors.primaryColor,
+                      ),
                     ),
                   ),
                 ],

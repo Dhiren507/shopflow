@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:shopflow/core/constants/app_colors.dart';
 import 'package:shopflow/core/constants/app_text_styles.dart';
+import 'package:shopflow/core/widgets/common_button.dart';
+import 'package:shopflow/core/widgets/common_divider.dart';
 import 'package:shopflow/core/widgets/numeric_stepper_button.dart';
-import 'package:shopflow/features/shop/screens/empty_cart_placeholder.dart';
+import 'package:shopflow/features/shop/widgets/empty_cart_placeholder.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
@@ -14,6 +17,73 @@ class _CartScreenState extends State<CartScreen> {
   bool isCartEmpty = false;
 
   int itemValue = 1;
+
+  List<Map<String, dynamic>> cartItems = [
+    {
+      'id': '1',
+      'title': 'Aura Studio Wireless Speaker System with Premium Sound',
+      'color': 'Midnight Blue',
+      'price': 299.00,
+      'imageUrl': 'https://unsplash.com',
+      'quantity': 1,
+    },
+    {
+      'id': '2',
+      'title': 'SoundLink Comfort Noise Cancelling Headphones',
+      'color': 'Matte Black',
+      'price': 349.50,
+      'imageUrl': 'https://unsplash.com',
+      'quantity': 2,
+    },
+    {
+      'id': '3',
+      'title': 'Minimalist Mechanical Keyboard 75%',
+      'color': 'Chalk White / Anodized Aluminum Base Frame',
+      'price': 159.00,
+      'imageUrl': 'https://unsplash.com',
+      'quantity': 1,
+    },
+    {
+      'id': '4',
+      'title': 'Ergonomic Wireless Mouse',
+      'color': 'Space Gray',
+      'price': 99.99,
+      'imageUrl': 'https://unsplash.com',
+      'quantity': 1,
+    },
+    {
+      'id': '5',
+      'title': 'Aura Studio Wireless Speaker System with Premium Sound',
+      'color': 'Midnight Blue',
+      'price': 299.00,
+      'imageUrl': 'https://unsplash.com',
+      'quantity': 1,
+    },
+    {
+      'id': '6',
+      'title': 'SoundLink Comfort Noise Cancelling Headphones',
+      'color': 'Matte Black',
+      'price': 349.50,
+      'imageUrl': 'https://unsplash.com',
+      'quantity': 2,
+    },
+    {
+      'id': '7',
+      'title': 'Minimalist Mechanical Keyboard 75%',
+      'color': 'Chalk White / Anodized Aluminum Base Frame',
+      'price': 159.00,
+      'imageUrl': 'https://unsplash.com',
+      'quantity': 1,
+    },
+    {
+      'id': '8',
+      'title': 'Ergonomic Wireless Mouse',
+      'color': 'Space Gray',
+      'price': 99.99,
+      'imageUrl': 'https://unsplash.com',
+      'quantity': 1,
+    },
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -29,12 +99,18 @@ class _CartScreenState extends State<CartScreen> {
               ? EmptyCartPlaceholder()
               : Expanded(
                   child: ListView.separated(
+                    separatorBuilder: (context, index) =>
+                        const SizedBox(height: 5),
+                    itemCount: cartItems.length,
+
                     itemBuilder: (context, index) {
+                      final item = cartItems[index];
+
                       return Card(
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
-                            horizontal: 20,
-                            vertical: 12,
+                            vertical: 16,
+                            horizontal: 23,
                           ),
                           child: Row(
                             children: [
@@ -54,39 +130,51 @@ class _CartScreenState extends State<CartScreen> {
                                 ),
                               ),
                               const SizedBox(width: 10),
-                              Column(
-                                crossAxisAlignment: .start,
-                                spacing: 10,
-                                children: [
-                                  Text(
-                                    'Aura Studio',
-                                    style: AppTextStyles.headingSmall,
-                                  ),
-                                  Text(
-                                    'MidnightBlue',
-                                    style: AppTextStyles.bodySmall,
-                                  ),
-                                  Text(
-                                    '\$299.00',
-                                    style: AppTextStyles.headingSmall.copyWith(
-                                      color: AppColors.primaryColor,
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: .start,
+                                  mainAxisSize: .min,
+                                  spacing: 10,
+                                  children: [
+                                    Text(
+                                      item['title'],
+                                      style: AppTextStyles.headingSmall,
+                                      overflow: TextOverflow.ellipsis,
                                     ),
-                                  ),
-                                ],
+                                    Flexible(
+                                      child: Text(
+                                        item['color'],
+                                        style: AppTextStyles.bodySmall,
+                                        maxLines: 2,
+                                      ),
+                                    ),
+                                    Text(
+                                      '\$299.00',
+                                      style: AppTextStyles.headingSmall
+                                          .copyWith(
+                                            color: AppColors.primaryColor,
+                                          ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                              const Spacer(),
+                              const SizedBox(width: 10),
                               Column(
                                 crossAxisAlignment: .end,
                                 spacing: 10,
                                 children: [
                                   IconButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      setState(() {
+                                        cartItems.removeAt(index);
+                                      });
+                                    },
                                     icon: Icon(Icons.close),
                                   ),
                                   NumericStepperButton(
                                     onDecrement: () {},
                                     onIncrement: () {},
-                                    value: 500,
+                                    value: item['quantity'],
                                     isSmall: true,
                                   ),
                                 ],
@@ -96,11 +184,54 @@ class _CartScreenState extends State<CartScreen> {
                         ),
                       );
                     },
-                    separatorBuilder: (context, index) =>
-                        const SizedBox(height: 5),
-                    itemCount: 10,
                   ),
                 ),
+          !isCartEmpty ? CommonButton(
+            label: 'Proceed To Checkout',
+            onPressed: () {
+              showModalBottomSheet(
+                context: context,
+                showDragHandle: false,
+                builder: (context) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
+                    child: Column(
+                      spacing: 15,
+                      mainAxisSize: .min,
+                      children: [
+                        Container(
+                          width: 48,
+                          height: 6,
+                          decoration: BoxDecoration(
+                            color: AppColors.greyColor,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: .spaceBetween,
+                          children: [Text('SubTotal', style: AppTextStyles.bodySmall,), Text('\$828.00', style: AppTextStyles.headingMedium,)],
+                        ),
+                        Row(
+                          mainAxisAlignment: .spaceBetween,
+                          children: [Text('Discount', style: AppTextStyles.bodySmall), Text('-\$28.00', style: AppTextStyles.headingMedium.copyWith(color: AppColors.redTextColor),)],
+                        ),
+                        Row(
+                          mainAxisAlignment: .spaceBetween,
+                          children: [Text('Delivery', style: AppTextStyles.bodySmall), Text('Free',  style: AppTextStyles.strikethroughMedium)],
+                        ),
+                        CommonDivider(),
+                        Row(
+                          mainAxisAlignment: .spaceBetween,
+                          children: [Text('Total', style: AppTextStyles.headingMedium,), Text('\$828.00', style: AppTextStyles.headingLarge.copyWith(color: AppColors.primaryColor),)],
+                        ),
+                        CommonButton(label: 'Checkout Now', onPressed: () {})
+                      ],
+                    ),
+                  );
+                },
+              );
+            },
+          ) : const SizedBox(),
         ],
       ),
     );
