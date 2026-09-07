@@ -39,48 +39,50 @@ class _CommonBaseScreenState extends State<CommonBaseScreen>
     int activeIndex = _tabController.index;
     return Scaffold(
       appBar: CommonAppBar(),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-        child: SizedBox(
-          height: 60,
-          child: TabBar(
-            controller: _tabController,
-            labelColor: AppColors.white,
-            unselectedLabelColor: AppColors.subheadingDarkGreyText,
-            dividerColor: Colors.transparent,
-            indicator: BoxDecoration(
-              color: AppColors.primaryColor,
-              borderRadius: BorderRadius.circular(12),
+      bottomNavigationBar: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+          child: SizedBox(
+            height: 60,
+            child: TabBar(
+              controller: _tabController,
+              labelColor: AppColors.white,
+              unselectedLabelColor: AppColors.subheadingDarkGreyText,
+              dividerColor: Colors.transparent,
+              indicator: BoxDecoration(
+                color: AppColors.primaryColor,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              indicatorSize: .tab,
+              tabs: [
+                Tab(
+                  icon: Icon(activeIndex == 0 ? Icons.home : Icons.home_outlined),
+                  text: AppStrings.tabBarLabelOne,
+                ),
+                Tab(
+                  icon: Icon(
+                    activeIndex == 1
+                        ? Icons.shopping_cart
+                        : Icons.shopping_cart_outlined,
+                  ),
+                  text: AppStrings.tabBarLabelTwo,
+                ),
+                Tab(
+                  icon: Icon(
+                    activeIndex == 2
+                        ? Icons.inventory_2
+                        : Icons.inventory_2_outlined,
+                  ),
+                  text: AppStrings.tabBarLabelThree,
+                ),
+                Tab(
+                  icon: Icon(
+                    activeIndex == 3 ? Icons.person : Icons.person_outline,
+                  ),
+                  text: AppStrings.tabBarLabelFour,
+                ),
+              ],
             ),
-            indicatorSize: .tab,
-            tabs: [
-              Tab(
-                icon: Icon(activeIndex == 0 ? Icons.home : Icons.home_outlined),
-                text: AppStrings.tabBarLabelOne,
-              ),
-              Tab(
-                icon: Icon(
-                  activeIndex == 1
-                      ? Icons.shopping_cart
-                      : Icons.shopping_cart_outlined,
-                ),
-                text: AppStrings.tabBarLabelTwo,
-              ),
-              Tab(
-                icon: Icon(
-                  activeIndex == 2
-                      ? Icons.inventory_2
-                      : Icons.inventory_2_outlined,
-                ),
-                text: AppStrings.tabBarLabelThree,
-              ),
-              Tab(
-                icon: Icon(
-                  activeIndex == 3 ? Icons.person : Icons.person_outline,
-                ),
-                text: AppStrings.tabBarLabelFour,
-              ),
-            ],
           ),
         ),
       ),

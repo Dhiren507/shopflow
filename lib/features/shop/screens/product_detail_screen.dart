@@ -290,16 +290,16 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 children: [
                   Text(
                     product['brand'],
-                    style: AppTextStyles.mutedGreyTextSmall,
+                    style: AppTextStyles.labelSmall,
                   ),
-                  Text(product['name'], style: AppTextStyles.displayMedium),
+                  Text(product['name'], style: AppTextStyles.headingLarge),
                   Row(
                     spacing: 6,
                     children: [
                       ProductRatingStars(rating: 4.5),
                       Text(
                         '4.8 (1,284 reviews)',
-                        style: AppTextStyles.mutedGreyTextSmall,
+                        style: AppTextStyles.labelSmall,
                       ),
                       Container(
                         height: 4,
@@ -320,7 +320,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         ),
                         child: Text(
                           product['availability']['label'],
-                          style: AppTextStyles.smallChipText,
+                          style: AppTextStyles.labelSmall.copyWith(
+                            color: AppColors.lightGreyColor,
+                          ),
                         ),
                       ),
                     ],
@@ -333,11 +335,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     children: [
                       Text(
                         '\$${product['pricing']['currentPrice']}',
-                        style: AppTextStyles.displayMedium,
+                        style: AppTextStyles.headingLarge,
                       ),
                       Text(
                         '\$${product['pricing']['originalPrice']}',
-                        style: AppTextStyles.mutedGreyTextMediumLineThrough,
+                        style: AppTextStyles.strikethroughMedium,
                       ),
                       Container(
                         padding: EdgeInsets.symmetric(
@@ -350,7 +352,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         ),
                         child: Text(
                           r"Save $50",
-                          style: AppTextStyles.smallChipText,
+                          style: AppTextStyles.labelSmall.copyWith(
+                            color: AppColors.lightGreyColor,
+                          ),
                         ),
                       ),
                     ],
@@ -364,7 +368,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               child: Row(
                 mainAxisAlignment: .spaceBetween,
                 children: [
-                  Text(AppStrings.quantitySectionText, style: AppTextStyles.displayMediumSemiBold),
+                  Text(AppStrings.quantitySectionText, style: AppTextStyles.headingMedium),
                   NumericStepperButton(
                     onDecrement: _handleDecrement,
                     onIncrement: _handleIncrement,
@@ -403,7 +407,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   children: [
                     Text(
                       AppStrings.reviewSectionHeaderText,
-                      style: AppTextStyles.displayMediumSemiBold,
+                      style: AppTextStyles.headingMedium,
                     ),
                     const SizedBox(height: 10),
                     RatingSection(totalRating: 4.5, totalReviews: 1050),
@@ -437,13 +441,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                       children: [
                                         Text(
                                           'Sarah Jenkins',
-                                          style: AppTextStyles
-                                              .displaySmallSemiBold,
+                                          style: AppTextStyles.headingSmall,
                                         ),
                                         Text(
                                           'Oct 12, 2023',
-                                          style:
-                                              AppTextStyles.mutedGreyTextSmall,
+                                          style: AppTextStyles.labelSmall,
                                         ),
                                       ],
                                     ),
@@ -456,7 +458,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                   padding: const EdgeInsets.all(8),
                                   child: Text(
                                     'Absolutely love the build quality. The battery easily lasts a day and a half with heavy usage. The sleep tracking is surprisingly accurate compared to my previous device.',
-                                    style: AppTextStyles.displaySmall,
+                                    style: AppTextStyles.bodySmall,
                                   ),
                                 ),
                               ],
@@ -486,7 +488,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                             isReviewListExpanded
                                 ? AppStrings.showLessReviewsText
                                 : AppStrings.viewAllReviews,
-                            style: AppTextStyles.buttonTextMediumBlack,
+                            style: AppTextStyles.headingSmall.copyWith(
+                              color: AppColors.black,
+                            ),
                           ),
                         ),
                       ),
@@ -506,8 +510,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             children: [
               Column(
                 children: [
-                  Text(AppStrings.totalPriceText, style: AppTextStyles.mutedGreyTextSmall),
-                  Text('\$299.00', style: AppTextStyles.displayMediumSemiBold),
+                  Text(AppStrings.totalPriceText, style: AppTextStyles.labelSmall),
+                  Text('\$299.00', style: AppTextStyles.headingMedium),
                 ],
               ),
               const SizedBox(width: 10,),
@@ -533,7 +537,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         const SizedBox(width: 5),
                         Text(
                           AppStrings.addToCartText,
-                          style: AppTextStyles.buttonTextMediumWhite,
+                          style: AppTextStyles.headingSmall.copyWith(
+                            color: AppColors.white,
+                          ),
                         ),
                       ],
                     ),

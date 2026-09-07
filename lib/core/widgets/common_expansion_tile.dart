@@ -19,7 +19,7 @@ class CommonExpansionTile extends StatelessWidget {
       minTileHeight: 10,
       title: Text(
         headerTitle,
-          style : AppTextStyles.displayMediumSemiBold
+          style : AppTextStyles.headingMedium
       ),
 
       children: [

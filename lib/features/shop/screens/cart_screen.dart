@@ -22,7 +22,7 @@ class _CartScreenState extends State<CartScreen> {
       child: Column(
         crossAxisAlignment: .start,
         children: [
-          Text('Your Cart', style: AppTextStyles.displayMedium),
+          Text('Your Cart', style: AppTextStyles.headingLarge),
           Text('2 items', style: AppTextStyles.bodySmall),
 
           isCartEmpty
@@ -60,7 +60,7 @@ class _CartScreenState extends State<CartScreen> {
                                 children: [
                                   Text(
                                     'Aura Studio',
-                                    style: AppTextStyles.displaySmallSemiBold,
+                                    style: AppTextStyles.headingSmall,
                                   ),
                                   Text(
                                     'MidnightBlue',
@@ -68,8 +68,9 @@ class _CartScreenState extends State<CartScreen> {
                                   ),
                                   Text(
                                     '\$299.00',
-                                    style: AppTextStyles
-                                        .coloredDisplayTextSmallSemiBold,
+                                    style: AppTextStyles.headingSmall.copyWith(
+                                      color: AppColors.primaryColor,
+                                    ),
                                   ),
                                 ],
                               ),

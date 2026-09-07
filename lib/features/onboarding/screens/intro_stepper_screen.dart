@@ -71,7 +71,7 @@ class _IntroStepperScreenState extends State<IntroStepperScreen> {
                 },
                 child: Text(
                   AppStrings.skipText,
-                  style: AppTextStyles.mutedGreyText,
+                  style: AppTextStyles.labelMedium,
                 ),
               ),
             ),
@@ -95,7 +95,7 @@ class _IntroStepperScreenState extends State<IntroStepperScreen> {
                       const SizedBox(height: 16),
                       Text(
                         _stepperPages[index]['title']!,
-                        style: AppTextStyles.display.copyWith(fontSize: 21),
+                        style: AppTextStyles.headingLarge,
                         textAlign: .center,
                       ),
                       const SizedBox(height: 8),
@@ -152,7 +152,9 @@ class _IntroStepperScreenState extends State<IntroStepperScreen> {
                         isLastPage
                             ? AppStrings.getStartedText
                             : AppStrings.nextText,
-                        style: AppTextStyles.buttonText,
+                        style: AppTextStyles.headingMedium.copyWith(
+                          color: AppColors.white,
+                        ),
                       ),
                     ),
                   ),

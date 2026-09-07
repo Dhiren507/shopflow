@@ -45,7 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   SvgPicture.asset(AppImages.loginTopLogo),
                   Text(
                     AppStrings.appName,
-                    style: AppTextStyles.coloredDisplayTextMedium,
+                    style: AppTextStyles.headingLarge.copyWith(color: AppColors.primaryColor),
                   ),
                   const SizedBox(height: 10),
                   Text(AppStrings.greetingText, style: AppTextStyles.bodyMedium),
@@ -128,7 +128,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           children: [
                             Text(
                               AppStrings.loginButtonText,
-                              style: AppTextStyles.buttonTextMediumWhite,
+                              style: AppTextStyles.headingSmall.copyWith(color: AppColors.white),
                             ),
                             const SizedBox(width: 5),
                             const Icon(
@@ -151,7 +151,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                     child: Text(
                       AppStrings.helperText,
-                      style: AppTextStyles.coloredBodySmall,
+                      style: AppTextStyles.bodySmall.copyWith(color: AppColors.primaryColor),
                     ),
                   ),
                 ],

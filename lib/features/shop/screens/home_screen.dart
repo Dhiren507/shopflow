@@ -135,13 +135,15 @@ class _HomeScreenState extends State<HomeScreen> {
                               children: [
                                 Text(
                                   'Tech',
-                                  style: AppTextStyles.mutedGreyTextSmall,
+                                  style: AppTextStyles.labelSmall,
                                 ),
 
                                 const SizedBox(height: 3),
                                 const Text(
                                   'Too much long Product name should wrap',
-                                  style: AppTextStyles.displaySmall,
+                                  style: AppTextStyles.bodySmall.copyWith(
+                                    color: AppColors.headerDarkBlackText,
+                                  ),
                                   maxLines: 2,
                                   overflow: .ellipsis,
                                 ),
@@ -157,11 +159,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ),
                                     const Text(
                                       '4.8',
-                                      style: AppTextStyles.displaySmallBold,
+                                      style: AppTextStyles.bodyMedium.copyWith(
+                                        color: AppColors.headerDarkBlackText,
+                                      ),
                                     ),
                                     const Text(
                                       '(123)',
-                                      style: AppTextStyles.mutedGreyTextSmall,
+                                      style: AppTextStyles.labelSmall,
                                     ),
                                   ],
                                 ),
@@ -171,12 +175,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                   children: [
                                     const Text(
                                       r"$299",
-                                      style: AppTextStyles.displayMediumBold,
+                                      style: AppTextStyles.headingMedium,
                                     ),
                                     const Text(
                                       r"$300",
-                                      style: AppTextStyles
-                                          .mutedGreyTextSmallLineThrough,
+                                      style: AppTextStyles.strikethroughSmall,
                                     ),
                                     Container(
                                       padding: const EdgeInsets.symmetric(

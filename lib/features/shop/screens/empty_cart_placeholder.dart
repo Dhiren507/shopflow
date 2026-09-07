@@ -33,7 +33,7 @@ class EmptyCartPlaceholder extends StatelessWidget {
             ),
             Text(
               AppStrings.emptyCartMainText,
-              style: AppTextStyles.displayMedium,
+              style: AppTextStyles.headingLarge,
             ),
             Text(
               AppStrings.emptyCartSubText,
@@ -55,7 +55,9 @@ class EmptyCartPlaceholder extends StatelessWidget {
                   children: [
                     Text(
                       AppStrings.startShoppingText,
-                      style: AppTextStyles.buttonTextMediumWhite,
+                      style: AppTextStyles.headingSmall.copyWith(
+                        color: AppColors.white,
+                      ),
                     ),
                   ],
                 ),

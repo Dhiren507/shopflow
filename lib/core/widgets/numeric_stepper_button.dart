@@ -43,7 +43,7 @@ class NumericStepperButton extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: isSmall ? 2.0 : 8.0),
             child: Text(
               '$value',
-              style: isSmall ? AppTextStyles.bodySmall : AppTextStyles.buttonTextMediumBlack,
+              style: isSmall ? AppTextStyles.bodySmall : AppTextStyles.headingSmall.copyWith(color: AppColors.black),
             ),
           ),
           IconButton(

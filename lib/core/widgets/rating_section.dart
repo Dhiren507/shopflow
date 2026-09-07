@@ -24,9 +24,9 @@ class RatingSection extends StatelessWidget {
             child: Column(
               spacing: 2,
               children: [
-                Text('4.8', style: AppTextStyles.display),
+                Text('4.8', style: AppTextStyles.headingLarge),
                 ProductRatingStars(rating: totalRating),
-                Text('$totalReviews Reviews', style: AppTextStyles.mutedGreyTextSmall),
+                Text('$totalReviews Reviews', style: AppTextStyles.labelSmall),
               ],
             ),
           ),
