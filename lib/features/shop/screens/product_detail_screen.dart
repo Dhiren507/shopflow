@@ -12,6 +12,7 @@ import 'package:shopflow/core/widgets/rating_section.dart';
 
 import '../../../core/constants/app_images.dart';
 import '../../../core/constants/app_text_styles.dart';
+import '../../../core/widgets/common_button.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   const ProductDetailScreen({super.key});
@@ -470,30 +471,16 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
 
                     const SizedBox(height: 10),
 
-                    SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        onPressed: _handleReviewToggleButton,
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.reviewSectionBgColor,
-                          elevation: 0,
-                          side: BorderSide(color: AppColors.greyColor),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadiusGeometry.circular(22),
-                          ),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 13),
-                          child: Text(
-                            isReviewListExpanded
-                                ? AppStrings.showLessReviewsText
-                                : AppStrings.viewAllReviews,
-                            style: AppTextStyles.headingSmall.copyWith(
-                              color: AppColors.black,
-                            ),
-                          ),
-                        ),
-                      ),
+                    CommonButton(
+                      label: isReviewListExpanded
+                          ? AppStrings.showLessReviewsText
+                          : AppStrings.viewAllReviews,
+                      onPressed: _handleReviewToggleButton,
+                      borderRadius: 22,
+                      backgroundColor: AppColors.reviewSectionBgColor,
+                      textColor: AppColors.black,
+                      elevation: 0,
+                      borderSide: BorderSide(color: AppColors.greyColor),
                     ),
                   ],
                 ),
@@ -516,33 +503,14 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               ),
               const SizedBox(width: 10,),
               Expanded(
-                child: ElevatedButton(
+                child: CommonButton(
+                  label: AppStrings.addToCartText,
                   onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.coloredText,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadiusGeometry.circular(22),
-                    ),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 11),
-                    child: Row(
-                      mainAxisAlignment: .center,
-                      children: [
-                        const Icon(
-                          Icons.shopping_cart_outlined,
-                          color: AppColors.white,
-                          size: 20,
-                        ),
-                        const SizedBox(width: 5),
-                        Text(
-                          AppStrings.addToCartText,
-                          style: AppTextStyles.headingSmall.copyWith(
-                            color: AppColors.white,
-                          ),
-                        ),
-                      ],
-                    ),
+                  borderRadius: 22,
+                  leadingIcon: const Icon(
+                    Icons.shopping_cart_outlined,
+                    color: AppColors.white,
+                    size: 20,
                   ),
                 ),
               ),

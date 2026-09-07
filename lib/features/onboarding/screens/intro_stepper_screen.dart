@@ -4,6 +4,7 @@ import 'package:shopflow/core/constants/app_images.dart';
 import 'package:shopflow/core/constants/app_routes.dart';
 import 'package:shopflow/core/constants/app_strings.dart';
 import 'package:shopflow/core/constants/app_text_styles.dart';
+import 'package:shopflow/core/widgets/common_button.dart';
 
 class IntroStepperScreen extends StatefulWidget {
   const IntroStepperScreen({super.key});
@@ -136,28 +137,9 @@ class _IntroStepperScreenState extends State<IntroStepperScreen> {
 
                 const SizedBox(height: 16),
 
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: _handleButtonPress,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.coloredText,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadiusGeometry.circular(12),
-                      ),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 13),
-                      child: Text(
-                        isLastPage
-                            ? AppStrings.getStartedText
-                            : AppStrings.nextText,
-                        style: AppTextStyles.headingMedium.copyWith(
-                          color: AppColors.white,
-                        ),
-                      ),
-                    ),
-                  ),
+                CommonButton(
+                  label: isLastPage ? AppStrings.getStartedText : AppStrings.nextText,
+                  onPressed: _handleButtonPress,
                 ),
               ],
             ),

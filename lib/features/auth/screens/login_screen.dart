@@ -5,6 +5,7 @@ import 'package:shopflow/core/constants/app_images.dart';
 import 'package:shopflow/core/constants/app_routes.dart';
 import 'package:shopflow/core/constants/app_strings.dart';
 import 'package:shopflow/core/constants/app_text_styles.dart';
+import 'package:shopflow/core/widgets/common_button.dart';
 import 'package:shopflow/core/widgets/common_input_field.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -106,39 +107,18 @@ class _LoginScreenState extends State<LoginScreen> {
 
                   const SizedBox(height: 20),
 
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.pushReplacementNamed(
-                          context,
-                          AppRoutes.homeScreen,
-                        );
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.coloredText,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadiusGeometry.circular(12),
-                        ),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 13),
-                        child: Row(
-                          mainAxisAlignment: .center,
-                          children: [
-                            Text(
-                              AppStrings.loginButtonText,
-                              style: AppTextStyles.headingSmall.copyWith(color: AppColors.white),
-                            ),
-                            const SizedBox(width: 5),
-                            const Icon(
-                              Icons.arrow_forward,
-                              color: AppColors.white,
-                              size: 20,
-                            ),
-                          ],
-                        ),
-                      ),
+                  CommonButton(
+                    label: AppStrings.loginButtonText,
+                    onPressed: () {
+                      Navigator.pushReplacementNamed(
+                        context,
+                        AppRoutes.homeScreen,
+                      );
+                    },
+                    trailingIcon: const Icon(
+                      Icons.arrow_forward,
+                      color: AppColors.white,
+                      size: 20,
                     ),
                   ),
 

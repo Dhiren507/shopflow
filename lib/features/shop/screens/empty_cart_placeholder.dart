@@ -5,6 +5,7 @@ import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_images.dart';
 import '../../../core/constants/app_strings.dart';
 import '../../../core/constants/app_text_styles.dart';
+import '../../../core/widgets/common_button.dart';
 
 class EmptyCartPlaceholder extends StatelessWidget {
   const EmptyCartPlaceholder({super.key});
@@ -40,28 +41,9 @@ class EmptyCartPlaceholder extends StatelessWidget {
               style: AppTextStyles.bodySmall,
               textAlign: TextAlign.center,
             ),
-            ElevatedButton(
+            CommonButton(
+              label: AppStrings.startShoppingText,
               onPressed: () {},
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.coloredText,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadiusGeometry.circular(12),
-                ),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 13),
-                child: Row(
-                  mainAxisAlignment: .center,
-                  children: [
-                    Text(
-                      AppStrings.startShoppingText,
-                      style: AppTextStyles.headingSmall.copyWith(
-                        color: AppColors.white,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
             ),
           ],
         ),
