@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:shopflow/core/constants/app_routes.dart';
 
@@ -78,8 +76,7 @@ class _MyProductsListingScreenState extends State<MyProductsListingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
+    return Padding(
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 24),
         child: Column(
           crossAxisAlignment: .start,
@@ -246,14 +243,6 @@ class _MyProductsListingScreenState extends State<MyProductsListingScreen> {
             ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pushNamed(context, AppRoutes.addProductScreen);
-        },
-        backgroundColor: AppColors.primary,
-        child: Icon(Icons.add, color: AppColors.textOnDark),
-      ),
-    );
+      );
   }
 }

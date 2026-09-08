@@ -17,4 +17,11 @@ class AppImages {
   static const String editPencil ='$_commonImagePath/editPencil.svg';
 
   static const String addImageEmptyPlaceholder = '$_commonImagePath/add_image.svg';
+
+  // profile section images
+ static const String editProfilePerson = '$_commonImagePath/person_icon.svg';
+ static const String bellIcon = '$_commonImagePath/bell_icon.svg';
+ static const String documentPaperIcon = '$_commonImagePath/paper_icon.svg';
+ static const String locationMarkIcon = '$_commonImagePath/location_icon.svg';
+ static const String helperTooltipIcon = '$_commonImagePath/helper_tooltip.svg';
 }

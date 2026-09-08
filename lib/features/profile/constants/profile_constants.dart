@@ -3,23 +3,23 @@ import 'package:shopflow/core/constants/app_images.dart';
 class ProfileConstants {
   static const List<Map<String, dynamic>> profileOptions = [
     {
-      'leadingIcon' : AppImages.appIconLogo,
+      'leadingIcon' : AppImages.editProfilePerson,
       'optionText' : 'Edit Profile'
     },
     {
-      'leadingIcon' : AppImages.appIconLogo,
+      'leadingIcon' : AppImages.documentPaperIcon,
       'optionText' : 'Order History'
     },
     {
-      'leadingIcon' : AppImages.appIconLogo,
+      'leadingIcon' : AppImages.locationMarkIcon,
       'optionText' : 'Addresses'
     },
     {
-      'leadingIcon' : AppImages.appIconLogo,
+      'leadingIcon' : AppImages.bellIcon,
       'optionText' : 'Notifications'
     },
     {
-      'leadingIcon' : AppImages.appIconLogo,
+      'leadingIcon' : AppImages.helperTooltipIcon,
       'optionText' : 'Help & Support'
     },
   ];

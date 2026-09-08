@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shopflow/core/constants/app_colors.dart';
+import 'package:shopflow/core/constants/app_routes.dart';
 import 'package:shopflow/core/constants/app_strings.dart';
 import 'package:shopflow/core/widgets/common_app_bar.dart';
 import 'package:shopflow/features/profile/profile_screen.dart';
@@ -100,6 +101,15 @@ class _CommonBaseScreenState extends State<CommonBaseScreen>
           ProfileScreen(),
         ],
       ),
+      floatingActionButton: _tabController.index == 2
+          ? FloatingActionButton(
+              onPressed: () {
+                Navigator.pushNamed(context, AppRoutes.addProductScreen);
+              },
+              backgroundColor: AppColors.primary,
+              child: Icon(Icons.add, color: AppColors.textOnDark),
+            )
+          : const SizedBox(),
     );
   }
 }
