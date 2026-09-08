@@ -53,7 +53,7 @@ class _SplashScreenState extends State<SplashScreen> {
             Text(
               AppStrings.appName,
               style: AppTextStyles.headingLarge.copyWith(
-                color: AppColors.primaryColor,
+                color: AppColors.primary,
               ),
             ),
             const SizedBox(height: 16),
@@ -67,7 +67,7 @@ class _SplashScreenState extends State<SplashScreen> {
               width: 32,
               child: CircularProgressIndicator(
                 value: _progress,
-                color: AppColors.primaryColor,
+                color: AppColors.primary,
               ),
             ),
           ],

@@ -29,7 +29,7 @@ class _LoginScreenState extends State<LoginScreen> {
             height: double.maxFinite,
             padding: EdgeInsets.all(24),
             decoration: BoxDecoration(
-              color: AppColors.white,
+              color: AppColors.bgCard,
               borderRadius: BorderRadius.circular(12),
               boxShadow: [
                 BoxShadow(
@@ -47,7 +47,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   Text(
                     AppStrings.appName,
                     style: AppTextStyles.headingLarge.copyWith(
-                      color: AppColors.primaryColor,
+                      color: AppColors.primary,
                     ),
                   ),
                   const SizedBox(height: 10),
@@ -63,7 +63,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     hintText: AppStrings.usernameHintText,
                     leadingIcon: Icon(
                       Icons.person_2_outlined,
-                      color: AppColors.greyColor,
+                      color: AppColors.border,
                     ),
                   ),
 
@@ -84,10 +84,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         _isPasswordVisible
                             ? Icons.visibility_off
                             : Icons.visibility,
-                        color: AppColors.greyColor,
+                        color: AppColors.border,
                       ),
                     ),
-                    leadingIcon: Icon(Icons.lock, color: AppColors.greyColor),
+                    leadingIcon: Icon(Icons.lock, color: AppColors.border),
                   ),
 
                   const SizedBox(height: 20),
@@ -96,12 +96,12 @@ class _LoginScreenState extends State<LoginScreen> {
 
                     padding: EdgeInsets.all(12),
                     decoration: BoxDecoration(
-                      color: AppColors.lightRedBgColor,
+                      color: AppColors.errorBg,
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Row(
                       children: [
-                        Icon(Icons.info_outline, color: AppColors.errorColor),
+                        Icon(Icons.info_outline, color: AppColors.errorText),
                         const SizedBox(width: 5),
                         Text(
                           AppStrings.loginErrorText,
@@ -123,7 +123,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                     trailingIcon: const Icon(
                       Icons.arrow_forward,
-                      color: AppColors.white,
+                      color: AppColors.textOnDark,
                       size: 20,
                     ),
                   ),
@@ -138,7 +138,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Text(
                       AppStrings.helperText,
                       style: AppTextStyles.bodySmall.copyWith(
-                        color: AppColors.primaryColor,
+                        color: AppColors.primary,
                       ),
                     ),
                   ),

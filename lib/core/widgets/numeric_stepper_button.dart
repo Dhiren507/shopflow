@@ -22,8 +22,8 @@ class NumericStepperButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: isStyled ? AppColors.white : AppColors.stepperBgColor,
-        border: Border.all(color: AppColors.greyColor),
+        color: isStyled ? AppColors.bgCard : AppColors.bgStepper,
+        border: Border.all(color: AppColors.border),
         borderRadius: BorderRadius.all(Radius.circular(isStyled ? 12 : 24)),
       ),
       child: Row(
@@ -44,10 +44,10 @@ class NumericStepperButton extends StatelessWidget {
           Container(
             decoration: isStyled
                 ? const BoxDecoration(
-                    color: AppColors.scaffoldBgColor,
+                    color: AppColors.bgScreen,
                     border: Border(
-                      left: BorderSide(color: AppColors.greyColor, width: 1.0),
-                      right: BorderSide(color: AppColors.greyColor, width: 1.0),
+                      left: BorderSide(color: AppColors.border, width: 1.0),
+                      right: BorderSide(color: AppColors.border, width: 1.0),
                     ),
                   )
                 : null,

@@ -1,32 +1,35 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static const Color primaryColor = Color(0xFF412AE7);
+  // brand
+  static const Color primary       = Color(0xFF412AE7);
+  static const Color primaryLight  = Color(0xFF5B4CFF);
+  static const Color primaryDim    = Color(0xFFEEEAFF);
 
-  static const Color coloredText = Color(0xFF5B4CFF);
-  static const Color headerDarkBlackText = Color(0xFF1B1A25);
-  static const Color subheadingDarkGreyText = Color(0xFF464556);
-  static const Color white = Color(0xFFFFFFFF);
-  static const Color black = Color(0xFF000000);
+  // backgrounds
+  static const Color bgScreen      = Color(0xFFFCF8FF);
+  static const Color bgCard        = Color(0xFFFFFFFF);
+  static const Color bgChip        = Color(0xFFF6F2FF);
+  static const Color bgStepper     = Color(0xFFF0ECFA);
+  static const Color bgTile        = Color(0xFFEAE6F5);
 
-  static const Color offGreyColor = Color(0xFF777588);
-  static const Color greyDotColor = Color(0xFFE4E0EF);
-  static const Color scaffoldBgColor = Color(0xFFFCF8FF);
-  static const Color chipBgColor = Color(0xFFF6F2FF);
+  // text
+  static const Color textPrimary   = Color(0xFF1B1A25);
+  static const Color textSecondary = Color(0xFF464556);
+  static const Color textHint      = Color(0xFF777588);
+  static const Color textOnDark    = Color(0xFFFFFFFF);
 
-  // input field colors
-  static const Color greyColor = Color(0xFFC7C4D9);
-  static const Color errorColor = Color(0xFFBA1A1A);
-  static const Color lightRedBgColor = Color(0xFFFFDAD6);
-  static const Color redTextColor = Color(0xFFAE2F34);
-  static const Color redBgColor = Color(0xFFFF6B6B);
-  static const Color stepperBgColor = Color(0xFFF0ECFA);
+  // borders
+  static const Color border        = Color(0xFFC7C4D9);
+  static const Color divider       = Color(0xFFE4E0EF);
 
-  static const Color reviewSectionBgColor = Color(0xFFF6F2FF);
-  static const Color tileBarBgColor = Color(0xFFEAE6F5);
+  // error
+  static const Color errorText     = Color(0xFFBA1A1A);
+  static const Color errorBg       = Color(0xFFFFDAD6);
+  static const Color errorLabel    = Color(0xFFAE2F34);
 
-
-
-
-  static const Color lightGreyColor = Color(0xFFEEEAFF);
+  // misc
+  static const Color saleBadge     = Color(0xFFFF6B6B);
+  static const Color black         = Color(0xFF000000);
+  static const Color white         = Color(0xFFFFFFFF);
 }

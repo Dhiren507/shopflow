@@ -80,25 +80,25 @@ class CommonInputField extends StatelessWidget {
           decoration: InputDecoration(
             prefixIcon: leadingIcon,
             filled: true,
-            fillColor: AppColors.white,
+            fillColor: AppColors.bgCard,
             hintText: hintText,
             hintStyle: AppTextStyles.hintText,
             suffixIcon: isDate ? const Icon(Icons.calendar_month) : suffixIcon,
             enabledBorder: const OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(12)),
-              borderSide: BorderSide(color: AppColors.greyColor, width: 1),
+              borderSide: BorderSide(color: AppColors.border, width: 1),
             ),
             focusedBorder: const OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(12)),
-              borderSide: BorderSide(color: AppColors.greyColor, width: 2),
+              borderSide: BorderSide(color: AppColors.border, width: 2),
             ),
             errorBorder: const OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(12)),
-              borderSide: BorderSide(color: AppColors.errorColor),
+              borderSide: BorderSide(color: AppColors.errorText),
             ),
             focusedErrorBorder: const OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(12)),
-              borderSide: BorderSide(color: AppColors.errorColor),
+              borderSide: BorderSide(color: AppColors.errorText),
             ),
           ),
         ),

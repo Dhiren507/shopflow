@@ -22,13 +22,13 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-     backgroundColor: AppColors.scaffoldBgColor,
+     backgroundColor: AppColors.bgScreen,
       scrolledUnderElevation: 0 ,
-      title: Text(title ?? AppStrings.appName, style:AppTextStyles.headingLarge.copyWith(color:  textColor ?? AppColors.primaryColor)),
+      title: Text(title ?? AppStrings.appName, style:AppTextStyles.headingLarge.copyWith(color:  textColor ?? AppColors.primary)),
       centerTitle: centerTitle,
       leading: leading ?? IconButton(onPressed: () {}, icon: Icon(Icons.search)),
       actions: actions ?? [IconButton(onPressed: () {}, icon: Icon(Icons.tune_outlined))],
-      iconTheme: IconThemeData(color: textColor ?? AppColors.offGreyColor),
+      iconTheme: IconThemeData(color: textColor ?? AppColors.textHint),
     );
   }
 

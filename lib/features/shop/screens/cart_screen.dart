@@ -152,7 +152,7 @@ class _CartScreenState extends State<CartScreen> {
                                       '\$299.00',
                                       style: AppTextStyles.headingSmall
                                           .copyWith(
-                                            color: AppColors.primaryColor,
+                                            color: AppColors.primary,
                                           ),
                                     ),
                                   ],
@@ -203,7 +203,7 @@ class _CartScreenState extends State<CartScreen> {
                           width: 48,
                           height: 6,
                           decoration: BoxDecoration(
-                            color: AppColors.greyColor,
+                            color: AppColors.border,
                             borderRadius: BorderRadius.circular(10),
                           ),
                         ),
@@ -213,7 +213,7 @@ class _CartScreenState extends State<CartScreen> {
                         ),
                         Row(
                           mainAxisAlignment: .spaceBetween,
-                          children: [Text('Discount', style: AppTextStyles.bodySmall), Text('-\$28.00', style: AppTextStyles.headingMedium.copyWith(color: AppColors.redTextColor),)],
+                          children: [Text('Discount', style: AppTextStyles.bodySmall), Text('-\$28.00', style: AppTextStyles.headingMedium.copyWith(color: AppColors.errorLabel),)],
                         ),
                         Row(
                           mainAxisAlignment: .spaceBetween,
@@ -222,7 +222,7 @@ class _CartScreenState extends State<CartScreen> {
                         CommonDivider(),
                         Row(
                           mainAxisAlignment: .spaceBetween,
-                          children: [Text('Total', style: AppTextStyles.headingMedium,), Text('\$828.00', style: AppTextStyles.headingLarge.copyWith(color: AppColors.primaryColor),)],
+                          children: [Text('Total', style: AppTextStyles.headingMedium,), Text('\$828.00', style: AppTextStyles.headingLarge.copyWith(color: AppColors.primary),)],
                         ),
                         CommonButton(label: 'Checkout Now', onPressed: () {})
                       ],

@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
 
       title: 'Shop Flow',
       theme: ThemeData(
-        colorScheme: .fromSeed(seedColor: AppColors.primaryColor),
+        colorScheme: .fromSeed(seedColor: AppColors.primary),
         splashFactory: NoSplash.splashFactory,
         highlightColor: Colors.transparent,
       ),

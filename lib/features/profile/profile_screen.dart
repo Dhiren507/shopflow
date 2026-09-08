@@ -38,7 +38,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
          children: [
            CircleAvatar(
              radius: 52,
-             backgroundColor: AppColors.lightGreyColor,
+             backgroundColor: AppColors.primaryDim,
              child: CircleAvatar(
                radius: 50,
                backgroundImage: _avatarImage != null
@@ -60,7 +60,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                height: 32,
                width: 32,
                decoration: BoxDecoration(
-                 color: AppColors.primaryColor,
+                 color: AppColors.primary,
                  shape: BoxShape.circle,
                ),
                child: SvgPicture.asset(
@@ -91,7 +91,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                        height: 40,
                        width: 40,
                        decoration: BoxDecoration(
-                         color: Color(0xFFF0ECFA)
+                         color: AppColors.bgStepper,
                        ),
                        child: SvgPicture.asset(option['leadingIcon']),
                      ),

@@ -10,7 +10,7 @@ class ProductRatingStars extends StatelessWidget {
     super.key,
     required this.rating,
     this.size = 15.0,
-    this.color = AppColors.coloredText,
+    this.color = AppColors.primaryLight,
   });
 
   @override
@@ -25,7 +25,7 @@ class ProductRatingStars extends StatelessWidget {
         } else {
           return Icon(
             Icons.star_border,
-            color: AppColors.coloredText,
+            color: AppColors.primaryLight,
             size: size,
           );
         }

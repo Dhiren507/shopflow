@@ -24,7 +24,7 @@ class CommonProgressIndicator extends StatelessWidget {
     return  LinearProgressIndicator(
       value: progressBarValue.clamp(0.0, 1.0),
       borderRadius: BorderRadius.circular(8),
-      color: barColor ?? AppColors.coloredText
+      color: barColor ?? AppColors.primaryLight
     );
   }
 }

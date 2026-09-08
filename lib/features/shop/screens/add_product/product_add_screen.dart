@@ -36,7 +36,7 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
             icon: Tooltip(
               message: 'Helper Test when clicked on',
               triggerMode: TooltipTriggerMode.tap,
-              child: Icon(Icons.help_outline, color: AppColors.offGreyColor),
+              child: Icon(Icons.help_outline, color: AppColors.textHint),
             ),
           ),
         ],
@@ -47,7 +47,7 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
           icon: Icon(Icons.close),
         ),
         title: 'Add Product',
-        textColor: AppColors.headerDarkBlackText,
+        textColor: AppColors.textPrimary,
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(20),
@@ -81,7 +81,7 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
                     width: 72,
                     decoration: BoxDecoration(
                       border: _currentForm.selectedImagePaths[index] == ''
-                          ? DashedBorder(color: AppColors.greyColor, width: 2)
+                          ? DashedBorder(color: AppColors.border, width: 2)
                           : Border.all(color: Colors.transparent),
                       borderRadius: BorderRadius.circular(8),
                     ),
@@ -96,7 +96,7 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
                         : SvgPicture.asset(
                             AppImages.addImageEmptyPlaceholder,
                             colorFilter: ColorFilter.mode(
-                              AppColors.offGreyColor,
+                              AppColors.textHint,
                               BlendMode.srcIn,
                             ),
                             height: 18,
@@ -160,7 +160,7 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
                           leadingIcon: Icon(
                             Icons.attach_money,
                             size: 18,
-                            color: AppColors.offGreyColor,
+                            color: AppColors.textHint,
                           ),
                           hintText: '99.99',
                         ),
@@ -174,7 +174,7 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
                           suffixIcon: Icon(
                             Icons.percent_rounded,
                             size: 18,
-                            color: AppColors.offGreyColor,
+                            color: AppColors.textHint,
                           ),
                         ),
                       ),
@@ -186,8 +186,8 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
                   Container(
                     width: 200,
                     decoration: BoxDecoration(
-                      color: AppColors.primaryColor.withValues(alpha: 0.4),
-                      border: Border.all(color: AppColors.primaryColor),
+                      color: AppColors.primary.withValues(alpha: 0.4),
+                      border: Border.all(color: AppColors.primary),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Padding(
@@ -199,14 +199,14 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
                         children: [
                           Icon(
                             Icons.local_offer_outlined,
-                            color: AppColors.primaryColor,
+                            color: AppColors.primary,
                             size: 16,
                           ),
                           const SizedBox(width: 10),
                           Text(
                             "Final Price : \$ ${_currentForm.calculatedFinalPrice}",
                             style: AppTextStyles.headingSmall.copyWith(
-                              color: AppColors.primaryColor,
+                              color: AppColors.primary,
                             ),
                           ),
                         ],
@@ -226,28 +226,28 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       decoration: InputDecoration(
                         filled: true,
-                        fillColor: AppColors.white,
+                        fillColor: AppColors.bgCard,
                         enabledBorder: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(12)),
                           borderSide: BorderSide(
-                            color: AppColors.greyColor,
+                            color: AppColors.border,
                             width: 1,
                           ),
                         ),
                         focusedBorder: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(12)),
                           borderSide: BorderSide(
-                            color: AppColors.greyColor,
+                            color: AppColors.border,
                             width: 2,
                           ),
                         ),
                         errorBorder: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(12)),
-                          borderSide: BorderSide(color: AppColors.errorColor),
+                          borderSide: BorderSide(color: AppColors.errorText),
                         ),
                         focusedErrorBorder: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(12)),
-                          borderSide: BorderSide(color: AppColors.errorColor),
+                          borderSide: BorderSide(color: AppColors.errorText),
                         ),
                       ),
 
@@ -310,7 +310,7 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
         child: CommonButton(
           label: "Save Product",
           onPressed: () {},
-          leadingIcon: Icon(Icons.save, color: AppColors.white),
+          leadingIcon: Icon(Icons.save, color: AppColors.bgCard),
         ),
       ),
     );

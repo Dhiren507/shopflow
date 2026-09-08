@@ -183,7 +183,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.scaffoldBgColor,
+      backgroundColor: AppColors.bgScreen,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -193,7 +193,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   items: imgList
                       .map(
                         (image) => Container(
-                          color: Colors.grey,
+                          color: AppColors.bgTile,
                           child: Image.network(
                             image,
                             fit: BoxFit.cover,
@@ -230,7 +230,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           height: 44,
                           width: 44,
                           decoration: BoxDecoration(
-                            color: AppColors.white,
+                            color: AppColors.bgCard,
                             shape: BoxShape.circle,
                           ),
                           child: Icon(Icons.arrow_back, color: AppColors.black),
@@ -242,7 +242,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           height: 44,
                           width: 44,
                           decoration: BoxDecoration(
-                            color: AppColors.white,
+                            color: AppColors.bgCard,
                             shape: BoxShape.circle,
                           ),
                           child: SvgPicture.asset(
@@ -273,8 +273,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         width: 8,
                         decoration: BoxDecoration(
                           color: _currentImageIndex == index
-                              ? AppColors.primaryColor
-                              : AppColors.greyDotColor,
+                              ? AppColors.primary
+                              : AppColors.divider,
                           borderRadius: BorderRadius.circular(4),
                         ),
                       ),
@@ -306,7 +306,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         height: 4,
                         width: 4,
                         decoration: BoxDecoration(
-                          color: AppColors.greyColor,
+                          color: AppColors.border,
                           shape: BoxShape.circle,
                         ),
                       ),
@@ -316,13 +316,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           horizontal: 8,
                         ),
                         decoration: BoxDecoration(
-                          color: AppColors.primaryColor,
+                          color: AppColors.primary,
                           borderRadius: BorderRadiusGeometry.circular(16),
                         ),
                         child: Text(
                           product['availability']['label'],
                           style: AppTextStyles.labelSmall.copyWith(
-                            color: AppColors.lightGreyColor,
+                            color: AppColors.primaryDim,
                           ),
                         ),
                       ),
@@ -348,13 +348,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           horizontal: 8,
                         ),
                         decoration: BoxDecoration(
-                          color: AppColors.redBgColor,
+                          color: AppColors.saleBadge,
                           borderRadius: BorderRadiusGeometry.circular(16),
                         ),
                         child: Text(
                           r"Save $50",
                           style: AppTextStyles.labelSmall.copyWith(
-                            color: AppColors.lightGreyColor,
+                            color: AppColors.primaryDim,
                           ),
                         ),
                       ),
@@ -396,7 +396,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             const CommonDivider(),
 
             Container(
-              decoration: BoxDecoration(color: AppColors.reviewSectionBgColor),
+              decoration: BoxDecoration(color: AppColors.bgChip),
               child: Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 24,
@@ -422,7 +422,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           const SizedBox(height: 5),
                       itemBuilder: (context, index) {
                         return Card(
-                          color: AppColors.white,
+                          color: AppColors.bgCard,
                           child: Padding(
                             padding: const EdgeInsets.all(16.0),
                             child: Column(
@@ -477,10 +477,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           : AppStrings.viewAllReviews,
                       onPressed: _handleReviewToggleButton,
                       borderRadius: 22,
-                      backgroundColor: AppColors.reviewSectionBgColor,
+                      backgroundColor: AppColors.bgChip,
                       textColor: AppColors.black,
                       elevation: 0,
-                      borderSide: BorderSide(color: AppColors.greyColor),
+                      borderSide: BorderSide(color: AppColors.border),
                     ),
                   ],
                 ),
@@ -490,7 +490,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         ),
       ),
       bottomNavigationBar: BottomAppBar(
-        color: AppColors.white,
+        color: AppColors.bgCard,
         child: Padding(
           padding: const EdgeInsets.all(6.0),
           child: Row(
@@ -509,7 +509,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   borderRadius: 22,
                   leadingIcon: const Icon(
                     Icons.shopping_cart_outlined,
-                    color: AppColors.white,
+                    color: AppColors.textOnDark,
                     size: 20,
                   ),
                 ),

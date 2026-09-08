@@ -127,8 +127,8 @@ class _IntroStepperScreenState extends State<IntroStepperScreen> {
                       width: _currentPage == index ? 24 : 8,
                       decoration: BoxDecoration(
                         color: _currentPage == index
-                            ? AppColors.primaryColor
-                            : AppColors.greyDotColor,
+                            ? AppColors.primary
+                            : AppColors.divider,
                         borderRadius: BorderRadius.circular(4),
                       ),
                     ),

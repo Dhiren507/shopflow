@@ -21,7 +21,7 @@ class RatingProgressRow extends StatelessWidget {
       spacing: 10,
       children: [
         Text(leadingText),
-        Icon(Icons.star, size: 13, color: AppColors.greyColor),
+        Icon(Icons.star, size: 13, color: AppColors.border),
         SizedBox(
           height: 8,
           width: 125,

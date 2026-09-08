@@ -9,21 +9,21 @@ class AppTextStyles {
     fontFamily: _font,
     fontSize: 24,
     fontWeight: FontWeight.w700,
-    color: AppColors.headerDarkBlackText,
+    color: AppColors.textPrimary,
   );
 
   static const TextStyle headingMedium = TextStyle(
     fontFamily: _font,
     fontSize: 18,
     fontWeight: FontWeight.w600,
-    color: AppColors.headerDarkBlackText,
+    color: AppColors.textPrimary,
   );
 
   static const TextStyle headingSmall = TextStyle(
     fontFamily: _font,
     fontSize: 16,
     fontWeight: FontWeight.w600,
-    color: AppColors.headerDarkBlackText,
+    color: AppColors.textPrimary,
   );
 
   // subheadings
@@ -31,14 +31,14 @@ class AppTextStyles {
     fontFamily: _font,
     fontSize: 14,
     fontWeight: FontWeight.w500,
-    color: AppColors.subheadingDarkGreyText,
+    color: AppColors.textSecondary,
   );
 
   static const TextStyle bodySmall = TextStyle(
     fontFamily: _font,
     fontSize: 14,
     fontWeight: FontWeight.w400,
-    color: AppColors.subheadingDarkGreyText,
+    color: AppColors.textSecondary,
   );
 
   // small labels chip text etc
@@ -46,14 +46,14 @@ class AppTextStyles {
     fontFamily: _font,
     fontSize: 14,
     fontWeight: FontWeight.w600,
-    color: AppColors.offGreyColor,
+    color: AppColors.textHint,
   );
 
   static const TextStyle labelSmall = TextStyle(
     fontFamily: _font,
     fontSize: 12,
     fontWeight: FontWeight.w500,
-    color: AppColors.offGreyColor,
+    color: AppColors.textHint,
   );
 
   // input fields text styles
@@ -61,7 +61,7 @@ class AppTextStyles {
     fontFamily: _font,
     fontSize: 12,
     fontWeight: FontWeight.w500,
-    color: AppColors.subheadingDarkGreyText,
+    color: AppColors.textSecondary,
     letterSpacing: 0.5,
   );
 
@@ -69,23 +69,23 @@ class AppTextStyles {
     fontFamily: _font,
     fontSize: 14,
     fontWeight: FontWeight.w400,
-    color: AppColors.greyColor,
+    color: AppColors.border,
   );
 
   static const TextStyle errorText = TextStyle(
     fontFamily: _font,
     fontSize: 14,
     fontWeight: FontWeight.w400,
-    color: AppColors.errorColor,
+    color: AppColors.errorText,
   );
 
     static const TextStyle strikethroughSmall = TextStyle(
       fontFamily: _font,
       fontSize: 12,
       fontWeight: FontWeight.w500,
-      color: AppColors.offGreyColor,
+      color: AppColors.textHint,
       decoration: TextDecoration.lineThrough,
-      decorationColor: AppColors.offGreyColor,
+      decorationColor: AppColors.textHint,
       decorationStyle: TextDecorationStyle.solid,
       decorationThickness: 1.0,
     );
@@ -94,9 +94,9 @@ class AppTextStyles {
     fontFamily: _font,
     fontSize: 16,
     fontWeight: FontWeight.w600,
-    color: AppColors.offGreyColor,
+    color: AppColors.textHint,
     decoration: TextDecoration.lineThrough,
-    decorationColor: AppColors.offGreyColor,
+    decorationColor: AppColors.textHint,
     decorationStyle: TextDecorationStyle.solid,
     decorationThickness: 1.0,
   );

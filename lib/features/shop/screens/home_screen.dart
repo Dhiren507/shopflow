@@ -19,7 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final String _selectedFilterOption = 'All';
     return Scaffold(
-      backgroundColor: AppColors.scaffoldBgColor,
+      backgroundColor: AppColors.bgScreen,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
         child: Column(
@@ -39,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       decoration: BoxDecoration(
                         border: Border.all(
-                          color: AppColors.offGreyColor,
+                          color: AppColors.textHint,
                           width: 1,
                         ),
                         borderRadius: BorderRadius.circular(16),
@@ -65,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 itemBuilder: (context, index) {
                   return Container(
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: AppColors.bgCard,
                       boxShadow: [
                         BoxShadow(
                           color: AppColors.black.withAlpha(5),
@@ -94,7 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   height: 143,
                                   width: 143,
                                   decoration: BoxDecoration(
-                                    color: Colors.black,
+                                    color: AppColors.black,
                                     borderRadius: BorderRadius.circular(6),
                                   ),
                                   child: ClipRRect(
@@ -114,7 +114,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     height: 32,
                                     width: 32,
                                     decoration: BoxDecoration(
-                                      color: AppColors.white,
+                                      color: AppColors.textOnDark,
                                       shape: BoxShape.circle,
                                     ),
                                     child: SvgPicture.asset(
@@ -142,7 +142,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 Text(
                                   'Too much long Product name should wrap',
                                   style: AppTextStyles.bodySmall.copyWith(
-                                    color: AppColors.headerDarkBlackText,
+                                    color: AppColors.textPrimary,
                                   ),
                                   maxLines: 2,
                                   overflow: .ellipsis,
@@ -160,7 +160,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     Text(
                                       '4.8',
                                       style: AppTextStyles.bodyMedium.copyWith(
-                                        color: AppColors.headerDarkBlackText,
+                                        color: AppColors.textPrimary,
                                       ),
                                     ),
                                     const Text(
@@ -187,7 +187,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         vertical: 2,
                                       ),
                                       decoration: BoxDecoration(
-                                        color: AppColors.errorColor,
+                                        color: AppColors.errorText,
                                         borderRadius: BorderRadius.circular(16),
                                       ),
                                       child: const Text(
@@ -195,7 +195,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         style: TextStyle(
                                           fontSize: 10,
                                           fontWeight: FontWeight.w400,
-                                          color: AppColors.white,
+                                          color: AppColors.textOnDark,
                                         ),
                                       ),
                                     ),

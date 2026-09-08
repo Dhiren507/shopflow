@@ -11,7 +11,7 @@ class CommonDivider extends StatelessWidget {
     return Divider(
       height: height,
       thickness: 1,
-      color: AppColors.greyDotColor,
+      color: AppColors.divider,
     );
   }
 }

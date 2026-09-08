@@ -48,17 +48,19 @@ class _CommonBaseScreenState extends State<CommonBaseScreen>
             height: 60,
             child: TabBar(
               controller: _tabController,
-              labelColor: AppColors.white,
-              unselectedLabelColor: AppColors.subheadingDarkGreyText,
+              labelColor: AppColors.textOnDark,
+              unselectedLabelColor: AppColors.textSecondary,
               dividerColor: Colors.transparent,
               indicator: BoxDecoration(
-                color: AppColors.primaryColor,
+                color: AppColors.primary,
                 borderRadius: BorderRadius.circular(12),
               ),
               indicatorSize: .tab,
               tabs: [
                 Tab(
-                  icon: Icon(activeIndex == 0 ? Icons.home : Icons.home_outlined),
+                  icon: Icon(
+                    activeIndex == 0 ? Icons.home : Icons.home_outlined,
+                  ),
                   text: AppStrings.tabBarLabelOne,
                 ),
                 Tab(
@@ -95,7 +97,7 @@ class _CommonBaseScreenState extends State<CommonBaseScreen>
           HomeScreen(),
           CartScreen(),
           MyProductsListingScreen(),
-          ProfileScreen()
+          ProfileScreen(),
         ],
       ),
     );

@@ -93,7 +93,7 @@ class _MyProductsListingScreenState extends State<MyProductsListingScreen> {
                   height: 4,
                   width: 4,
                   decoration: BoxDecoration(
-                    color: AppColors.greyColor,
+                    color: AppColors.border,
                     shape: BoxShape.circle,
                   ),
                 ),
@@ -106,7 +106,7 @@ class _MyProductsListingScreenState extends State<MyProductsListingScreen> {
             Container(
               padding: EdgeInsets.all(4),
               decoration: BoxDecoration(
-                color: AppColors.tileBarBgColor,
+                color: AppColors.bgTile,
                 borderRadius: BorderRadius.circular(12),
                 boxShadow: [
                   BoxShadow(
@@ -129,7 +129,7 @@ class _MyProductsListingScreenState extends State<MyProductsListingScreen> {
                         padding: const EdgeInsets.symmetric(vertical: 8),
                         decoration: BoxDecoration(
                           color: isSelected
-                              ? AppColors.white
+                              ? AppColors.textOnDark
                               : Colors.transparent,
                           borderRadius: BorderRadius.circular(10),
                         ),
@@ -137,8 +137,8 @@ class _MyProductsListingScreenState extends State<MyProductsListingScreen> {
                           tabs[index],
                           style: AppTextStyles.headingSmall.copyWith(
                             color: isSelected
-                                ? AppColors.primaryColor
-                                : AppColors.offGreyColor,
+                                ? AppColors.primary
+                                : AppColors.textHint,
                           ),
                         ),
                       ),
@@ -206,8 +206,8 @@ class _MyProductsListingScreenState extends State<MyProductsListingScreen> {
                                                       '0',
                                                 ) <
                                                 5
-                                            ? AppColors.lightRedBgColor
-                                            : AppColors.chipBgColor,
+                                            ? AppColors.errorBg
+                                            : AppColors.bgChip,
                                         borderRadius: BorderRadius.circular(6),
                                       ),
                                       child: Padding(
@@ -223,7 +223,7 @@ class _MyProductsListingScreenState extends State<MyProductsListingScreen> {
                                                 '0',
                                           ) <
                                               5
-                                              ? AppTextStyles.labelSmall.copyWith(color : AppColors.redTextColor)
+                                              ? AppTextStyles.labelSmall.copyWith(color : AppColors.errorLabel)
                                               : AppTextStyles.labelSmall,
                                         ),
                                       ),
@@ -251,8 +251,8 @@ class _MyProductsListingScreenState extends State<MyProductsListingScreen> {
         onPressed: () {
           Navigator.pushNamed(context, AppRoutes.addProductScreen);
         },
-        backgroundColor: AppColors.primaryColor,
-        child: Icon(Icons.add, color: AppColors.white),
+        backgroundColor: AppColors.primary,
+        child: Icon(Icons.add, color: AppColors.textOnDark),
       ),
     );
   }
