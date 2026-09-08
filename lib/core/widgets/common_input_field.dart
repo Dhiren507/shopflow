@@ -11,14 +11,12 @@ class CommonInputField extends StatelessWidget {
   final bool hasLabelPadding;
   final TextEditingController? controller;
   final String? hintText;
-  final bool isDate;
   final bool isMultiline;
   final int? maxLines;
   final TextInputType? keyboardType;
   final List<TextInputFormatter>? inputFormatters;
   final String? Function(String?)? validator;
   final VoidCallback? onTap;
-  final ValueChanged<String>? onChanged;
   final AutovalidateMode? autovalidateMode;
   final bool? isPasswordField;
 
@@ -29,14 +27,12 @@ class CommonInputField extends StatelessWidget {
     this.hasLabelPadding = true,
     this.controller,
     this.hintText,
-    this.isDate = false,
     this.isMultiline = false,
     this.maxLines,
     this.keyboardType,
     this.inputFormatters,
     this.validator,
     this.onTap,
-    this.onChanged,
     this.autovalidateMode,
     this.leadingIcon,
     this.isPasswordField,
@@ -67,10 +63,8 @@ class CommonInputField extends StatelessWidget {
           },
           obscureText: isPasswordField ?? false,
           controller: controller,
-          onChanged: onChanged,
           validator: validator,
           inputFormatters: inputFormatters,
-          readOnly: isDate,
           onTap: onTap,
           autovalidateMode: autovalidateMode,
           maxLines: (isMultiline ? (maxLines ?? 4) : 1),
@@ -83,7 +77,7 @@ class CommonInputField extends StatelessWidget {
             fillColor: AppColors.bgCard,
             hintText: hintText,
             hintStyle: AppTextStyles.hintText,
-            suffixIcon: isDate ? const Icon(Icons.calendar_month) : suffixIcon,
+            suffixIcon: suffixIcon,
             enabledBorder: const OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(12)),
               borderSide: BorderSide(color: AppColors.border, width: 1),

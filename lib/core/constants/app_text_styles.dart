@@ -19,6 +19,13 @@ class AppTextStyles {
     color: AppColors.textPrimary,
   );
 
+  static const TextStyle headingMediumBoldColored = TextStyle(
+    fontFamily: _font,
+    fontSize: 18,
+    fontWeight: FontWeight.w700,
+    color: AppColors.primary,
+  );
+
   static const TextStyle headingSmall = TextStyle(
     fontFamily: _font,
     fontSize: 16,

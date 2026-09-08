@@ -24,4 +24,11 @@ class AppImages {
  static const String documentPaperIcon = '$_commonImagePath/paper_icon.svg';
  static const String locationMarkIcon = '$_commonImagePath/location_icon.svg';
  static const String helperTooltipIcon = '$_commonImagePath/helper_tooltip.svg';
+
+ // seller dashboard stat card icons and images
+ static const String productCartIcon = '$_commonImagePath/product_cart.svg';
+ static const String stockBarIcon = '$_commonImagePath/stock_bar_icon.svg';
+ static const String ratingStarIcon = '$_commonImagePath/star_icon.svg';
+ static const String progressUpIcon = '$_commonImagePath/progress_up_icon.svg';
+ static const String nextArrowIcon = '$_commonImagePath/next_arrow.svg';
 }

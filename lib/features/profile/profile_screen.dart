@@ -74,50 +74,78 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
         const SizedBox(height: 15),
         Text('Alex Morgan', style: AppTextStyles.headingMedium),
-        const SizedBox(height: 15),
+        Text('alex.morgan@example.com', style: AppTextStyles.bodySmall),
+        const SizedBox(height: 5),
 
         Expanded(
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: ListView.separated(
+              physics: NeverScrollableScrollPhysics(),
               itemBuilder: (context, index) {
                 final option = ProfileConstants.profileOptions[index];
-                return Card(
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Row(
-                      children: [
-                        Container(
-                          height: 40,
-                          width: 40,
-                          decoration: BoxDecoration(color: AppColors.bgStepper),
-                          child: SvgPicture.asset(option['leadingIcon']),
-                        ),
-                        Text(
-                          option['optionText'],
-                          style: AppTextStyles.headingMedium,
-                        ),
-                        const Spacer(),
-                        Icon(Icons.navigate_next),
-                      ],
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, option['navigateTo']);
+                  },
+                  child: Card(
+                    color: AppColors.white,
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Row(
+                        children: [
+                            Container(
+                              height: 40,
+                              width: 40,
+                              decoration: BoxDecoration(
+                                color: AppColors.bgStepper,
+                                shape: BoxShape.circle,
+                              ),
+                              child: SvgPicture.asset(
+                                option['leadingIcon'],
+                                height: 16,
+                                width: 16,
+                                fit: BoxFit.scaleDown,
+                              ),
+                            ),
+                          const SizedBox(width: 10),
+                          Text(
+                            option['optionText'],
+                            style: AppTextStyles.headingMedium,
+                          ),
+                          const Spacer(),
+                          Icon(Icons.navigate_next, color: AppColors.textHint),
+                        ],
+                      ),
                     ),
                   ),
                 );
               },
-              separatorBuilder: (context, index) => const SizedBox(height: 10),
+              separatorBuilder: (context, index) => const SizedBox(height: 5),
               itemCount: ProfileConstants.profileOptions.length,
             ),
           ),
         ),
-        CommonDivider(height: 50),
-        const Spacer(),
 
-        CommonButton(
-          label: 'Log Out',
-          onPressed: () {},
-          leadingIcon: Icon(Icons.logout_outlined),
-          backgroundColor: AppColors.errorBg,
-          textColor: AppColors.darkRed,
+        Column(
+          children: [
+            CommonDivider(),
+            const SizedBox(height: 15),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 9),
+              child: CommonButton(
+                label: 'Log Out',
+                onPressed: () {},
+                leadingIcon: Icon(
+                  Icons.logout_outlined,
+                  color: AppColors.darkRed,
+                  size: 20,
+                ),
+                backgroundColor: AppColors.errorBg,
+                textColor: AppColors.darkRed,
+              ),
+            ),
+          ],
         ),
       ],
     );
