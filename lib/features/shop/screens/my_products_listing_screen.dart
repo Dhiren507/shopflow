@@ -152,10 +152,7 @@ class _MyProductsListingScreenState extends State<MyProductsListingScreen> {
                   final item = myProductsList[index];
                   return Card(
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 16,
-                        horizontal: 23,
-                      ),
+                      padding: const EdgeInsets.all(12),
                       child: Row(
                         children: [
                           // image container

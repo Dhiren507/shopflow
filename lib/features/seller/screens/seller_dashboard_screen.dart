@@ -1,7 +1,9 @@
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shopflow/core/constants/app_colors.dart';
 import 'package:shopflow/core/constants/app_images.dart';
+import 'package:shopflow/core/constants/app_strings.dart';
 import 'package:shopflow/core/constants/app_text_styles.dart';
 import 'package:shopflow/core/widgets/common_app_bar.dart';
 import 'package:shopflow/features/seller/widgets/stat_card.dart';
@@ -43,7 +45,7 @@ class SellerDashboardScreen extends StatelessWidget {
     },
   ];
 
-  List<Map<String, dynamic>> productList = [
+  final List<Map<String, dynamic>> productList = [
     {
       "id": "p1",
       "name": "ProX Smartphone 5G",
@@ -91,6 +93,60 @@ class SellerDashboardScreen extends StatelessWidget {
     },
   ];
 
+  final List<Map<String, dynamic>> stockData = [
+    {
+      'label': 'Smartphones',
+      'value': 2600,
+      'totalStock': 3200,
+      'barColor': AppColors.primary,
+    },
+    {
+      'label': 'Laptops',
+      'value': 1800,
+      'totalStock': 3200,
+      'barColor': AppColors.primaryLight,
+    },
+    {
+      'label': 'Accessories',
+      'value': 2200,
+      'totalStock': 3000,
+      'barColor': AppColors.textSecondary,
+    },
+    {
+      'label': 'Audio Devices',
+      'value': 150,
+      'totalStock': 1200,
+      'barColor': null,
+    },
+  ];
+
+  final List<Map<String, dynamic>> pieChartData = [
+    {
+      "id": "c1",
+      "categoryName": "Electronics",
+      "valuePercentage": 45,
+      "color": AppColors.primary,
+    },
+    {
+      "id": "c2",
+      "categoryName": "Clothing",
+      "valuePercentage": 30,
+      "color": AppColors.saleBadge,
+    },
+    {
+      "id": "c2",
+      "categoryName": "Home Goods",
+      "valuePercentage": 10,
+      "color": AppColors.brownColor,
+    },
+    {
+      "id": "c2",
+      "categoryName": "Other",
+      "valuePercentage": 15,
+      "color": AppColors.divider,
+    },
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -100,10 +156,13 @@ class SellerDashboardScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: .start,
           children: [
-            Text('Seller Dashboard', style: AppTextStyles.headingMedium),
+            Text(
+              AppStrings.sellerDashboardText,
+              style: AppTextStyles.headingMedium,
+            ),
             const SizedBox(height: 10),
             Text(
-              "Overview of your store's performance today.",
+              AppStrings.sellerDashboardSubheadingText,
               style: AppTextStyles.bodyMedium,
             ),
 
@@ -125,6 +184,82 @@ class SellerDashboardScreen extends StatelessWidget {
 
             const SizedBox(height: 15),
 
+            SizedBox(
+              width: double.maxFinite,
+              child: Card(
+                color: AppColors.white,
+                child: Padding(
+                  padding: EdgeInsets.all(16),
+                  child: Column(
+                    crossAxisAlignment: .start,
+                    children: [
+                      Text(
+                        AppStrings.categoryBreakdownText,
+                        style: AppTextStyles.headingMedium,
+                      ),
+                      const SizedBox(height: 10),
+
+                      Center(
+                        child: SizedBox(
+                          height: 200,
+                          width: 200,
+                          child: PieChart(
+                            PieChartData(
+                              sectionsSpace: 0,
+                              centerSpaceRadius: 40,
+                              sections: [
+                                ...List.generate(pieChartData.length, (index) {
+                                  final item = pieChartData[index];
+                                  return PieChartSectionData(
+                                    color: item['color'],
+                                    value: double.parse(
+                                      item['valuePercentage'].toString(),
+                                    ),
+                                    showTitle: false,
+                                  );
+                                }),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+
+                      Column(
+                        spacing: 15,
+                        children: List.generate(pieChartData.length, (index) {
+                          final item = pieChartData[index];
+                          return Row(
+                            children: [
+                              Container(
+                                height: 12,
+                                width: 12,
+                                decoration: BoxDecoration(
+                                  color: item['color'],
+                                  shape: BoxShape.circle,
+                                ),
+                              ),
+                              const SizedBox(width: 10),
+                              Text(
+                                item["categoryName"],
+                                style: AppTextStyles.bodySmall,
+                              ),
+                              const Spacer(),
+                              Text(
+                                '${item["valuePercentage"]}%',
+                                style: AppTextStyles.headingSmall,
+                              ),
+                            ],
+                          );
+                        }),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+
+            const SizedBox(height: 15),
+
             Card(
               color: AppColors.white,
               child: Padding(
@@ -135,11 +270,11 @@ class SellerDashboardScreen extends StatelessWidget {
                       mainAxisAlignment: .spaceBetween,
                       children: [
                         Text(
-                          'Stock Levels',
+                          AppStrings.stockLevelsText,
                           style: AppTextStyles.headingMedium,
                         ),
                         Text(
-                          'View Details',
+                          AppStrings.viewAllReviews,
                           style: AppTextStyles.labelSmall.copyWith(
                             color: AppColors.primary,
                           ),
@@ -151,31 +286,22 @@ class SellerDashboardScreen extends StatelessWidget {
 
                     Column(
                       spacing: 15,
-                      children: [
-                        StockLevelProgressIndicator(
-                          label: 'Smartphones',
-                          value: 2600,
-                          totalStock: 3200,
-                          barColor: AppColors.primary,
-                        ),
-                        StockLevelProgressIndicator(
-                          label: 'Laptops',
-                          value: 1800,
-                          totalStock: 3200,
-                          barColor: AppColors.primaryLight,
-                        ),
-                        StockLevelProgressIndicator(
-                          label: 'Accessories',
-                          value: 2200,
-                          barColor: AppColors.textSecondary,
-                          totalStock: 3000,
-                        ),
-                        StockLevelProgressIndicator(
-                          label: 'Audio Devices',
-                          value: 150,
-                          totalStock: 1200,
-                        ),
-                      ],
+                      children: List.generate(stockData.length, (index) {
+                        final item = stockData[index];
+
+                        return StockLevelProgressIndicator(
+                          label: item['label'].toString(),
+                          value:
+                              int.tryParse(item['value']?.toString() ?? '') ??
+                              0,
+                          totalStock:
+                              int.tryParse(
+                                item['totalStock']?.toString() ?? '',
+                              ) ??
+                              0,
+                          barColor: item['color'],
+                        );
+                      }),
                     ),
                   ],
                 ),
@@ -190,7 +316,7 @@ class SellerDashboardScreen extends StatelessWidget {
                   mainAxisAlignment: .spaceBetween,
                   children: [
                     Text(
-                      'Top Rated Products',
+                      AppStrings.topRatedProductsText,
                       style: AppTextStyles.headingMedium,
                     ),
                     const Icon(

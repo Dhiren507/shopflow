@@ -108,10 +108,7 @@ class _CartScreenState extends State<CartScreen> {
 
                       return Card(
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 16,
-                            horizontal: 23,
-                          ),
+                          padding: const EdgeInsets.all(16),
                           child: Row(
                             children: [
                               Container(
@@ -151,9 +148,7 @@ class _CartScreenState extends State<CartScreen> {
                                     Text(
                                       '\$299.00',
                                       style: AppTextStyles.headingSmall
-                                          .copyWith(
-                                            color: AppColors.primary,
-                                          ),
+                                          .copyWith(color: AppColors.primary),
                                     ),
                                   ],
                                 ),
@@ -186,52 +181,100 @@ class _CartScreenState extends State<CartScreen> {
                     },
                   ),
                 ),
-          !isCartEmpty ? CommonButton(
-            label: 'Proceed To Checkout',
-            onPressed: () {
-              showModalBottomSheet(
-                context: context,
-                showDragHandle: false,
-                builder: (context) {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
-                    child: Column(
-                      spacing: 15,
-                      mainAxisSize: .min,
-                      children: [
-                        Container(
-                          width: 48,
-                          height: 6,
-                          decoration: BoxDecoration(
-                            color: AppColors.border,
-                            borderRadius: BorderRadius.circular(10),
+          !isCartEmpty
+              ? CommonButton(
+                  label: 'Proceed To Checkout',
+                  onPressed: () {
+                    showModalBottomSheet(
+                      context: context,
+                      showDragHandle: false,
+                      builder: (context) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 20,
+                            vertical: 24,
                           ),
-                        ),
-                        Row(
-                          mainAxisAlignment: .spaceBetween,
-                          children: [Text('SubTotal', style: AppTextStyles.bodySmall,), Text('\$828.00', style: AppTextStyles.headingMedium,)],
-                        ),
-                        Row(
-                          mainAxisAlignment: .spaceBetween,
-                          children: [Text('Discount', style: AppTextStyles.bodySmall), Text('-\$28.00', style: AppTextStyles.headingMedium.copyWith(color: AppColors.errorLabel),)],
-                        ),
-                        Row(
-                          mainAxisAlignment: .spaceBetween,
-                          children: [Text('Delivery', style: AppTextStyles.bodySmall), Text('Free',  style: AppTextStyles.strikethroughMedium)],
-                        ),
-                        CommonDivider(),
-                        Row(
-                          mainAxisAlignment: .spaceBetween,
-                          children: [Text('Total', style: AppTextStyles.headingMedium,), Text('\$828.00', style: AppTextStyles.headingLarge.copyWith(color: AppColors.primary),)],
-                        ),
-                        CommonButton(label: 'Checkout Now', onPressed: () {})
-                      ],
-                    ),
-                  );
-                },
-              );
-            },
-          ) : const SizedBox(),
+                          child: Column(
+                            spacing: 15,
+                            mainAxisSize: .min,
+                            children: [
+                              Container(
+                                width: 48,
+                                height: 6,
+                                decoration: BoxDecoration(
+                                  color: AppColors.border,
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
+                              Row(
+                                mainAxisAlignment: .spaceBetween,
+                                children: [
+                                  Text(
+                                    'SubTotal',
+                                    style: AppTextStyles.bodySmall,
+                                  ),
+                                  Text(
+                                    '\$828.00',
+                                    style: AppTextStyles.headingMedium,
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment: .spaceBetween,
+                                children: [
+                                  Text(
+                                    'Discount',
+                                    style: AppTextStyles.bodySmall,
+                                  ),
+                                  Text(
+                                    '-\$28.00',
+                                    style: AppTextStyles.headingMedium.copyWith(
+                                      color: AppColors.errorLabel,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment: .spaceBetween,
+                                children: [
+                                  Text(
+                                    'Delivery',
+                                    style: AppTextStyles.bodySmall,
+                                  ),
+                                  Text(
+                                    'Free',
+                                    style: AppTextStyles.strikethroughMedium,
+                                  ),
+                                ],
+                              ),
+                              CommonDivider(),
+                              Row(
+                                mainAxisAlignment: .spaceBetween,
+                                children: [
+                                  Text(
+                                    'Total',
+                                    style: AppTextStyles.headingMedium,
+                                  ),
+                                  Text(
+                                    '\$828.00',
+                                    style: AppTextStyles.headingLarge.copyWith(
+                                      color: AppColors.primary,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              CommonButton(
+                                label: 'Checkout Now',
+                                onPressed: () {},
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    );
+                  },
+                )
+              : const SizedBox(),
         ],
       ),
     );

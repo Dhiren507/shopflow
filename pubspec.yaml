@@ -38,6 +38,9 @@ dependencies:
   carousel_slider: ^5.1.2
   flutter_html: ^3.0.0
   flutter_widget_from_html: ^0.17.3
+  image_picker: ^1.2.3
+  dashed_border: ^1.0.2
+  fl_chart: ^1.2.0
 
 dev_dependencies:
   flutter_test:

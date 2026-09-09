@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shopflow/core/constants/app_colors.dart';
 import 'package:shopflow/core/constants/app_images.dart';
+import 'package:shopflow/core/constants/app_routes.dart';
 import 'package:shopflow/core/constants/app_text_styles.dart';
 import 'package:shopflow/core/services/image_picker_service.dart';
 import 'package:shopflow/core/widgets/common_button.dart';
@@ -94,20 +95,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       padding: const EdgeInsets.all(16.0),
                       child: Row(
                         children: [
-                            Container(
-                              height: 40,
-                              width: 40,
-                              decoration: BoxDecoration(
-                                color: AppColors.bgStepper,
-                                shape: BoxShape.circle,
-                              ),
-                              child: SvgPicture.asset(
-                                option['leadingIcon'],
-                                height: 16,
-                                width: 16,
-                                fit: BoxFit.scaleDown,
-                              ),
+                          Container(
+                            height: 40,
+                            width: 40,
+                            decoration: BoxDecoration(
+                              color: AppColors.bgStepper,
+                              shape: BoxShape.circle,
                             ),
+                            child: SvgPicture.asset(
+                              option['leadingIcon'],
+                              height: 16,
+                              width: 16,
+                              fit: BoxFit.scaleDown,
+                            ),
+                          ),
                           const SizedBox(width: 10),
                           Text(
                             option['optionText'],
@@ -135,7 +136,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 9),
               child: CommonButton(
                 label: 'Log Out',
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    AppRoutes.loginScreen,
+                    (route) => false,
+                  );
+                },
                 leadingIcon: Icon(
                   Icons.logout_outlined,
                   color: AppColors.darkRed,

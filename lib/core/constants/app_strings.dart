@@ -52,4 +52,21 @@ class AppStrings {
   static const String emptyCartMainText = 'Your cart is empty';
   static const String emptyCartSubText =
       "Looks like you haven't added anything to your cart yet.";
+
+
+  // seller dashboard constant Strings
+  // top level heading
+  static const sellerDashboardText = 'Seller Dashboard';
+  static const sellerDashboardSubheadingText =
+      "Overview of your store's performance today.";
+
+  // stat card strings
+  static const totalStockText = 'TOTAL STOCK';
+  static const totalProductsText = 'TOTAL PRODUCTS';
+  static const averageRatingText = 'AVG. RATING';
+
+  // section heading
+  static const categoryBreakdownText = 'Category Breakdown';
+  static const stockLevelsText = 'Stock Levels';
+  static const topRatedProductsText = 'Top Rated Products';
 }

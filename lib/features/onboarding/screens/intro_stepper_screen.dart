@@ -5,6 +5,7 @@ import 'package:shopflow/core/constants/app_routes.dart';
 import 'package:shopflow/core/constants/app_strings.dart';
 import 'package:shopflow/core/constants/app_text_styles.dart';
 import 'package:shopflow/core/widgets/common_button.dart';
+import 'package:shopflow/features/onboarding/constants/onboarding_screen_constants.dart';
 
 class IntroStepperScreen extends StatefulWidget {
   const IntroStepperScreen({super.key});
@@ -17,26 +18,8 @@ class _IntroStepperScreenState extends State<IntroStepperScreen> {
   final PageController _pageController = PageController();
   int _currentPage = 0;
 
-  final List<Map<String, String>> _stepperPages = [
-    {
-      'image': AppImages.introImageOne,
-      'title': AppStrings.introScreenOneTitle,
-      'subTitle': AppStrings.introScreenOneSubtitle,
-    },
-    {
-      'image': AppImages.introImageTwo,
-      'title': AppStrings.introScreenTwoTitle,
-      'subTitle': AppStrings.introScreenTwoSubTitle,
-    },
-    {
-      'image': AppImages.introImageThree,
-      'title': AppStrings.introScreenThreeTitle,
-      'subTitle': AppStrings.introScreenThreeSubtitle,
-    },
-  ];
-
   void _handleButtonPress() {
-    if (_currentPage == _stepperPages.length - 1) {
+    if (_currentPage == OnboardingScreenConstants.stepperPages.length - 1) {
       Navigator.pushReplacementNamed(context, AppRoutes.loginScreen);
     } else {
       _pageController.nextPage(
@@ -54,7 +37,7 @@ class _IntroStepperScreenState extends State<IntroStepperScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final bool isLastPage = _currentPage == _stepperPages.length - 1;
+    final bool isLastPage = _currentPage == OnboardingScreenConstants.stepperPages.length - 1;
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 34),
@@ -81,7 +64,7 @@ class _IntroStepperScreenState extends State<IntroStepperScreen> {
             Expanded(
               child: PageView.builder(
                 controller: _pageController,
-                itemCount: _stepperPages.length,
+                itemCount: OnboardingScreenConstants.stepperPages.length,
                 onPageChanged: (index) {
                   setState(() => _currentPage = index);
                 },
@@ -91,11 +74,11 @@ class _IntroStepperScreenState extends State<IntroStepperScreen> {
                     children: [
                       ClipRRect(
                         borderRadius: BorderRadius.circular(16.0),
-                        child: Image.asset(_stepperPages[index]['image']!),
+                        child: Image.asset(OnboardingScreenConstants.stepperPages[index]['image']!),
                       ),
                       const SizedBox(height: 16),
                       Text(
-                        _stepperPages[index]['title']!,
+                        OnboardingScreenConstants.stepperPages[index]['title']!,
                         style: AppTextStyles.headingLarge,
                         textAlign: .center,
                       ),
@@ -103,7 +86,7 @@ class _IntroStepperScreenState extends State<IntroStepperScreen> {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 25),
                         child: Text(
-                          _stepperPages[index]['subTitle']!,
+                          OnboardingScreenConstants.stepperPages[index]['subTitle']!,
                           style: AppTextStyles.bodySmall,
                           textAlign: .center,
                         ),
@@ -120,7 +103,7 @@ class _IntroStepperScreenState extends State<IntroStepperScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: List.generate(
-                    _stepperPages.length,
+                    OnboardingScreenConstants.stepperPages.length,
                     (index) => Container(
                       margin: const EdgeInsets.symmetric(horizontal: 4.0),
                       height: 8,

@@ -33,4 +33,5 @@ class AppColors {
   static const Color saleBadge = Color(0xFFFF6B6B);
   static const Color black = Color(0xFF000000);
   static const Color white = Color(0xFFFFFFFF);
+  static const Color brownColor = Color(0xFFB64800);
 }
