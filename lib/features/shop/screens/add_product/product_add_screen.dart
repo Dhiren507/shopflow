@@ -27,6 +27,12 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
   final _formKey = GlobalKey<FormState>();
 
   @override
+  void dispose() {
+    _currentForm.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CommonAppBar(
@@ -60,73 +66,6 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
               style: AppTextStyles.bodySmall,
             ),
             const SizedBox(height: 10),
-            // SizedBox(
-            //   child: Row(
-            //     mainAxisAlignment: .spaceBetween,
-            //     children: List.generate(_currentForm.selectedImagePaths.length, (
-            //       index,
-            //     ) {
-            //       return GestureDetector(
-            //         onTap: () async {
-            //           final imgPath =
-            //               await ImagePickerService.pickImageFromGallery();
-            //
-            //           if (imgPath != null) {
-            //             setState(() {
-            //               _currentForm.selectedImagePaths[index] = imgPath;
-            //             });
-            //           }
-            //         },
-            //         child: Stack(
-            //           children: [
-            //             Container(
-            //               height: 72,
-            //               width: 72,
-            //               decoration: BoxDecoration(
-            //                 border: _currentForm.selectedImagePaths[index] == ''
-            //                     ? DashedBorder(color: AppColors.border, width: 2)
-            //                     : Border.all(color: Colors.transparent),
-            //                 borderRadius: BorderRadius.circular(8),
-            //                 color: AppColors.white
-            //               ),
-            //               child: _currentForm.selectedImagePaths[index] != ''
-            //                   ? ClipRRect(
-            //                 borderRadius: BorderRadius.circular(8),
-            //                 child: Image.file(
-            //                   File(_currentForm.selectedImagePaths[index]),
-            //                   fit: BoxFit.cover,
-            //                 ),
-            //               )
-            //                   : SvgPicture.asset(
-            //                 AppImages.addImageEmptyPlaceholder,
-            //                 colorFilter: ColorFilter.mode(
-            //                   AppColors.textHint,
-            //                   BlendMode.srcIn,
-            //                 ),
-            //                 height: 18,
-            //                 width: 18,
-            //                 fit: BoxFit.scaleDown,
-            //               ),
-            //             ),
-            //             Positioned(
-            //               right: 1,
-            //               top: -10,
-            //               child: Container(
-            //                 height: 25,
-            //                 width: 25,
-            //                 decoration: BoxDecoration(
-            //                   color: AppColors.errorBg,
-            //                   shape: BoxShape.circle
-            //                 ),
-            //                 child: Icon(Icons.close, size: 15,),
-            //               ),
-            //             ),
-            //           ]
-            //         ),
-            //       );
-            //     }),
-            //   ),
-            // ),
             SizedBox(
               height: 80,
               child: ListView.separated(
@@ -152,7 +91,10 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
                           width: 72,
                           decoration: BoxDecoration(
                             border: _currentForm.selectedImagePaths[index] == ''
-                                ? DashedBorder(color: AppColors.border, width: 2)
+                                ? DashedBorder(
+                                    color: AppColors.border,
+                                    width: 2,
+                                  )
                                 : Border.all(color: Colors.transparent),
                             borderRadius: BorderRadius.circular(8),
                             color: AppColors.white,
@@ -161,7 +103,9 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
                               ? ClipRRect(
                                   borderRadius: BorderRadius.circular(8),
                                   child: Image.file(
-                                    File(_currentForm.selectedImagePaths[index]),
+                                    File(
+                                      _currentForm.selectedImagePaths[index],
+                                    ),
                                     fit: BoxFit.cover,
                                   ),
                                 )
@@ -196,7 +140,6 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
                 separatorBuilder: (context, index) => const SizedBox(width: 15),
                 itemCount: _currentForm.selectedImagePaths.length,
               ),
-
             ),
             const CommonDivider(height: 25),
 

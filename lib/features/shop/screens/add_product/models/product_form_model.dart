@@ -13,17 +13,6 @@ class ProductFormModel {
   int stock = 1;
 
 
-  void calculateFinalPrice() {
-    double original = double.tryParse(originalPriceController.text) ?? 0.0;
-    double discount = double.tryParse(discountController.text) ?? 0.0;
-
-    if (original > 0) {
-      calculatedFinalPrice = original - (original * (discount / 100));
-    } else {
-      calculatedFinalPrice = 0;
-    }
-  }
-
   Map<String, dynamic> toBackendJson() {
     return {
       'imagePaths': selectedImagePaths,

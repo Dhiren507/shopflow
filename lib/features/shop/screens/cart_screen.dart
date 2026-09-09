@@ -96,7 +96,7 @@ class _CartScreenState extends State<CartScreen> {
           Text('2 items', style: AppTextStyles.bodySmall),
 
           isCartEmpty
-              ? EmptyCartPlaceholder()
+              ? Expanded(child: EmptyCartPlaceholder())
               : Expanded(
                   child: ListView.separated(
                     separatorBuilder: (context, index) =>
