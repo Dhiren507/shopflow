@@ -46,6 +46,16 @@ class AppStrings {
   static const String viewAllReviews = 'View All Reviews';
   static const String productDescriptionHeaderText = 'Product Description';
   static const String quantitySectionText = 'Quantity';
+  static const String noProductReviewsText = 'No Product Reviews';
+
+  // Cart Screen Text
+  static const String yourCartTitle = 'Your Cart';
+  static const String subTotalText = 'SubTotal';
+  static const String discountText = 'Discount';
+  static const String deliveryText = 'Delivery';
+  static const String freeText = 'Free';
+  static const String totalText = 'Total';
+  static const String checkoutNowButtonText = 'Checkout Now';
 
   // Empty Cart Screen Text
   static const String startShoppingText = 'Start Shopping';
@@ -53,6 +63,29 @@ class AppStrings {
   static const String emptyCartSubText =
       "Looks like you haven't added anything to your cart yet.";
 
+  // Add Product Screen Text
+  static const String addProductTitle = 'Add Product';
+  static const String addProductHelperText = 'Helper Test when clicked on';
+  static const String productImagesText = 'Product Images';
+  static const String uploadImagesSubText = 'Upload up to 4 high-quality images.';
+  static const String productTitleLabel = 'Product Title';
+  static const String productTitleHint = 'e.g. Minimalist Ceramic Mug';
+  static const String productTitleError = 'Title is Required';
+  static const String productDescriptionLabel = 'Description';
+  static const String productDescriptionHint =
+      "Describe your product's features and benefits...";
+  static const String productDescriptionError = 'Description is Required';
+  static const String originalPriceLabel = 'Original Price';
+  static const String originalPriceHint = '99.99';
+  static const String discountLabel = 'Discount %';
+  static const String categoryLabel = 'Category';
+  static const String selectCategoryHint = 'Select a Product Category';
+  static const String selectCategoryError = 'Please Select Product Category';
+  static const String inventoryStockLabel = 'Inventory Stock';
+  static const String saveProductButtonText = 'Save Product';
+
+  // Profile Screen Text
+  static const String logOutButtonText = 'Log Out';
 
   // seller dashboard constant Strings
   // top level heading

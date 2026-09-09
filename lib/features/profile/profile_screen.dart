@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shopflow/core/constants/app_colors.dart';
 import 'package:shopflow/core/constants/app_images.dart';
 import 'package:shopflow/core/constants/app_routes.dart';
+import 'package:shopflow/core/constants/app_strings.dart';
 import 'package:shopflow/core/constants/app_text_styles.dart';
 import 'package:shopflow/core/services/image_picker_service.dart';
 import 'package:shopflow/core/widgets/common_button.dart';
@@ -82,6 +83,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: ListView.separated(
+              clipBehavior: .none,
               physics: NeverScrollableScrollPhysics(),
               itemBuilder: (context, index) {
                 final option = ProfileConstants.profileOptions[index];
@@ -133,9 +135,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
             CommonDivider(),
             const SizedBox(height: 15),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 9),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
               child: CommonButton(
-                label: 'Log Out',
+                label: AppStrings.logOutButtonText,
                 onPressed: () {
                   Navigator.pushNamedAndRemoveUntil(
                     context,

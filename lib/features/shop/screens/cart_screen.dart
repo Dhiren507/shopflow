@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shopflow/core/constants/app_colors.dart';
+import 'package:shopflow/core/constants/app_strings.dart';
 import 'package:shopflow/core/constants/app_text_styles.dart';
 import 'package:shopflow/core/widgets/common_button.dart';
 import 'package:shopflow/core/widgets/common_divider.dart';
@@ -14,7 +15,7 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
-  bool isCartEmpty = true;
+  bool isCartEmpty = false;
 
   int itemValue = 1;
 
@@ -88,12 +89,14 @@ class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 25),
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
       child: Column(
         crossAxisAlignment: .start,
         children: [
-          Text('Your Cart', style: AppTextStyles.headingLarge),
+          Text(AppStrings.yourCartTitle, style: AppTextStyles.headingLarge),
           Text('2 items', style: AppTextStyles.bodySmall),
+
+          const SizedBox(height: 15,),
 
           isCartEmpty
               ? Expanded(child: EmptyCartPlaceholder())
@@ -107,6 +110,7 @@ class _CartScreenState extends State<CartScreen> {
                       final item = cartItems[index];
 
                       return Card(
+                        color: AppColors.white,
                         child: Padding(
                           padding: const EdgeInsets.all(16),
                           child: Row(
@@ -131,23 +135,24 @@ class _CartScreenState extends State<CartScreen> {
                                 child: Column(
                                   crossAxisAlignment: .start,
                                   mainAxisSize: .min,
-                                  spacing: 10,
+                                  spacing: 6,
                                   children: [
                                     Text(
                                       item['title'],
                                       style: AppTextStyles.headingSmall,
-                                      overflow: TextOverflow.ellipsis,
+                                      overflow: .ellipsis,
                                     ),
-                                    Flexible(
-                                      child: Text(
+
+                                      Text(
                                         item['color'],
                                         style: AppTextStyles.bodySmall,
                                         maxLines: 2,
-                                      ),
+                                        overflow: .ellipsis,
+
                                     ),
                                     Text(
                                       '\$299.00',
-                                      style: AppTextStyles.headingSmall
+                                      style: AppTextStyles.headingMedium
                                           .copyWith(color: AppColors.primary),
                                     ),
                                   ],
@@ -156,6 +161,7 @@ class _CartScreenState extends State<CartScreen> {
                               const SizedBox(width: 10),
                               Column(
                                 crossAxisAlignment: .end,
+                                mainAxisAlignment: .spaceBetween,
                                 spacing: 10,
                                 children: [
                                   IconButton(
@@ -181,6 +187,7 @@ class _CartScreenState extends State<CartScreen> {
                     },
                   ),
                 ),
+          const SizedBox(height: 10,),
           !isCartEmpty
               ? CommonButton(
                   label: 'Proceed To Checkout',
@@ -210,7 +217,7 @@ class _CartScreenState extends State<CartScreen> {
                                 mainAxisAlignment: .spaceBetween,
                                 children: [
                                   Text(
-                                    'SubTotal',
+                                    AppStrings.subTotalText,
                                     style: AppTextStyles.bodySmall,
                                   ),
                                   Text(
@@ -223,7 +230,7 @@ class _CartScreenState extends State<CartScreen> {
                                 mainAxisAlignment: .spaceBetween,
                                 children: [
                                   Text(
-                                    'Discount',
+                                    AppStrings.discountText,
                                     style: AppTextStyles.bodySmall,
                                   ),
                                   Text(
@@ -238,11 +245,11 @@ class _CartScreenState extends State<CartScreen> {
                                 mainAxisAlignment: .spaceBetween,
                                 children: [
                                   Text(
-                                    'Delivery',
+                                    AppStrings.deliveryText,
                                     style: AppTextStyles.bodySmall,
                                   ),
                                   Text(
-                                    'Free',
+                                    AppStrings.freeText,
                                     style: AppTextStyles.strikethroughMedium,
                                   ),
                                 ],
@@ -252,7 +259,7 @@ class _CartScreenState extends State<CartScreen> {
                                 mainAxisAlignment: .spaceBetween,
                                 children: [
                                   Text(
-                                    'Total',
+                                    AppStrings.totalText,
                                     style: AppTextStyles.headingMedium,
                                   ),
                                   Text(
@@ -264,7 +271,7 @@ class _CartScreenState extends State<CartScreen> {
                                 ],
                               ),
                               CommonButton(
-                                label: 'Checkout Now',
+                                label: AppStrings.checkoutNowButtonText,
                                 onPressed: () {},
                               ),
                             ],

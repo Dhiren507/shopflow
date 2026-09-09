@@ -5,13 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shopflow/core/constants/app_colors.dart';
 import 'package:shopflow/core/constants/app_images.dart';
+import 'package:shopflow/core/constants/app_strings.dart';
 import 'package:shopflow/core/constants/app_text_styles.dart';
 import 'package:shopflow/core/services/image_picker_service.dart';
 import 'package:shopflow/core/widgets/common_app_bar.dart';
 import 'package:shopflow/core/widgets/common_button.dart';
 import 'package:shopflow/core/widgets/common_divider.dart';
 import 'package:shopflow/core/widgets/common_input_field.dart';
-import 'package:shopflow/core/widgets/numeric_stepper_button.dart';
 import 'package:shopflow/features/shop/constants/shop_constants.dart';
 import 'package:shopflow/features/shop/screens/add_product/models/product_form_model.dart';
 
@@ -40,7 +40,7 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
           IconButton(
             onPressed: () {},
             icon: Tooltip(
-              message: 'Helper Test when clicked on',
+              message: AppStrings.addProductHelperText,
               triggerMode: TooltipTriggerMode.tap,
               child: Icon(Icons.help_outline, color: AppColors.textHint),
             ),
@@ -52,7 +52,7 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
           },
           icon: Icon(Icons.close),
         ),
-        title: 'Add Product',
+        title: AppStrings.addProductTitle,
         textColor: AppColors.textPrimary,
       ),
       body: SingleChildScrollView(
@@ -60,9 +60,9 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
         child: Column(
           crossAxisAlignment: .start,
           children: [
-            Text('Product Images', style: AppTextStyles.headingSmall),
+            Text(AppStrings.productImagesText, style: AppTextStyles.headingSmall),
             Text(
-              'Upload up to 4 high-quality images.',
+              AppStrings.uploadImagesSubText,
               style: AppTextStyles.bodySmall,
             ),
             const SizedBox(height: 10),
@@ -89,9 +89,7 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
                             await ImagePickerService.pickImageFromGallery();
                         if (imgPath != null) {
                           setState(() {
-                            _currentForm.selectedImagePaths.add(
-                              imgPath,
-                            );
+                            _currentForm.selectedImagePaths.add(imgPath);
                           });
                         }
                       }
@@ -124,9 +122,7 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
                                   fit: BoxFit.scaleDown,
                                 )
                               : ClipRRect(
-                                  borderRadius: BorderRadius.circular(
-                                    8,
-                                  ),
+                                  borderRadius: BorderRadius.circular(8),
                                   child: Image.file(
                                     File(imagePath),
                                     fit: BoxFit.cover,
@@ -140,8 +136,9 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
                             child: GestureDetector(
                               onTap: () {
                                 setState(() {
-                                  _currentForm.selectedImagePaths
-                                      .removeAt(index);
+                                  _currentForm.selectedImagePaths.removeAt(
+                                    index,
+                                  );
                                 });
                               },
                               child: Container(
@@ -151,10 +148,7 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
                                   color: AppColors.errorBg,
                                   shape: BoxShape.circle,
                                 ),
-                                child: const Icon(
-                                  Icons.close,
-                                  size: 15,
-                                ),
+                                child: const Icon(Icons.close, size: 15),
                               ),
                             ),
                           ),
@@ -162,8 +156,7 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
                     ),
                   );
                 },
-                separatorBuilder: (context, index) =>
-                    const SizedBox(width: 15),
+                separatorBuilder: (context, index) => const SizedBox(width: 15),
               ),
             ),
             const CommonDivider(height: 25),
@@ -176,14 +169,14 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
                 children: [
                   CommonInputField(
                     controller: _currentForm.titleController,
-                    labelText: 'Product Title',
+                    labelText: AppStrings.productTitleLabel,
                     hasLabelPadding: false,
-                    hintText: 'e.g. Minimalist Ceramic Mug',
+                    hintText: AppStrings.productTitleHint,
                     labelTrailing: Text('*', style: AppTextStyles.errorText),
 
                     validator: (String? value) {
                       if (value == 'null') {
-                        return 'Title is Required';
+                        return AppStrings.productTitleError;
                       }
                       return null;
                     },
@@ -193,15 +186,14 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
 
                   CommonInputField(
                     controller: _currentForm.descriptionController,
-                    labelText: 'Description',
+                    labelText: AppStrings.productDescriptionLabel,
                     isMultiline: true,
                     maxLines: 3,
-                    hintText:
-                        "Describe your product's features and benefits...",
+                    hintText: AppStrings.productDescriptionHint,
 
                     validator: (String? value) {
                       if (value == 'null') {
-                        return 'Description is Required';
+                        return AppStrings.productDescriptionError;
                       }
                       return null;
                     },
@@ -213,14 +205,14 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
                     children: [
                       Expanded(
                         child: CommonInputField(
-                          labelText: 'Original Price',
+                          labelText: AppStrings.originalPriceLabel,
                           controller: _currentForm.originalPriceController,
                           leadingIcon: Icon(
                             Icons.attach_money,
                             size: 18,
                             color: AppColors.textHint,
                           ),
-                          hintText: '99.99',
+                          hintText: AppStrings.originalPriceHint,
                         ),
                       ),
 
@@ -228,7 +220,7 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
 
                       Expanded(
                         child: CommonInputField(
-                          labelText: 'Discount %',
+                          labelText: AppStrings.discountLabel,
                           suffixIcon: Icon(
                             Icons.percent_rounded,
                             size: 18,
@@ -273,14 +265,14 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
                   ),
 
                   const CommonDivider(height: 50),
-                  Text('Category', style: AppTextStyles.labelSmall),
+                  Text(AppStrings.categoryLabel, style: AppTextStyles.labelSmall),
                   const SizedBox(height: 5),
                   ButtonTheme(
                     alignedDropdown: true,
                     child: DropdownButtonFormField<String>(
                       initialValue:
                           _currentForm.selectedCategory ??
-                          'Select a Product Category',
+                          AppStrings.selectCategoryHint,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       decoration: InputDecoration(
                         filled: true,
@@ -317,15 +309,15 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
 
                       validator: (String? value) {
                         if (value == null ||
-                            value == 'Select Product Category') {
-                          return 'Please Select Product Category';
+                            value == AppStrings.selectCategoryHint) {
+                          return AppStrings.selectCategoryError;
                         }
                         return null;
                       },
                       items: [
                         const DropdownMenuItem<String>(
-                          value: 'Select Product Category',
-                          child: Text('Select Product Category'),
+                          value: AppStrings.selectCategoryHint,
+                          child: Text(AppStrings.selectCategoryHint),
                         ),
                         ...ShopConstants.productCategories.map((String opt) {
                           return DropdownMenuItem<String>(
@@ -337,25 +329,67 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
                     ),
                   ),
                   const SizedBox(height: 10),
-                  Text('Inventory Stock', style: AppTextStyles.labelSmall),
+                  Text(AppStrings.inventoryStockLabel, style: AppTextStyles.labelSmall),
                   const SizedBox(height: 5),
-                  NumericStepperButton(
-                    onDecrement: () {
-                      if (_currentForm.stock > 1) {
-                        setState(() {
-                          --_currentForm.stock;
-                        });
-                      }
-                    },
-                    onIncrement: () {
-                      if (_currentForm.stock < 50) {
-                        setState(() {
-                          ++_currentForm.stock;
-                        });
-                      }
-                    },
-                    value: _currentForm.stock,
-                    isStyled: true,
+                  Container(
+                    height: 44,
+                    decoration: BoxDecoration(
+                      color: AppColors.bgCard,
+                      border: Border.all(color: AppColors.border),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            if (_currentForm.stock > 1) {
+                              setState(() {
+                                --_currentForm.stock;
+                              });
+                            }
+                          },
+                          iconSize: 20,
+                          padding: const EdgeInsets.all(8),
+                          icon: const Icon(Icons.remove),
+                        ),
+                        Container(
+                          alignment: Alignment.center,
+                          decoration: const BoxDecoration(
+                            color: AppColors.bgScreen,
+                            border: Border(
+                              left: BorderSide(
+                                color: AppColors.border,
+                                width: 1.0,
+                              ),
+                              right: BorderSide(
+                                color: AppColors.border,
+                                width: 1.0,
+                              ),
+                            ),
+                          ),
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                          child: Text(
+                            '${_currentForm.stock}',
+                            style: AppTextStyles.headingSmall.copyWith(
+                              color: AppColors.black,
+                            ),
+                          ),
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            if (_currentForm.stock < 100) {
+                              setState(() {
+                                ++_currentForm.stock;
+                              });
+                            }
+                          },
+                          iconSize: 20,
+                          padding: const EdgeInsets.all(8),
+                          icon: const Icon(Icons.add),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -366,7 +400,7 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
       bottomNavigationBar: Padding(
         padding: EdgeInsets.all(20),
         child: CommonButton(
-          label: "Save Product",
+          label: AppStrings.saveProductButtonText,
           onPressed: () {},
           leadingIcon: Icon(Icons.save, color: AppColors.bgCard),
         ),

@@ -8,7 +8,7 @@ class ShopConstants {
     'Home',
     'Beauty',
     'Electronics',
-    'Gadgets'
+    'Gadgets',
   ];
 
   static const List<String> productCategories = [
@@ -39,10 +39,7 @@ class ShopConstants {
         creationAt: "2026-01-15T08:00:00Z",
         updatedAt: "2026-03-01T10:30:00Z",
       ),
-      images: [
-        "https://unsplash.com",
-        "https://unsplash.com",
-      ],
+      images: ["https://unsplash.com", "https://unsplash.com"],
       ratings: ProductRating(
         avgRating: 4.5,
         totalReviews: 2,
@@ -56,7 +53,8 @@ class ShopConstants {
         CustomerReview(
           id: 1,
           username: "Alex_Dev",
-          reviewText: "Amazing bass response and very comfortable for long hours.",
+          reviewText:
+              "Amazing bass response and very comfortable for long hours.",
           rating: 5.0,
           userImage: "https://unsplash.com",
           creationAt: "2026-03-01T11:00:00Z",
@@ -74,7 +72,8 @@ class ShopConstants {
         CustomerReview(
           id: 3,
           username: "Test User 3",
-          reviewText: "Amazing bass response and very comfortable for long hours.",
+          reviewText:
+              "Amazing bass response and very comfortable for long hours.",
           rating: 3.0,
           userImage: "https://www.imageurlgenerator.com/_next/image?url=%2Fassets%2Ffree_tool.png&w=3840&q=75",
           creationAt: "2026-03-01T11:00:00Z",
@@ -83,12 +82,13 @@ class ShopConstants {
         CustomerReview(
           id: 3,
           username: "Test User 4",
-          reviewText: "Amazing bass response and very comfortable for long hours.",
+          reviewText:
+              "Amazing bass response and very comfortable for long hours.",
           rating: 2.5,
           userImage: "https://www.imageurlgenerator.com/_next/image?url=%2Fassets%2Ffree_tool.png&w=3840&q=75",
           creationAt: "2026-03-01T11:00:00Z",
           updatedAt: "2026-03-01T11:00:00Z",
-        )
+        ),
       ],
     ),
 
@@ -112,9 +112,7 @@ class ShopConstants {
         creationAt: "2026-01-15T08:00:00Z",
         updatedAt: "2026-03-01T10:30:00Z",
       ),
-      images: [
-        "https://unsplash.com",
-      ],
+      images: ["https://unsplash.com"],
       ratings: ProductRating(
         avgRating: 5.0,
         totalReviews: 1,
@@ -128,7 +126,8 @@ class ShopConstants {
         CustomerReview(
           id: 3,
           username: "TypingPro",
-          reviewText: "Absolute dream to type on. Keystrokes are perfectly smooth!",
+          reviewText:
+              "Absolute dream to type on. Keystrokes are perfectly smooth!",
           rating: 5.0,
           userImage: "https://unsplash.com",
           creationAt: "2026-02-28T18:20:00Z",
@@ -157,9 +156,7 @@ class ShopConstants {
         creationAt: "2026-01-01T10:00:00Z",
         updatedAt: "2026-01-01T10:00:00Z",
       ),
-      images: [
-        "https://unsplash.com",
-      ],
+      images: ["https://unsplash.com"],
       ratings: ProductRating(
         avgRating: 0.0,
         totalReviews: 0,
@@ -219,6 +216,4 @@ class ShopConstants {
       ],
     ),
   ];
-
-
 }

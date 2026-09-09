@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shopflow/core/constants/app_colors.dart';
 import 'package:shopflow/core/constants/app_routes.dart';
 import 'package:shopflow/core/constants/app_strings.dart';
+import 'package:shopflow/core/constants/app_text_styles.dart';
 import 'package:shopflow/core/widgets/common_app_bar.dart';
 import 'package:shopflow/features/profile/profile_screen.dart';
 import 'package:shopflow/features/shop/screens/cart_screen.dart';
@@ -18,6 +19,7 @@ class CommonBaseScreen extends StatefulWidget {
 class _CommonBaseScreenState extends State<CommonBaseScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
+  final bool isNotificaitionExists = true;
 
   @override
   void initState() {
@@ -57,6 +59,7 @@ class _CommonBaseScreenState extends State<CommonBaseScreen>
                 borderRadius: BorderRadius.circular(12),
               ),
               indicatorSize: .tab,
+              labelStyle: AppTextStyles.labelSmall,
               tabs: [
                 Tab(
                   icon: Icon(
@@ -65,10 +68,20 @@ class _CommonBaseScreenState extends State<CommonBaseScreen>
                   text: AppStrings.tabBarLabelOne,
                 ),
                 Tab(
-                  icon: Icon(
-                    activeIndex == 1
-                        ? Icons.shopping_cart
-                        : Icons.shopping_cart_outlined,
+                  icon: Badge(
+                    isLabelVisible: isNotificaitionExists,
+                    backgroundColor: AppColors.errorLabel,
+                    label: Text(
+                      '2',
+                      style: AppTextStyles.labelSmall.copyWith(
+                        color: AppColors.black,
+                      ),
+                    ),
+                    child: Icon(
+                      activeIndex == 1
+                          ? Icons.shopping_cart
+                          : Icons.shopping_cart_outlined,
+                    ),
                   ),
                   text: AppStrings.tabBarLabelTwo,
                 ),
@@ -87,7 +100,6 @@ class _CommonBaseScreenState extends State<CommonBaseScreen>
                   text: AppStrings.tabBarLabelFour,
                 ),
               ],
-
             ),
           ),
         ),

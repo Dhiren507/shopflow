@@ -37,10 +37,11 @@ class _IntroStepperScreenState extends State<IntroStepperScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final bool isLastPage = _currentPage == OnboardingScreenConstants.stepperPages.length - 1;
+    final bool isLastPage =
+        _currentPage == OnboardingScreenConstants.stepperPages.length - 1;
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 34),
+        padding: EdgeInsetsGeometry.symmetric(vertical: 32, horizontal: 16),
         child: Column(
           children: [
             // Skip Button
@@ -60,7 +61,6 @@ class _IntroStepperScreenState extends State<IntroStepperScreen> {
               ),
             ),
 
-            // Scrollable Page View
             Expanded(
               child: PageView.builder(
                 controller: _pageController,
@@ -74,19 +74,28 @@ class _IntroStepperScreenState extends State<IntroStepperScreen> {
                     children: [
                       ClipRRect(
                         borderRadius: BorderRadius.circular(16.0),
-                        child: Image.asset(OnboardingScreenConstants.stepperPages[index]['image']!),
+                        child: Image.asset(
+                          OnboardingScreenConstants
+                              .stepperPages[index]['image']!,
+                        ),
                       ),
                       const SizedBox(height: 16),
-                      Text(
-                        OnboardingScreenConstants.stepperPages[index]['title']!,
-                        style: AppTextStyles.headingLarge,
-                        textAlign: .center,
+                      FittedBox(
+                        fit: .scaleDown,
+                        child: Text(
+                          OnboardingScreenConstants
+                              .stepperPages[index]['title']!,
+                          style: AppTextStyles.headingLarge.copyWith(
+                            fontSize: 24,
+                          ),
+                        ),
                       ),
                       const SizedBox(height: 8),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 25),
                         child: Text(
-                          OnboardingScreenConstants.stepperPages[index]['subTitle']!,
+                          OnboardingScreenConstants
+                              .stepperPages[index]['subTitle']!,
                           style: AppTextStyles.bodySmall,
                           textAlign: .center,
                         ),
@@ -121,7 +130,9 @@ class _IntroStepperScreenState extends State<IntroStepperScreen> {
                 const SizedBox(height: 16),
 
                 CommonButton(
-                  label: isLastPage ? AppStrings.getStartedText : AppStrings.nextText,
+                  label: isLastPage
+                      ? AppStrings.getStartedText
+                      : AppStrings.nextText,
                   onPressed: _handleButtonPress,
                 ),
               ],

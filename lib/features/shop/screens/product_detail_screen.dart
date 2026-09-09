@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -249,14 +251,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                             color: AppColors.bgCard,
                             shape: BoxShape.circle,
                           ),
-                          child: SvgPicture.asset(
-                            AppImages.unlikedHeart,
-                            fit: BoxFit.scaleDown,
-                            colorFilter: ColorFilter.mode(
-                              AppColors.black,
-                              BlendMode.srcIn,
-                            ),
-                          ),
+                          child: (selectedProduct.isLiked ?? false)
+                              ? Icon(Icons.favorite, color: AppColors.darkRed)
+                              : Icon(Icons.favorite_outline_outlined),
                         ),
                       ),
                     ],
@@ -438,12 +435,12 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     ),
                     const SizedBox(height: 20),
 
-                    (totalReviews ?? 0) > reviewListDefaultLength
+                    (totalReviews ?? 0) != 0
                         ? ListView.separated(
                             padding: EdgeInsets.zero,
                             itemCount: isReviewListExpanded
                                 ? (totalReviews ?? 0)
-                                : reviewListDefaultLength,
+                                : min(reviewListDefaultLength, (totalReviews ?? 0)),
                             shrinkWrap: true,
                             physics: NeverScrollableScrollPhysics(),
                             separatorBuilder: (context, index) =>
@@ -502,7 +499,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                               );
                             },
                           )
-                        : const Text('No User Reviews'),
+                        : const Text(AppStrings.noProductReviewsText),
 
                     const SizedBox(height: 10),
 

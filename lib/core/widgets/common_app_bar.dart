@@ -23,7 +23,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
      backgroundColor: AppColors.bgScreen,
-      scrolledUnderElevation: 0 ,
+      scrolledUnderElevation: 0,
       title: Text(title ?? AppStrings.appName, style:AppTextStyles.headingLarge.copyWith(color:  textColor ?? AppColors.primary)),
       centerTitle: centerTitle,
       leading: leading ?? IconButton(onPressed: () {}, icon: Icon(Icons.search)),

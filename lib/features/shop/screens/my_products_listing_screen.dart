@@ -76,7 +76,7 @@ class _MyProductsListingScreenState extends State<MyProductsListingScreen> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 24),
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
         child: Column(
           crossAxisAlignment: .start,
           children: [
@@ -104,14 +104,6 @@ class _MyProductsListingScreenState extends State<MyProductsListingScreen> {
               decoration: BoxDecoration(
                 color: AppColors.bgTile,
                 borderRadius: BorderRadius.circular(12),
-                boxShadow: [
-                  BoxShadow(
-                    color: AppColors.black.withValues(alpha: 0.3),
-                    offset: Offset(0, 0.1),
-                    blurRadius: 1,
-                    spreadRadius: 0,
-                  ),
-                ],
               ),
               child: Row(
                 children: List.generate(tabs.length, (index) {
@@ -134,7 +126,7 @@ class _MyProductsListingScreenState extends State<MyProductsListingScreen> {
                           style: AppTextStyles.headingSmall.copyWith(
                             color: isSelected
                                 ? AppColors.primary
-                                : AppColors.textHint,
+                                : AppColors.textSecondary,
                           ),
                         ),
                       ),
@@ -202,7 +194,7 @@ class _MyProductsListingScreenState extends State<MyProductsListingScreen> {
                                                 5
                                             ? AppColors.errorBg
                                             : AppColors.bgChip,
-                                        borderRadius: BorderRadius.circular(6),
+                                        borderRadius: BorderRadius.circular(16),
                                       ),
                                       child: Padding(
                                         padding: const EdgeInsets.symmetric(
