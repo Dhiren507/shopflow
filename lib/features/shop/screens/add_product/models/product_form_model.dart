@@ -7,7 +7,7 @@ class ProductFormModel {
   final discountController = TextEditingController();
 
 
-  List<String> selectedImagePaths = ['', '', '', ''];
+  List<String> selectedImagePaths = [];
   String? selectedCategory = 'Beauty';
   num calculatedFinalPrice = 0;
   int stock = 1;

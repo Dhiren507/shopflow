@@ -41,6 +41,7 @@ dependencies:
   image_picker: ^1.2.3
   dashed_border: ^1.0.2
   fl_chart: ^1.2.0
+  flutter_staggered_grid_view: ^0.7.0
 
 dev_dependencies:
   flutter_test:

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shopflow/core/constants/app_colors.dart';
 
 class ProductRatingStars extends StatelessWidget {
-  final double rating;
+  final num rating;
   final double size;
   final Color color;
 

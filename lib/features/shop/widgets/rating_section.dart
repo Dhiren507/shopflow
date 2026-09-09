@@ -5,12 +5,22 @@ import 'package:shopflow/features/shop/widgets/rating_progress_row.dart';
 
 class RatingSection extends StatelessWidget {
   final int totalReviews;
-  final double totalRating;
+  final num totalRating;
+  final int fiveStarReviewCount;
+  final int fourStarReviewCount;
+  final int threeStarReviewCount;
+  final int twoStarReviewCount;
+  final int oneStarReviewCount;
 
   const RatingSection({
     super.key,
     required this.totalRating,
     required this.totalReviews,
+    required this.fiveStarReviewCount,
+    required this.fourStarReviewCount,
+    required this.threeStarReviewCount,
+    required this.twoStarReviewCount,
+    required this.oneStarReviewCount,
   });
 
   @override
@@ -24,7 +34,7 @@ class RatingSection extends StatelessWidget {
             child: Column(
               spacing: 2,
               children: [
-                Text('4.8', style: AppTextStyles.headingLarge),
+                Text('$totalRating', style: AppTextStyles.headingLarge),
                 ProductRatingStars(rating: totalRating),
                 Text('$totalReviews Reviews', style: AppTextStyles.labelSmall),
               ],
@@ -37,27 +47,27 @@ class RatingSection extends StatelessWidget {
             RatingProgressRow(
               leadingText: '5',
               totalReviewCount: totalReviews,
-              value: 500,
+              value: fiveStarReviewCount,
             ),
             RatingProgressRow(
               leadingText: '4',
               totalReviewCount: totalReviews,
-              value: 200,
+              value: fourStarReviewCount,
             ),
             RatingProgressRow(
               leadingText: '3',
               totalReviewCount: totalReviews,
-              value: 100,
+              value: threeStarReviewCount,
             ),
             RatingProgressRow(
               leadingText: '2',
               totalReviewCount: totalReviews,
-              value: 100,
+              value: twoStarReviewCount,
             ),
             RatingProgressRow(
               leadingText: '1',
               totalReviewCount: totalReviews,
-              value: 150,
+              value: oneStarReviewCount,
             ),
           ],
         ),

@@ -8,6 +8,7 @@ import 'package:shopflow/core/widgets/common_divider.dart';
 import 'package:shopflow/core/widgets/common_expansion_tile.dart';
 import 'package:shopflow/core/widgets/numeric_stepper_button.dart';
 import 'package:shopflow/core/widgets/product_rating_stars.dart';
+import 'package:shopflow/features/shop/models/product_model.dart';
 import 'package:shopflow/features/shop/widgets/rating_section.dart';
 
 import '../../../core/constants/app_images.dart';
@@ -24,20 +25,26 @@ class ProductDetailScreen extends StatefulWidget {
 class _ProductDetailScreenState extends State<ProductDetailScreen> {
   int _currentImageIndex = 0;
   int _quantity = 1;
-  int reviewListLength = 2;
+  int reviewListDefaultLength = 2;
+  int? totalReviews;
   bool isReviewListExpanded = false;
+  late ProductModel currentProduct;
 
-  void _handleDecrement(){
-    if(_quantity > 1){
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  void _handleDecrement() {
+    if (_quantity > 1) {
       setState(() {
         --_quantity;
       });
     }
   }
 
-
-    void _handleIncrement(){
-    if(_quantity < 10){
+  void _handleIncrement() {
+    if (_quantity < 10) {
       setState(() {
         ++_quantity;
       });
@@ -170,18 +177,15 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   void _handleReviewToggleButton() {
     setState(() {
       isReviewListExpanded = !isReviewListExpanded;
-      if (isReviewListExpanded) {
-        reviewListLength = product['reviews'].length;
-      } else {
-        reviewListLength = 2;
-      }
     });
   }
 
-  late final product = mockProduct['data'];
-
   @override
   Widget build(BuildContext context) {
+    final ProductModel selectedProduct =
+        ModalRoute.of(context)!.settings.arguments as ProductModel;
+    totalReviews = selectedProduct.productReviews?.length ?? 0;
+
     return Scaffold(
       backgroundColor: AppColors.bgScreen,
       body: SingleChildScrollView(
@@ -246,7 +250,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                             shape: BoxShape.circle,
                           ),
                           child: SvgPicture.asset(
-                            AppImages.likeHeart,
+                            AppImages.unlikedHeart,
                             fit: BoxFit.scaleDown,
                             colorFilter: ColorFilter.mode(
                               AppColors.black,
@@ -290,16 +294,21 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 crossAxisAlignment: .start,
                 children: [
                   Text(
-                    product['brand'],
+                    '${selectedProduct.brandName?.toUpperCase()}',
                     style: AppTextStyles.labelSmall,
                   ),
-                  Text(product['name'], style: AppTextStyles.headingLarge),
+                  Text(
+                    '${selectedProduct.title}',
+                    style: AppTextStyles.headingLarge,
+                  ),
                   Row(
                     spacing: 6,
                     children: [
-                      ProductRatingStars(rating: 4.5),
+                      ProductRatingStars(
+                        rating: selectedProduct.ratings?.avgRating ?? 0,
+                      ),
                       Text(
-                        '4.8 (1,284 reviews)',
+                        '${selectedProduct.ratings?.avgRating} (${selectedProduct.ratings?.totalReviews} reviews)',
                         style: AppTextStyles.labelSmall,
                       ),
                       Container(
@@ -320,7 +329,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           borderRadius: BorderRadiusGeometry.circular(16),
                         ),
                         child: Text(
-                          product['availability']['label'],
+                          selectedProduct.productStock! > 0
+                              ? 'In Stock'
+                              : 'Out of Stock',
                           style: AppTextStyles.labelSmall.copyWith(
                             color: AppColors.primaryDim,
                           ),
@@ -335,13 +346,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     spacing: 15,
                     children: [
                       Text(
-                        '\$${product['pricing']['currentPrice']}',
+                        '\$${selectedProduct.price}.00',
                         style: AppTextStyles.headingLarge,
                       ),
-                      Text(
-                        '\$${product['pricing']['originalPrice']}',
-                        style: AppTextStyles.strikethroughMedium,
-                      ),
+                      Text('\$399.0', style: AppTextStyles.strikethroughMedium),
                       Container(
                         padding: EdgeInsets.symmetric(
                           vertical: 2,
@@ -369,7 +377,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               child: Row(
                 mainAxisAlignment: .spaceBetween,
                 children: [
-                  Text(AppStrings.quantitySectionText, style: AppTextStyles.headingMedium),
+                  Text(
+                    AppStrings.quantitySectionText,
+                    style: AppTextStyles.headingMedium,
+                  ),
                   NumericStepperButton(
                     onDecrement: _handleDecrement,
                     onIncrement: _handleIncrement,
@@ -386,7 +397,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 headerTitle: AppStrings.productDescriptionHeaderText,
                 inputFields: [
                   HtmlWidget(
-                    product['description'],
+                    selectedProduct.description ?? '',
                     textStyle: AppTextStyles.bodySmall,
                   ),
                 ],
@@ -411,77 +422,102 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       style: AppTextStyles.headingMedium,
                     ),
                     const SizedBox(height: 10),
-                    RatingSection(totalRating: 4.5, totalReviews: 1050),
+                    RatingSection(
+                      totalRating: selectedProduct.ratings?.avgRating ?? 0,
+                      totalReviews: selectedProduct.ratings?.totalReviews ?? 0,
+                      fiveStarReviewCount:
+                          selectedProduct.ratings?.fiveStarReviewCount ?? 0,
+                      fourStarReviewCount:
+                          selectedProduct.ratings?.fourStarReviewCount ?? 0,
+                      threeStarReviewCount:
+                          selectedProduct.ratings?.threeStarReviewCount ?? 0,
+                      twoStarReviewCount:
+                          selectedProduct.ratings?.twoStarReviewCount ?? 0,
+                      oneStarReviewCount:
+                          selectedProduct.ratings?.oneStarReviewCount ?? 0,
+                    ),
                     const SizedBox(height: 20),
-                    ListView.separated(
-                      padding: EdgeInsets.zero,
-                      itemCount: reviewListLength,
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      separatorBuilder: (context, index) =>
-                          const SizedBox(height: 5),
-                      itemBuilder: (context, index) {
-                        return Card(
-                          color: AppColors.bgCard,
-                          child: Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Column(
-                              children: [
-                                Row(
-                                  crossAxisAlignment: .start,
-                                  children: [
-                                    CircleAvatar(
-                                      radius: 20,
-                                      backgroundImage: NetworkImage(
-                                        'https://www.imageurlgenerator.com/_next/image?url=%2Fassets%2Ffree_tool.png&w=3840&q=75',
-                                      ),
-                                    ),
-                                    const SizedBox(width: 10),
-                                    Column(
-                                      crossAxisAlignment: .start,
-                                      children: [
-                                        Text(
-                                          'Sarah Jenkins',
-                                          style: AppTextStyles.headingSmall,
-                                        ),
-                                        Text(
-                                          'Oct 12, 2023',
-                                          style: AppTextStyles.labelSmall,
-                                        ),
-                                      ],
-                                    ),
-                                    const Spacer(),
-                                    ProductRatingStars(rating: 5),
-                                  ],
-                                ),
 
-                                Padding(
-                                  padding: const EdgeInsets.all(8),
-                                  child: Text(
-                                    'Absolutely love the build quality. The battery easily lasts a day and a half with heavy usage. The sleep tracking is surprisingly accurate compared to my previous device.',
-                                    style: AppTextStyles.bodySmall,
+                    (totalReviews ?? 0) > reviewListDefaultLength
+                        ? ListView.separated(
+                            padding: EdgeInsets.zero,
+                            itemCount: isReviewListExpanded
+                                ? (totalReviews ?? 0)
+                                : reviewListDefaultLength,
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            separatorBuilder: (context, index) =>
+                                const SizedBox(height: 5),
+                            itemBuilder: (context, index) {
+                              var reviewItem =
+                                  selectedProduct.productReviews?[index]
+                                      as CustomerReview;
+                              return Card(
+                                color: AppColors.bgCard,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(16.0),
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        crossAxisAlignment: .start,
+                                        children: [
+                                          CircleAvatar(
+                                            radius: 20,
+                                            backgroundImage: NetworkImage(
+                                              reviewItem.userImage ?? '',
+                                            ),
+                                          ),
+                                          const SizedBox(width: 10),
+                                          Column(
+                                            crossAxisAlignment: .start,
+                                            children: [
+                                              Text(
+                                                reviewItem.username ?? '',
+                                                style:
+                                                    AppTextStyles.headingSmall,
+                                              ),
+                                              Text(
+                                                'Oct 12, 2023',
+                                                style: AppTextStyles.labelSmall,
+                                              ),
+                                            ],
+                                          ),
+                                          const Spacer(),
+                                          ProductRatingStars(
+                                            rating: reviewItem.rating ?? 0,
+                                          ),
+                                        ],
+                                      ),
+
+                                      Padding(
+                                        padding: const EdgeInsets.all(8),
+                                        child: Text(
+                                          reviewItem.reviewText ?? '',
+                                          style: AppTextStyles.bodySmall,
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
-                              ],
-                            ),
-                          ),
-                        );
-                      },
-                    ),
+                              );
+                            },
+                          )
+                        : const Text('No User Reviews'),
 
                     const SizedBox(height: 10),
 
-                    CommonButton(
-                      label: isReviewListExpanded
-                          ? AppStrings.showLessReviewsText
-                          : AppStrings.viewAllReviews,
-                      onPressed: _handleReviewToggleButton,
-                      borderRadius: 22,
-                      backgroundColor: AppColors.bgChip,
-                      textColor: AppColors.black,
-                      elevation: 0,
-                      borderSide: BorderSide(color: AppColors.border),
-                    ),
+                    if ((totalReviews ?? 0) > reviewListDefaultLength)
+                      CommonButton(
+                        label: isReviewListExpanded
+                            ? AppStrings.showLessReviewsText
+                            : AppStrings.viewAllReviews,
+                        onPressed: _handleReviewToggleButton,
+                        borderRadius: 22,
+                        backgroundColor: AppColors.bgChip,
+                        textColor: AppColors.black,
+                        elevation: 0,
+                        borderSide: BorderSide(color: AppColors.border),
+                      ),
                   ],
                 ),
               ),
@@ -497,11 +533,17 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             children: [
               Column(
                 children: [
-                  Text(AppStrings.totalPriceText, style: AppTextStyles.labelSmall),
-                  Text('\$299.00', style: AppTextStyles.headingMedium),
+                  Text(
+                    AppStrings.totalPriceText,
+                    style: AppTextStyles.labelSmall,
+                  ),
+                  Text(
+                    '\$${selectedProduct.price}.00',
+                    style: AppTextStyles.headingMedium,
+                  ),
                 ],
               ),
-              const SizedBox(width: 10,),
+              const SizedBox(width: 10),
               Expanded(
                 child: CommonButton(
                   label: AppStrings.addToCartText,

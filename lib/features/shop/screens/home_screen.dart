@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shopflow/core/constants/app_colors.dart';
 import 'package:shopflow/core/constants/app_images.dart';
@@ -15,9 +16,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  String selectedFilterOption = 'Tech';
+
   @override
   Widget build(BuildContext context) {
-    final String _selectedFilterOption = 'All';
     return Scaffold(
       backgroundColor: AppColors.bgScreen,
       body: Padding(
@@ -30,21 +32,34 @@ class _HomeScreenState extends State<HomeScreen> {
               child: ListView.separated(
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
+                  bool isSelected =
+                      selectedFilterOption ==
+                      ShopConstants.allowedFilterOptions[index];
                   return GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      setState(() {
+                        selectedFilterOption =
+                            ShopConstants.allowedFilterOptions[index];
+                      });
+                    },
                     child: Container(
                       padding: EdgeInsets.symmetric(
                         horizontal: 16,
                         vertical: 8,
                       ),
                       decoration: BoxDecoration(
-                        border: Border.all(
-                          color: AppColors.textHint,
-                          width: 1,
-                        ),
+                        color: isSelected ? AppColors.primary : AppColors.white,
+                        border: Border.all(color: AppColors.textHint, width: 1),
                         borderRadius: BorderRadius.circular(16),
                       ),
-                      child: Text(ShopConstants.allowedFilterOptions[index]),
+                      child: Text(
+                        ShopConstants.allowedFilterOptions[index],
+                        style: AppTextStyles.labelSmall.copyWith(
+                          color: isSelected
+                              ? AppColors.white
+                              : AppColors.textHint,
+                        ),
+                      ),
                     ),
                   );
                 },
@@ -53,63 +68,70 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             const SizedBox(height: 25),
-            Expanded(
-              child: GridView.builder(
-                itemCount: 40,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10,
-                  childAspectRatio: 0.65,
-                ),
-                itemBuilder: (context, index) {
-                  return Container(
-                    decoration: BoxDecoration(
-                      color: AppColors.bgCard,
-                      boxShadow: [
-                        BoxShadow(
-                          color: AppColors.black.withAlpha(5),
-                          offset: Offset(0, 8),
-                          blurRadius: 12,
-                          spreadRadius: 0,
-                        ),
-                      ],
-                      borderRadius: BorderRadius.all(Radius.circular(12)),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.pushNamed(
-                            context,
-                            AppRoutes.productDetailScreen,
-                          );
-                        },
-                        child: Column(
-                          children: [
-                            // heart stack on top image container
-                            Stack(
-                              children: [
-                                Container(
-                                  height: 143,
-                                  width: 143,
+          Expanded(
+            child: AlignedGridView.count(
+              itemCount: ShopConstants.mockProducts.length,
+              crossAxisCount: 2,
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 10,
+              itemBuilder: (context, index) {
+                var product = ShopConstants.mockProducts[index];
+                return Container(
+                  decoration: BoxDecoration(
+                    color: AppColors.bgCard,
+                    boxShadow: [
+                      BoxShadow(
+                        color: AppColors.black.withAlpha(5),
+                        offset: const Offset(0, 8),
+                        blurRadius: 12,
+                        spreadRadius: 0,
+                      ),
+                    ],
+                    borderRadius: const BorderRadius.all(Radius.circular(12)),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(
+                          context,
+                          AppRoutes.productDetailScreen,
+                          arguments: product,
+                        );
+                      },
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+
+                          Stack(
+                            children: [
+                              AspectRatio(
+                                aspectRatio: 1.0,
+                                child: Container(
                                   decoration: BoxDecoration(
                                     color: AppColors.black,
                                     borderRadius: BorderRadius.circular(6),
                                   ),
                                   child: ClipRRect(
-                                    borderRadius: BorderRadiusGeometry.circular(
-                                      6,
-                                    ),
+                                    borderRadius: BorderRadius.circular(6),
                                     child: Image.network(
                                       'https://www.imageurlgenerator.com/_next/image?url=%2Fassets%2Ffree_tool.png&w=3840&q=75',
+                                      fit: BoxFit.cover,
                                     ),
                                   ),
                                 ),
+                              ),
 
-                                Positioned(
-                                  top: 10,
-                                  right: 10,
+                              Positioned(
+                                top: 10,
+                                right: 10,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      product.isLiked = !(product.isLiked ?? false);
+                                    });
+                                  },
                                   child: Container(
                                     height: 32,
                                     width: 32,
@@ -117,100 +139,102 @@ class _HomeScreenState extends State<HomeScreen> {
                                       color: AppColors.white,
                                       shape: BoxShape.circle,
                                     ),
-                                    child: SvgPicture.asset(
-                                      AppImages.likeHeart,
-                                      height: 13,
-                                      width: 15,
-                                      fit: BoxFit.scaleDown,
-                                    ),
+                                    child:  (product.isLiked ?? false) ? Icon(Icons.favorite) : Icon(Icons.favorite),
                                   ),
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
+                          ),
 
-                            const SizedBox(height: 6),
+                          const SizedBox(height: 6),
 
-                            Column(
-                              crossAxisAlignment: .start,
-                              children: [
-                                Text(
-                                  'Tech',
-                                  style: AppTextStyles.labelSmall,
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                product.category?.name ?? '',
+                                style: AppTextStyles.labelSmall,
+                              ),
+                              const SizedBox(height: 3),
+                              Text(
+                                product.title ?? '',
+                                style: AppTextStyles.bodySmall.copyWith(
+                                  color: AppColors.textPrimary,
                                 ),
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              const SizedBox(height: 4),
 
-                                const SizedBox(height: 3),
-                                Text(
-                                  'Too much long Product name should wrap hello world',
-                                  style: AppTextStyles.bodySmall.copyWith(
-                                    color: AppColors.textPrimary,
+
+                              Row(
+                                children: [
+                                  SvgPicture.asset(
+                                    AppImages.ratingStar,
+                                    height: 11,
+                                    width: 11,
+                                    fit: BoxFit.scaleDown,
                                   ),
-                                  maxLines: 2,
-                                  overflow: .ellipsis,
-                                ),
-                                const SizedBox(height: 4),
-                                Row(
-                                  spacing: 4,
-                                  children: [
-                                    SvgPicture.asset(
-                                      AppImages.ratingStar,
-                                      height: 11,
-                                      width: 11,
-                                      fit: BoxFit.scaleDown,
+                                  const SizedBox(width: 4),
+                                  Text(
+                                    '${product.ratings?.avgRating}',
+                                    style: AppTextStyles.bodyMedium.copyWith(
+                                      color: AppColors.textPrimary,
                                     ),
-                                    Text(
-                                      '4.8',
-                                      style: AppTextStyles.bodyMedium.copyWith(
-                                        color: AppColors.textPrimary,
+                                  ),
+                                  const SizedBox(width: 4),
+                                  Text(
+                                    '(${product.ratings?.totalReviews})',
+                                    style: AppTextStyles.labelSmall,
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 7),
+
+                              Wrap(
+                                spacing: 4,
+                                runSpacing: 2,
+                                crossAxisAlignment: WrapCrossAlignment.center,
+                                children: [
+                                  Text(
+                                    '\$${product.price}',
+                                    style: AppTextStyles.headingMedium,
+                                  ),
+                                  const Text(
+                                    r"$300",
+                                    style: AppTextStyles.strikethroughSmall,
+                                  ),
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 6,
+                                      vertical: 2,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: AppColors.errorText,
+                                      borderRadius: BorderRadius.circular(16),
+                                    ),
+                                    child: Text(
+                                      '-${product.discount}%',
+                                      style: const TextStyle(
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.w400,
+                                        color: Colors.white,
                                       ),
                                     ),
-                                    const Text(
-                                      '(123)',
-                                      style: AppTextStyles.labelSmall,
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 7),
-                                Row(
-                                  spacing: 3,
-                                  children: [
-                                    const Text(
-                                      r"$299",
-                                      style: AppTextStyles.headingMedium,
-                                    ),
-                                    const Text(
-                                      r"$300",
-                                      style: AppTextStyles.strikethroughSmall,
-                                    ),
-                                    Container(
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: 6,
-                                        vertical: 2,
-                                      ),
-                                      decoration: BoxDecoration(
-                                        color: AppColors.errorText,
-                                        borderRadius: BorderRadius.circular(16),
-                                      ),
-                                      child: const Text(
-                                        '-20%',
-                                        style: TextStyle(
-                                          fontSize: 10,
-                                          fontWeight: FontWeight.w400,
-                                          color: AppColors.white,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                     ),
-                  );
-                },
-              ),
+                  ),
+                );
+              },
             ),
+          )
           ],
         ),
       ),

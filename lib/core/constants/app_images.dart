@@ -10,7 +10,8 @@ class AppImages {
   static const String loginTopLogo = '$_commonImagePath/login_top_logo.svg';
   static const String ratingStar = '$_commonImagePath/rating_star.svg';
 
-  static const String likeHeart = '$_commonImagePath/like_heart.svg';
+  static const String unlikedHeart = '$_commonImagePath/heart.svg';
+  static const String likedHeart = '$_commonImagePath/liked_heart.svg';
   static const String emptyCartImage = '$_commonImagePath/empty_cart.svg';
 
   static const String defaultAvatar = '$_commonImagePath/defaultAvatar.svg';
