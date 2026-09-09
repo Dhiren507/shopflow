@@ -14,7 +14,7 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
-  bool isCartEmpty = false;
+  bool isCartEmpty = true;
 
   int itemValue = 1;
 

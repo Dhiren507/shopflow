@@ -19,7 +19,7 @@ class CommonButton extends StatelessWidget {
     required this.onPressed,
     this.borderRadius = 12,
     this.backgroundColor = AppColors.primaryLight,
-    this.textColor = AppColors.textOnDark,
+    this.textColor = AppColors.white,
     this.leadingIcon,
     this.trailingIcon,
     this.elevation,

@@ -93,7 +93,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(height: 20),
 
                   Container(
-
                     padding: EdgeInsets.all(12),
                     decoration: BoxDecoration(
                       color: AppColors.errorBg,
@@ -123,7 +122,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                     trailingIcon: const Icon(
                       Icons.arrow_forward,
-                      color: AppColors.textOnDark,
+                      color: AppColors.white,
                       size: 20,
                     ),
                   ),

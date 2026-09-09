@@ -10,7 +10,6 @@ class AppColors {
   static const Color textPrimary = Color(0xFF1B1A25);
   static const Color textSecondary = Color(0xFF464556);
   static const Color textHint = Color(0xFF777588);
-  static const Color textOnDark = Color(0xFFFFFFFF);
 
   // backgrounds
   static const Color bgScreen = Color(0xFFFCF8FF);

@@ -509,7 +509,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   borderRadius: 22,
                   leadingIcon: const Icon(
                     Icons.shopping_cart_outlined,
-                    color: AppColors.textOnDark,
+                    color: AppColors.white,
                     size: 20,
                   ),
                 ),

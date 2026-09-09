@@ -86,16 +86,16 @@ class AppTextStyles {
     color: AppColors.errorText,
   );
 
-    static const TextStyle strikethroughSmall = TextStyle(
-      fontFamily: _font,
-      fontSize: 12,
-      fontWeight: FontWeight.w500,
-      color: AppColors.textHint,
-      decoration: TextDecoration.lineThrough,
-      decorationColor: AppColors.textHint,
-      decorationStyle: TextDecorationStyle.solid,
-      decorationThickness: 1.0,
-    );
+  static const TextStyle strikethroughSmall = TextStyle(
+    fontFamily: _font,
+    fontSize: 12,
+    fontWeight: FontWeight.w500,
+    color: AppColors.textHint,
+    decoration: TextDecoration.lineThrough,
+    decorationColor: AppColors.textHint,
+    decorationStyle: TextDecorationStyle.solid,
+    decorationThickness: 1.0,
+  );
 
   static const TextStyle strikethroughMedium = TextStyle(
     fontFamily: _font,

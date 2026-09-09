@@ -60,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   crossAxisCount: 2,
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 10,
-                  childAspectRatio: 0.56,
+                  childAspectRatio: 0.65,
                 ),
                 itemBuilder: (context, index) {
                   return Container(
@@ -114,7 +114,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     height: 32,
                                     width: 32,
                                     decoration: BoxDecoration(
-                                      color: AppColors.textOnDark,
+                                      color: AppColors.white,
                                       shape: BoxShape.circle,
                                     ),
                                     child: SvgPicture.asset(
@@ -140,7 +140,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
                                 const SizedBox(height: 3),
                                 Text(
-                                  'Too much long Product name should wrap',
+                                  'Too much long Product name should wrap hello world',
                                   style: AppTextStyles.bodySmall.copyWith(
                                     color: AppColors.textPrimary,
                                   ),
@@ -195,7 +195,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         style: TextStyle(
                                           fontSize: 10,
                                           fontWeight: FontWeight.w400,
-                                          color: AppColors.textOnDark,
+                                          color: AppColors.white,
                                         ),
                                       ),
                                     ),

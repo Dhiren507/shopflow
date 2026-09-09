@@ -23,9 +23,9 @@ class EmptyCartPlaceholder extends StatelessWidget {
               shape: BoxShape.circle,
               boxShadow: [
                 BoxShadow(
-                    color: AppColors.primary.withValues(alpha: 0.2),
-                    blurRadius: 60,
-                    spreadRadius: 10
+                    color: AppColors.primary.withValues(alpha: 0.20),
+                    blurRadius: 70,
+                    spreadRadius: 5
                 ),
               ],
             ),

@@ -106,8 +106,8 @@ class _MyProductsListingScreenState extends State<MyProductsListingScreen> {
                 borderRadius: BorderRadius.circular(12),
                 boxShadow: [
                   BoxShadow(
-                    color: AppColors.black.withValues(alpha: 0.5),
-                    offset: Offset(0, 0.5),
+                    color: AppColors.black.withValues(alpha: 0.3),
+                    offset: Offset(0, 0.1),
                     blurRadius: 1,
                     spreadRadius: 0,
                   ),
@@ -125,7 +125,7 @@ class _MyProductsListingScreenState extends State<MyProductsListingScreen> {
                         padding: const EdgeInsets.symmetric(vertical: 8),
                         decoration: BoxDecoration(
                           color: isSelected
-                              ? AppColors.textOnDark
+                              ? AppColors.white
                               : Colors.transparent,
                           borderRadius: BorderRadius.circular(10),
                         ),
@@ -151,6 +151,7 @@ class _MyProductsListingScreenState extends State<MyProductsListingScreen> {
                 itemBuilder: (context, index) {
                   final item = myProductsList[index];
                   return Card(
+                    color: AppColors.white,
                     child: Padding(
                       padding: const EdgeInsets.all(12),
                       child: Row(

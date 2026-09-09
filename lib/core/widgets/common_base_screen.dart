@@ -49,7 +49,7 @@ class _CommonBaseScreenState extends State<CommonBaseScreen>
             height: 60,
             child: TabBar(
               controller: _tabController,
-              labelColor: AppColors.textOnDark,
+              labelColor: AppColors.white,
               unselectedLabelColor: AppColors.textSecondary,
               dividerColor: Colors.transparent,
               indicator: BoxDecoration(
@@ -87,6 +87,7 @@ class _CommonBaseScreenState extends State<CommonBaseScreen>
                   text: AppStrings.tabBarLabelFour,
                 ),
               ],
+
             ),
           ),
         ),
@@ -107,7 +108,7 @@ class _CommonBaseScreenState extends State<CommonBaseScreen>
                 Navigator.pushNamed(context, AppRoutes.addProductScreen);
               },
               backgroundColor: AppColors.primary,
-              child: Icon(Icons.add, color: AppColors.textOnDark),
+              child: Icon(Icons.add, color: AppColors.white),
             )
           : const SizedBox(),
     );
