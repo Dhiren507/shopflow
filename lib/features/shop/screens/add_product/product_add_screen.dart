@@ -68,77 +68,119 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
             const SizedBox(height: 10),
             SizedBox(
               height: 80,
-              child: ListView.separated(
-                clipBehavior: .none,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  return GestureDetector(
-                    onTap: () async {
-                      final imgPath =
-                          await ImagePickerService.pickImageFromGallery();
-
-                      if (imgPath != null) {
-                        setState(() {
-                          _currentForm.selectedImagePaths[index] = imgPath;
-                        });
-                      }
-                    },
-                    child: Stack(
+              child: Row(
+                children: [
+                  Expanded(
+                    child: ListView.separated(
                       clipBehavior: .none,
-                      children: [
-                        Container(
-                          height: 72,
-                          width: 72,
-                          decoration: BoxDecoration(
-                            border: _currentForm.selectedImagePaths[index] == ''
-                                ? DashedBorder(
-                                    color: AppColors.border,
-                                    width: 2,
-                                  )
-                                : Border.all(color: Colors.transparent),
-                            borderRadius: BorderRadius.circular(8),
-                            color: AppColors.white,
-                          ),
-                          child: _currentForm.selectedImagePaths[index] != ''
-                              ? ClipRRect(
-                                  borderRadius: BorderRadius.circular(8),
-                                  child: Image.file(
-                                    File(
-                                      _currentForm.selectedImagePaths[index],
-                                    ),
-                                    fit: BoxFit.cover,
-                                  ),
-                                )
-                              : SvgPicture.asset(
-                                  AppImages.addImageEmptyPlaceholder,
-                                  colorFilter: ColorFilter.mode(
-                                    AppColors.textHint,
-                                    BlendMode.srcIn,
-                                  ),
-                                  height: 18,
-                                  width: 18,
-                                  fit: BoxFit.scaleDown,
-                                ),
-                        ),
-                        Positioned(
-                          right: -10,
-                          top: -8,
-                          child: Container(
-                            height: 25,
-                            width: 25,
-                            decoration: BoxDecoration(
-                              color: AppColors.errorBg,
-                              shape: BoxShape.circle,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) {
+                        if (index == _currentForm.selectedImagePaths.length) {
+                          return GestureDetector(
+                            onTap: () {
+                              if (_currentForm.selectedImagePaths.length < 7) {
+                                setState(() {
+                                  _currentForm.selectedImagePaths.add('');
+                                });
+                              }
+                            },
+                            child: Container(
+                              height: 50,
+                              width: 50,
+                              decoration: BoxDecoration(
+                                color: AppColors.primaryDim,
+                                shape: BoxShape.circle,
+                              ),
+                              child: Icon(Icons.add),
                             ),
-                            child: Icon(Icons.close, size: 15),
+                          );
+                        }
+
+                        return GestureDetector(
+                          onTap: () async {
+                            final imgPath =
+                                await ImagePickerService.pickImageFromGallery();
+
+                            if (imgPath != null) {
+                              setState(() {
+                                _currentForm.selectedImagePaths[index] =
+                                    imgPath;
+                              });
+                            }
+                          },
+                          child: Stack(
+                            clipBehavior: .none,
+                            children: [
+                              Container(
+                                height: 72,
+                                width: 72,
+                                decoration: BoxDecoration(
+                                  border:
+                                      _currentForm.selectedImagePaths[index] ==
+                                          ''
+                                      ? DashedBorder(
+                                          color: AppColors.border,
+                                          width: 2,
+                                        )
+                                      : Border.all(color: Colors.transparent),
+                                  borderRadius: BorderRadius.circular(8),
+                                  color: AppColors.white,
+                                ),
+                                child:
+                                    _currentForm.selectedImagePaths[index] != ''
+                                    ? ClipRRect(
+                                        borderRadius: BorderRadius.circular(8),
+                                        child: Image.file(
+                                          File(
+                                            _currentForm
+                                                .selectedImagePaths[index],
+                                          ),
+                                          fit: BoxFit.cover,
+                                        ),
+                                      )
+                                    : SvgPicture.asset(
+                                        AppImages.addImageEmptyPlaceholder,
+                                        colorFilter: ColorFilter.mode(
+                                          AppColors.textHint,
+                                          BlendMode.srcIn,
+                                        ),
+                                        height: 18,
+                                        width: 18,
+                                        fit: BoxFit.scaleDown,
+                                      ),
+                              ),
+                              Positioned(
+                                right: -10,
+                                top: -8,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      _currentForm.selectedImagePaths.removeAt(
+                                        index,
+                                      );
+                                    });
+                                  },
+                                  child: Container(
+                                    height: 25,
+                                    width: 25,
+                                    decoration: BoxDecoration(
+                                      color: AppColors.errorBg,
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: Icon(Icons.close, size: 15),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
-                      ],
+                        );
+                      },
+                      separatorBuilder: (context, index) =>
+                          const SizedBox(width: 15),
+                      itemCount: _currentForm.selectedImagePaths.length + 1,
                     ),
-                  );
-                },
-                separatorBuilder: (context, index) => const SizedBox(width: 15),
-                itemCount: _currentForm.selectedImagePaths.length,
+                  ),
+                ],
               ),
             ),
             const CommonDivider(height: 25),
