@@ -25,7 +25,7 @@ class CartItemCard extends StatelessWidget {
     required this.onDecrement,
     required this.onIncrement,
     required this.onClose,
-    required this.productDiscount
+    required this.productDiscount,
   });
 
   @override
@@ -33,7 +33,7 @@ class CartItemCard extends StatelessWidget {
     return Card(
       color: AppColors.white,
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
         child: Row(
           children: [
             Container(
@@ -64,9 +64,7 @@ class CartItemCard extends StatelessWidget {
                     maxLines: 2,
                     overflow: .ellipsis,
                   ),
-                  Row(
-                    mainAxisSize: .min,
-                    spacing: 5,
+                  Wrap(
                     children: [
                       Text(
                         '\$$productPrice.00',
@@ -85,13 +83,9 @@ class CartItemCard extends StatelessWidget {
                         ),
                         child: Text(
                           '-$productDiscount%',
-                          style: const TextStyle(
-                            fontSize: 10,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.white,
-                          ),
+                          style: AppTextStyles.whiteSmallLabel,
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ],

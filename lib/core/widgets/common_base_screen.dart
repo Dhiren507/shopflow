@@ -50,6 +50,7 @@ class _CommonBaseScreenState extends State<CommonBaseScreen>
           child: SizedBox(
             height: 60,
             child: TabBar(
+              labelPadding: EdgeInsets.zero,
               controller: _tabController,
               labelColor: AppColors.white,
               unselectedLabelColor: AppColors.textSecondary,
@@ -59,7 +60,7 @@ class _CommonBaseScreenState extends State<CommonBaseScreen>
                 borderRadius: BorderRadius.circular(12),
               ),
               indicatorSize: .tab,
-              labelStyle: AppTextStyles.labelSmall,
+              labelStyle: AppTextStyles.labelSmall.copyWith(fontSize: 12),
               tabs: [
                 Tab(
                   icon: Icon(
@@ -73,9 +74,7 @@ class _CommonBaseScreenState extends State<CommonBaseScreen>
                     backgroundColor: AppColors.errorLabel,
                     label: Text(
                       '2',
-                      style: AppTextStyles.labelSmall.copyWith(
-                        color: AppColors.black,
-                      ),
+                      style: AppTextStyles.whiteSmallLabel,
                     ),
                     child: Icon(
                       activeIndex == 1

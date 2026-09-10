@@ -72,6 +72,12 @@ class AppTextStyles {
     letterSpacing: 0.5,
   );
 
+  static const TextStyle whiteSmallLabel = TextStyle(
+    fontSize: 10,
+    fontWeight: FontWeight.w400,
+    color: AppColors.white,
+  );
+
   static const TextStyle hintText = TextStyle(
     fontFamily: _font,
     fontSize: 14,

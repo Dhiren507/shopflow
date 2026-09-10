@@ -46,14 +46,8 @@ class _CartScreenState extends State<CartScreen> {
   }
 
   @override
-  void initState() {
-    // TODO: implement initState
-    calculateTotals();
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    calculateTotals();
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
       child: Column(
@@ -86,7 +80,7 @@ class _CartScreenState extends State<CartScreen> {
                           if (item.productQuantity! > 1) {
                             setState(() {
                               item.productQuantity = item.productQuantity! - 1;
-                              calculateTotals();
+                              // calculateTotals();
                             });
                           }
                         },
@@ -94,7 +88,7 @@ class _CartScreenState extends State<CartScreen> {
                           if (item.productQuantity! < 10) {
                             setState(() {
                               item.productQuantity = item.productQuantity! + 1;
-                              calculateTotals();
+                             // calculateTotals();
                             });
                           }
                         },
@@ -102,7 +96,7 @@ class _CartScreenState extends State<CartScreen> {
                           if(index > 0) {
                             setState(() {
                               ShopConstants.cartItems.removeAt(index);
-                              calculateTotals();
+                              // calculateTotals();
                             });
                           } else {
                             setState(() {

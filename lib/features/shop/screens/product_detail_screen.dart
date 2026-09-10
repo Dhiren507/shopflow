@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:shopflow/core/constants/app_colors.dart';
 import 'package:shopflow/core/constants/app_strings.dart';
@@ -11,11 +10,8 @@ import 'package:shopflow/core/widgets/common_expansion_tile.dart';
 import 'package:shopflow/core/widgets/numeric_stepper_button.dart';
 import 'package:shopflow/core/widgets/product_rating_stars.dart';
 import 'package:shopflow/features/shop/constants/shop_constants.dart';
-import 'package:shopflow/features/shop/models/cart_item_model.dart';
 import 'package:shopflow/features/shop/models/product_model.dart';
 import 'package:shopflow/features/shop/widgets/rating_section.dart';
-
-import '../../../core/constants/app_images.dart';
 import '../../../core/constants/app_text_styles.dart';
 import '../../../core/widgets/common_button.dart';
 
@@ -31,28 +27,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   int reviewListDefaultLength = 2;
   int? totalReviews;
   bool isReviewListExpanded = false;
-  late ProductModel currentProduct;
 
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  void _handleDecrement() {
-    if (_quantity > 1) {
-      setState(() {
-        --_quantity;
-      });
-    }
-  }
-
-  void _handleIncrement() {
-    if (_quantity < 10) {
-      setState(() {
-        ++_quantity;
-      });
-    }
-  }
 
   void addToCart(ProductModel chosenProduct) {
     setState(() {
@@ -72,122 +47,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     'https://www.imageurlgenerator.com/_next/image?url=%2Fassets%2Ffree_tool.png&w=3840&q=75',
   ];
 
-  final Map<String, dynamic> mockProduct = {
-    "success": true,
-    "message": "Product details fetched successfully",
-    "data": {
-      "id": "watch_001",
-      "brand": "LUMINA TECH",
-      "name": "Aura Horizon Smartwatch Series 7",
-
-      "images": [
-        "https://example.com/watch-1.jpg",
-        "https://example.com/watch-2.jpg",
-        "https://example.com/watch-3.jpg",
-        "https://example.com/watch-4.jpg",
-      ],
-
-      "rating": {
-        "average": 4.8,
-        "totalReviews": 1284,
-        "distribution": {"5": 1120, "4": 95, "3": 40, "2": 18, "1": 11},
-      },
-
-      "availability": {"inStock": true, "label": "In Stock"},
-
-      "pricing": {
-        "currentPrice": 299.00,
-        "originalPrice": 349.00,
-        "currency": "USD",
-        "discount": {"amount": 50.00, "label": "Save \$50"},
-      },
-
-      "quantity": {"minimum": 1, "maximum": 10, "default": 1},
-
-      "description": "<p>Experience the next generation of <strong>wearable technology</strong>.</p><p>The Aura Horizon features a stunning edge-to-edge AMOLED display, advanced health tracking sensors, and a premium titanium casing designed for both durability and elegance.</p><ul><li>Always-on Retina display with 2000 nits peak brightness.</li><li>Advanced ECG and blood oxygen monitoring.</li><li>Up to 36 hours of battery life on a single charge.</li><li>Water-resistant up to 50 meters.</li></ul>",
-
-      "reviews": [
-        {
-          "id": "review_001",
-          "user": {
-            "name": "Sarah Jenkins",
-            "avatar": "https://example.com/sarah.jpg",
-          },
-          "rating": 5,
-          "date": "2023-10-12",
-          "comment":
-              "Absolutely love the build quality. The battery easily "
-              "lasts a day and a half with heavy usage. The sleep tracking "
-              "is surprisingly accurate compared to my previous device.",
-        },
-        {
-          "id": "review_002",
-          "user": {
-            "name": "Michael T.",
-            "avatar": "https://example.com/michael.jpg",
-          },
-          "rating": 4,
-          "date": "2023-10-05",
-          "comment":
-              "Great watch overall. The screen is incredibly bright even "
-              "in direct sunlight. My only minor complaint is that the "
-              "included strap could be slightly more breathable.",
-        },
-        {
-          "id": "review_001",
-          "user": {
-            "name": "Sarah Jenkins",
-            "avatar": "https://example.com/sarah.jpg",
-          },
-          "rating": 5,
-          "date": "2023-10-12",
-          "comment":
-              "Absolutely love the build quality. The battery easily "
-              "lasts a day and a half with heavy usage. The sleep tracking "
-              "is surprisingly accurate compared to my previous device.",
-        },
-        {
-          "id": "review_002",
-          "user": {
-            "name": "Michael T.",
-            "avatar": "https://example.com/michael.jpg",
-          },
-          "rating": 4,
-          "date": "2023-10-05",
-          "comment":
-              "Great watch overall. The screen is incredibly bright even "
-              "in direct sunlight. My only minor complaint is that the "
-              "included strap could be slightly more breathable.",
-        },
-        {
-          "id": "review_001",
-          "user": {
-            "name": "Sarah Jenkins",
-            "avatar": "https://example.com/sarah.jpg",
-          },
-          "rating": 5,
-          "date": "2023-10-12",
-          "comment":
-              "Absolutely love the build quality. The battery easily "
-              "lasts a day and a half with heavy usage. The sleep tracking "
-              "is surprisingly accurate compared to my previous device.",
-        },
-        {
-          "id": "review_002",
-          "user": {
-            "name": "Michael T.",
-            "avatar": "https://example.com/michael.jpg",
-          },
-          "rating": 4,
-          "date": "2023-10-05",
-          "comment":
-              "Great watch overall. The screen is incredibly bright even "
-              "in direct sunlight. My only minor complaint is that the "
-              "included strap could be slightly more breathable.",
-        },
-      ],
-    },
-  };
 
   void _handleReviewToggleButton() {
     setState(() {

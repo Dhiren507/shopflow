@@ -16,6 +16,8 @@ import 'package:shopflow/core/widgets/common_input_field.dart';
 import 'package:shopflow/features/shop/constants/shop_constants.dart';
 import 'package:shopflow/features/shop/screens/add_product/models/product_form_model.dart';
 
+import '../../../../core/utils/image_picker_helper.dart';
+
 class ProductAddScreen extends StatefulWidget {
   const ProductAddScreen({super.key});
 
@@ -98,7 +100,7 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
                     onTap: () async {
                       if (isLastContainer) {
                         final imgPath =
-                            await ImagePickerService.pickImageFromGallery();
+                            await pickImageFromGallery();
                         if (imgPath != null) {
                           setState(() {
                             _currentForm.selectedImagePaths.add(imgPath);

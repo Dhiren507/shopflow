@@ -1,4 +1,3 @@
-import 'package:shopflow/features/shop/models/cart_item_model.dart';
 import 'package:shopflow/features/shop/models/product_model.dart';
 
 class ShopConstants {

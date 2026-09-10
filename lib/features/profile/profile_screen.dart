@@ -7,7 +7,7 @@ import 'package:shopflow/core/constants/app_images.dart';
 import 'package:shopflow/core/constants/app_routes.dart';
 import 'package:shopflow/core/constants/app_strings.dart';
 import 'package:shopflow/core/constants/app_text_styles.dart';
-import 'package:shopflow/core/services/image_picker_service.dart';
+import 'package:shopflow/core/utils/image_picker_helper.dart';
 import 'package:shopflow/core/widgets/common_button.dart';
 import 'package:shopflow/core/widgets/common_divider.dart';
 import 'package:shopflow/features/profile/constants/profile_constants.dart';
@@ -24,7 +24,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Future<void> _handleProfileSelection() async {
     final String? selectedImagePath =
-        await ImagePickerService.pickImageFromGallery();
+        await pickImageFromGallery();
 
     if (selectedImagePath != null) {
       setState(() {
