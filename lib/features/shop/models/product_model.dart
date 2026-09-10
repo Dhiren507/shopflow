@@ -12,6 +12,7 @@ class ProductModel {
   List<CustomerReview>? productReviews;
   ProductRating? ratings;
   int? productStock;
+  int? productQuantity;
   String? creationAt;
   String? updatedAt;
 
@@ -29,6 +30,7 @@ class ProductModel {
     this.productReviews,
     this.ratings,
     this.productStock,
+    this.productQuantity = 1,
     this.creationAt,
     this.updatedAt,
   });
@@ -50,6 +52,7 @@ class ProductModel {
     images = json['images'] != null ? List<String>.from(json['images']) : null;
     isLiked = json['isLiked'];
     productStock = json['productStock'];
+    productQuantity = json['productQuantity'];
     creationAt = json['creationAt'];
     updatedAt = json['updatedAt'];
 
@@ -79,6 +82,7 @@ class ProductModel {
     data['images'] = images;
     data['isLiked'] = isLiked;
     data['productStock'] = productStock;
+    data['productQuantity'] = productQuantity;
     data['creationAt'] = creationAt;
     data['updatedAt'] = updatedAt;
     if (productReviews != null) {

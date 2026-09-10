@@ -10,6 +10,8 @@ import 'package:shopflow/core/widgets/common_divider.dart';
 import 'package:shopflow/core/widgets/common_expansion_tile.dart';
 import 'package:shopflow/core/widgets/numeric_stepper_button.dart';
 import 'package:shopflow/core/widgets/product_rating_stars.dart';
+import 'package:shopflow/features/shop/constants/shop_constants.dart';
+import 'package:shopflow/features/shop/models/cart_item_model.dart';
 import 'package:shopflow/features/shop/models/product_model.dart';
 import 'package:shopflow/features/shop/widgets/rating_section.dart';
 
@@ -26,7 +28,6 @@ class ProductDetailScreen extends StatefulWidget {
 
 class _ProductDetailScreenState extends State<ProductDetailScreen> {
   int _currentImageIndex = 0;
-  int _quantity = 1;
   int reviewListDefaultLength = 2;
   int? totalReviews;
   bool isReviewListExpanded = false;
@@ -51,6 +52,18 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         ++_quantity;
       });
     }
+  }
+
+  void addToCart(ProductModel chosenProduct) {
+    setState(() {
+      int existingIndex = ShopConstants.cartItems.indexWhere((item) => item.id == chosenProduct.id);
+
+      if (existingIndex != -1) {
+        ShopConstants.cartItems[existingIndex].productQuantity = ShopConstants.cartItems[existingIndex].productQuantity! + 1;
+      } else {
+        ShopConstants.cartItems.add(chosenProduct);
+      }
+    });
   }
 
   final List<String> imgList = [
@@ -379,9 +392,21 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     style: AppTextStyles.headingMedium,
                   ),
                   NumericStepperButton(
-                    onDecrement: _handleDecrement,
-                    onIncrement: _handleIncrement,
-                    value: _quantity,
+                    onDecrement: () {
+                      if (selectedProduct.productQuantity! > 1) {
+                        setState(() {
+                          selectedProduct.productQuantity = selectedProduct.productQuantity! -1;
+                        });
+                      }
+                    },
+                    onIncrement: () {
+                      if (selectedProduct.productQuantity! < 10) {
+                        setState(() {
+                          selectedProduct.productQuantity = selectedProduct.productQuantity!  + 1;
+                        });
+                      }
+                    },
+                    value: selectedProduct.productQuantity ?? 0,
                   ),
                 ],
               ),
@@ -440,7 +465,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                             padding: EdgeInsets.zero,
                             itemCount: isReviewListExpanded
                                 ? (totalReviews ?? 0)
-                                : min(reviewListDefaultLength, (totalReviews ?? 0)),
+                                : min(
+                                    reviewListDefaultLength,
+                                    (totalReviews ?? 0),
+                                  ),
                             shrinkWrap: true,
                             physics: NeverScrollableScrollPhysics(),
                             separatorBuilder: (context, index) =>
@@ -544,7 +572,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               Expanded(
                 child: CommonButton(
                   label: AppStrings.addToCartText,
-                  onPressed: () {},
+                  onPressed: () {
+                    addToCart(selectedProduct);
+                  },
                   borderRadius: 22,
                   leadingIcon: const Icon(
                     Icons.shopping_cart_outlined,

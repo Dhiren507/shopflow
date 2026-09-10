@@ -4,7 +4,9 @@ import 'package:shopflow/core/constants/app_strings.dart';
 import 'package:shopflow/core/constants/app_text_styles.dart';
 import 'package:shopflow/core/widgets/common_button.dart';
 import 'package:shopflow/core/widgets/common_divider.dart';
-import 'package:shopflow/core/widgets/numeric_stepper_button.dart';
+import 'package:shopflow/features/shop/constants/shop_constants.dart';
+import 'package:shopflow/features/shop/models/product_model.dart';
+import 'package:shopflow/features/shop/widgets/cart_item_card.dart';
 import 'package:shopflow/features/shop/widgets/empty_cart_placeholder.dart';
 
 class CartScreen extends StatefulWidget {
@@ -15,76 +17,40 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
-  bool isCartEmpty = false;
+  bool isCartEmpty = ShopConstants.cartItems.isEmpty;
 
-  int itemValue = 1;
+  double totalOriginalPrice = 0.0;
+  double totalDiscountAmount = 0.0;
+  double finalPayoutAmount = 0.0;
 
-  List<Map<String, dynamic>> cartItems = [
-    {
-      'id': '1',
-      'title': 'Aura Studio Wireless Speaker System with Premium Sound',
-      'color': 'Midnight Blue',
-      'price': 299.00,
-      'imageUrl': 'https://unsplash.com',
-      'quantity': 1,
-    },
-    {
-      'id': '2',
-      'title': 'SoundLink Comfort Noise Cancelling Headphones',
-      'color': 'Matte Black',
-      'price': 349.50,
-      'imageUrl': 'https://unsplash.com',
-      'quantity': 2,
-    },
-    {
-      'id': '3',
-      'title': 'Minimalist Mechanical Keyboard 75%',
-      'color': 'Chalk White / Anodized Aluminum Base Frame',
-      'price': 159.00,
-      'imageUrl': 'https://unsplash.com',
-      'quantity': 1,
-    },
-    {
-      'id': '4',
-      'title': 'Ergonomic Wireless Mouse',
-      'color': 'Space Gray',
-      'price': 99.99,
-      'imageUrl': 'https://unsplash.com',
-      'quantity': 1,
-    },
-    {
-      'id': '5',
-      'title': 'Aura Studio Wireless Speaker System with Premium Sound',
-      'color': 'Midnight Blue',
-      'price': 299.00,
-      'imageUrl': 'https://unsplash.com',
-      'quantity': 1,
-    },
-    {
-      'id': '6',
-      'title': 'SoundLink Comfort Noise Cancelling Headphones',
-      'color': 'Matte Black',
-      'price': 349.50,
-      'imageUrl': 'https://unsplash.com',
-      'quantity': 2,
-    },
-    {
-      'id': '7',
-      'title': 'Minimalist Mechanical Keyboard 75%',
-      'color': 'Chalk White / Anodized Aluminum Base Frame',
-      'price': 159.00,
-      'imageUrl': 'https://unsplash.com',
-      'quantity': 1,
-    },
-    {
-      'id': '8',
-      'title': 'Ergonomic Wireless Mouse',
-      'color': 'Space Gray',
-      'price': 99.99,
-      'imageUrl': 'https://unsplash.com',
-      'quantity': 1,
-    },
-  ];
+  void calculateTotals() {
+    double tempOriginal = 0.0;
+    double tempDiscount = 0.0;
+
+    for (var item in ShopConstants.cartItems) {
+      final num price = item.price ?? 0.0;
+      final num discountPercent = item.discount ?? 0.0;
+      final int qty = item.productQuantity ?? 1;
+
+      tempOriginal += price * qty;
+
+      double discountPerUnit = price * (discountPercent / 100);
+      tempDiscount += discountPerUnit * qty;
+    }
+
+    totalOriginalPrice = tempOriginal;
+    totalDiscountAmount = tempDiscount;
+
+    finalPayoutAmount = totalOriginalPrice - totalDiscountAmount;
+    if (finalPayoutAmount < 0) finalPayoutAmount = 0.0;
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    calculateTotals();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -94,9 +60,9 @@ class _CartScreenState extends State<CartScreen> {
         crossAxisAlignment: .start,
         children: [
           Text(AppStrings.yourCartTitle, style: AppTextStyles.headingLarge),
-          Text('2 items', style: AppTextStyles.bodySmall),
+          Text('${ShopConstants.cartItems.length} items', style: AppTextStyles.bodySmall),
 
-          const SizedBox(height: 15,),
+          const SizedBox(height: 15),
 
           isCartEmpty
               ? Expanded(child: EmptyCartPlaceholder())
@@ -104,90 +70,53 @@ class _CartScreenState extends State<CartScreen> {
                   child: ListView.separated(
                     separatorBuilder: (context, index) =>
                         const SizedBox(height: 5),
-                    itemCount: cartItems.length,
+                    itemCount: ShopConstants.cartItems.length,
 
                     itemBuilder: (context, index) {
-                      final item = cartItems[index];
+                      final ProductModel item = ShopConstants.cartItems[index];
 
-                      return Card(
-                        color: AppColors.white,
-                        child: Padding(
-                          padding: const EdgeInsets.all(16),
-                          child: Row(
-                            children: [
-                              Container(
-                                height: 80,
-                                width: 80,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadiusGeometry.circular(
-                                    8,
-                                  ),
-                                  child: Image.network(
-                                    'https://www.imageurlgenerator.com/_next/image?url=%2Fassets%2Ffree_tool.png&w=3840&q=75',
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(width: 10),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: .start,
-                                  mainAxisSize: .min,
-                                  spacing: 6,
-                                  children: [
-                                    Text(
-                                      item['title'],
-                                      style: AppTextStyles.headingSmall,
-                                      overflow: .ellipsis,
-                                    ),
-
-                                      Text(
-                                        item['color'],
-                                        style: AppTextStyles.bodySmall,
-                                        maxLines: 2,
-                                        overflow: .ellipsis,
-
-                                    ),
-                                    Text(
-                                      '\$299.00',
-                                      style: AppTextStyles.headingMedium
-                                          .copyWith(color: AppColors.primary),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              const SizedBox(width: 10),
-                              Column(
-                                crossAxisAlignment: .end,
-                                mainAxisAlignment: .spaceBetween,
-                                spacing: 10,
-                                children: [
-                                  IconButton(
-                                    onPressed: () {
-                                      setState(() {
-                                        cartItems.removeAt(index);
-                                      });
-                                    },
-                                    icon: Icon(Icons.close),
-                                  ),
-                                  NumericStepperButton(
-                                    onDecrement: () {},
-                                    onIncrement: () {},
-                                    value: item['quantity'],
-                                    isSmall: true,
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
+                      return CartItemCard(
+                        productTitle: item.title ?? '',
+                        productColor: item.category?.name ?? '',
+                        productPrice: item.price ?? 0,
+                        productImagePath: item.images?.first ?? '',
+                        productQuantity: item.productQuantity ?? 1,
+                        productDiscount: item.discount ?? 0,
+                        onDecrement: () {
+                          if (item.productQuantity! > 1) {
+                            setState(() {
+                              item.productQuantity = item.productQuantity! - 1;
+                              calculateTotals();
+                            });
+                          }
+                        },
+                        onIncrement: () {
+                          if (item.productQuantity! < 10) {
+                            setState(() {
+                              item.productQuantity = item.productQuantity! + 1;
+                              calculateTotals();
+                            });
+                          }
+                        },
+                        onClose: () {
+                          if(index > 0) {
+                            setState(() {
+                              ShopConstants.cartItems.removeAt(index);
+                              calculateTotals();
+                            });
+                          } else {
+                            setState(() {
+                              ShopConstants.cartItems.removeAt(index);
+                              calculateTotals();
+                              isCartEmpty = true;
+                            });
+                          }
+                        },
                       );
                     },
                   ),
                 ),
-          const SizedBox(height: 10,),
+          const SizedBox(height: 10),
           !isCartEmpty
               ? CommonButton(
                   label: 'Proceed To Checkout',
@@ -221,7 +150,7 @@ class _CartScreenState extends State<CartScreen> {
                                     style: AppTextStyles.bodySmall,
                                   ),
                                   Text(
-                                    '\$828.00',
+                                    '\$$totalOriginalPrice',
                                     style: AppTextStyles.headingMedium,
                                   ),
                                 ],
@@ -234,7 +163,7 @@ class _CartScreenState extends State<CartScreen> {
                                     style: AppTextStyles.bodySmall,
                                   ),
                                   Text(
-                                    '-\$28.00',
+                                    '-\$$totalDiscountAmount',
                                     style: AppTextStyles.headingMedium.copyWith(
                                       color: AppColors.errorLabel,
                                     ),
@@ -263,7 +192,7 @@ class _CartScreenState extends State<CartScreen> {
                                     style: AppTextStyles.headingMedium,
                                   ),
                                   Text(
-                                    '\$828.00',
+                                    '\$$finalPayoutAmount',
                                     style: AppTextStyles.headingLarge.copyWith(
                                       color: AppColors.primary,
                                     ),

@@ -34,12 +34,12 @@ class NumericStepperButton extends StatelessWidget {
             iconSize: isSmall ? 16 : 24,
             constraints: isSmall ? const BoxConstraints() : null,
             padding: isSmall
-                ? const EdgeInsets.all(4)
+                ? const EdgeInsets.all(0)
                 : const EdgeInsets.all(8),
             icon: const Icon(Icons.remove),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: isSmall ? 2.0 : 12.0),
+            padding: EdgeInsets.symmetric(horizontal: isSmall ? 1.0 : 12.0),
             child: Text(
               '$value',
               style: isSmall
@@ -54,7 +54,7 @@ class NumericStepperButton extends StatelessWidget {
             iconSize: isSmall ? 16 : 24,
             constraints: isSmall ? const BoxConstraints() : null,
             padding: isSmall
-                ? const EdgeInsets.all(4)
+                ? const EdgeInsets.all(0)
                 : const EdgeInsets.all(8),
             icon: const Icon(Icons.add),
           ),

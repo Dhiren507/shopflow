@@ -1,3 +1,4 @@
+import 'package:shopflow/features/shop/models/cart_item_model.dart';
 import 'package:shopflow/features/shop/models/product_model.dart';
 
 class ShopConstants {
@@ -145,7 +146,8 @@ class ShopConstants {
       discount: 10,
       description: "Water-resistant commuter backpack with a dedicated 16-inch laptop sleeve and hidden anti-theft pockets.",
       isLiked: true,
-      productStock: 0, // Out of stock
+      productStock: 0,
+      // Out of stock
       creationAt: "2026-01-05T09:00:00Z",
       updatedAt: "2026-03-04T12:00:00Z",
       category: Category(
@@ -175,7 +177,8 @@ class ShopConstants {
       brandName: "SitWell",
       slug: "ergonomic-mesh-office-chair",
       price: 450,
-      discount: 50, // Heavy discount
+      discount: 50,
+      // Heavy discount
       description: "Fully adjustable 3D armrest chair with dynamic lumbar support and breathable mesh framework.",
       isLiked: false,
       productStock: 8,
@@ -212,6 +215,125 @@ class ShopConstants {
           userImage: "https://unsplash.com",
           creationAt: "2026-02-15T14:00:00Z",
           updatedAt: "2026-02-15T14:00:00Z",
+        ),
+      ],
+    ),
+  ];
+
+  static final List<ProductModel> cartItems = [
+    ProductModel(
+      id: 101,
+      title: "Pro Sound Wireless Headphones",
+      brandName: "AudioPro",
+      slug: "pro-sound-wireless-headphones",
+      price: 299,
+      discount: 15,
+      description: "<p>Experience the next generation of <strong>wearable technology</strong>.</p><p>The Aura Horizon features a stunning edge-to-edge AMOLED display, advanced health tracking sensors, and a premium titanium casing designed for both durability and elegance.</p><ul><li>Always-on Retina display with 2000 nits peak brightness.</li><li>Advanced ECG and blood oxygen monitoring.</li><li>Up to 36 hours of battery life on a single charge.</li><li>Water-resistant up to 50 meters.</li></ul>",
+      isLiked: true,
+      productStock: 45,
+      creationAt: "2026-02-20T14:22:00Z",
+      updatedAt: "2026-03-05T16:45:00Z",
+      category: Category(
+        id: 12,
+        name: "Electronics",
+        slug: "electronics",
+        image: "https://unsplash.com",
+        creationAt: "2026-01-15T08:00:00Z",
+        updatedAt: "2026-03-01T10:30:00Z",
+      ),
+      images: ["https://unsplash.com", "https://unsplash.com"],
+      ratings: ProductRating(
+        avgRating: 4.5,
+        totalReviews: 2,
+        fiveStarReviewCount: 1,
+        fourStarReviewCount: 1,
+        threeStarReviewCount: 0,
+        twoStarReviewCount: 0,
+        oneStarReviewCount: 0,
+      ),
+      productReviews: [
+        CustomerReview(
+          id: 1,
+          username: "Alex_Dev",
+          reviewText:
+          "Amazing bass response and very comfortable for long hours.",
+          rating: 5.0,
+          userImage: "https://unsplash.com",
+          creationAt: "2026-03-01T11:00:00Z",
+          updatedAt: "2026-03-01T11:00:00Z",
+        ),
+        CustomerReview(
+          id: 2,
+          username: "Sarah_M",
+          reviewText: "Good noise cancellation, but the case is a bit bulky.",
+          rating: 4.0,
+          userImage: "https://unsplash.com",
+          creationAt: "2026-03-03T09:15:00Z",
+          updatedAt: "2026-03-03T09:15:00Z",
+        ),
+        CustomerReview(
+          id: 3,
+          username: "Test User 3",
+          reviewText:
+          "Amazing bass response and very comfortable for long hours.",
+          rating: 3.0,
+          userImage: "https://www.imageurlgenerator.com/_next/image?url=%2Fassets%2Ffree_tool.png&w=3840&q=75",
+          creationAt: "2026-03-01T11:00:00Z",
+          updatedAt: "2026-03-01T11:00:00Z",
+        ),
+        CustomerReview(
+          id: 3,
+          username: "Test User 4",
+          reviewText:
+          "Amazing bass response and very comfortable for long hours.",
+          rating: 2.5,
+          userImage: "https://www.imageurlgenerator.com/_next/image?url=%2Fassets%2Ffree_tool.png&w=3840&q=75",
+          creationAt: "2026-03-01T11:00:00Z",
+          updatedAt: "2026-03-01T11:00:00Z",
+        ),
+      ],
+    ),
+
+    ProductModel(
+      id: 102,
+      title: "Ergonomic Mechanical Keyboard",
+      brandName: "KeyCraft",
+      slug: "ergonomic-mechanical-keyboard",
+      price: 149,
+      discount: 0,
+      description: "Hot-swappable mechanical keyboard featuring tactile brown switches and vibrant RGB backlighting.",
+      isLiked: false,
+      productStock: 12,
+      creationAt: "2026-02-22T11:10:00Z",
+      updatedAt: "2026-02-22T11:10:00Z",
+      category: Category(
+        id: 12,
+        name: "Electronics",
+        slug: "electronics",
+        image: "https://unsplash.com",
+        creationAt: "2026-01-15T08:00:00Z",
+        updatedAt: "2026-03-01T10:30:00Z",
+      ),
+      images: ["https://unsplash.com"],
+      ratings: ProductRating(
+        avgRating: 5.0,
+        totalReviews: 1,
+        fiveStarReviewCount: 1,
+        fourStarReviewCount: 0,
+        threeStarReviewCount: 0,
+        twoStarReviewCount: 0,
+        oneStarReviewCount: 0,
+      ),
+      productReviews: [
+        CustomerReview(
+          id: 3,
+          username: "TypingPro",
+          reviewText:
+          "Absolute dream to type on. Keystrokes are perfectly smooth!",
+          rating: 5.0,
+          userImage: "https://unsplash.com",
+          creationAt: "2026-02-28T18:20:00Z",
+          updatedAt: "2026-02-28T18:20:00Z",
         ),
       ],
     ),

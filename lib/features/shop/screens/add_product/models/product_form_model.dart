@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shopflow/core/constants/app_strings.dart';
 
 class ProductFormModel {
   final titleController = TextEditingController();
@@ -8,7 +9,7 @@ class ProductFormModel {
 
 
   List<String> selectedImagePaths = [];
-  String? selectedCategory = 'Beauty';
+  String? selectedCategory = AppStrings.selectCategoryHint;
   num calculatedFinalPrice = 0;
   int stock = 1;
 

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dashed_border/dashed_border.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shopflow/core/constants/app_colors.dart';
 import 'package:shopflow/core/constants/app_images.dart';
@@ -30,6 +31,17 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
   void dispose() {
     _currentForm.dispose();
     super.dispose();
+  }
+
+  void calculateFinalPrice() {
+    final num originalPrice = num.tryParse(_currentForm.originalPriceController.text) ?? 0;
+    final int discount = int.tryParse(_currentForm.discountController.text) ?? 0;
+
+    final finalPrice = originalPrice * (1 - (discount / 100));
+
+    setState(() {
+      _currentForm.calculatedFinalPrice = finalPrice;
+    });
   }
 
   @override
@@ -163,7 +175,6 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
 
             Form(
               key: _formKey,
-              autovalidateMode: AutovalidateMode.onUserInteraction,
               child: Column(
                 crossAxisAlignment: .start,
                 children: [
@@ -207,6 +218,12 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
                         child: CommonInputField(
                           labelText: AppStrings.originalPriceLabel,
                           controller: _currentForm.originalPriceController,
+                          keyboardType: .number,
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly,
+                            LengthLimitingTextInputFormatter(3)
+                          ],
+                          onChanged: (_) => calculateFinalPrice(),
                           leadingIcon: Icon(
                             Icons.attach_money,
                             size: 18,
@@ -221,6 +238,13 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
                       Expanded(
                         child: CommonInputField(
                           labelText: AppStrings.discountLabel,
+                          controller: _currentForm.discountController,
+                          keyboardType: .number,
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly,
+                            LengthLimitingTextInputFormatter(3)
+                          ],
+                          onChanged: (_) => calculateFinalPrice(),
                           suffixIcon: Icon(
                             Icons.percent_rounded,
                             size: 18,
@@ -234,7 +258,6 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
                   const SizedBox(height: 15),
 
                   Container(
-                    width: 200,
                     decoration: BoxDecoration(
                       color: AppColors.primary.withValues(alpha: 0.4),
                       border: Border.all(color: AppColors.primary),
@@ -246,6 +269,7 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
                         vertical: 8,
                       ),
                       child: Row(
+                        mainAxisSize: .min,
                         children: [
                           Icon(
                             Icons.local_offer_outlined,
@@ -254,7 +278,7 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
                           ),
                           const SizedBox(width: 10),
                           Text(
-                            "Final Price : \$ ${_currentForm.calculatedFinalPrice}",
+                            "Final Price : \$${_currentForm.calculatedFinalPrice}",
                             style: AppTextStyles.headingSmall.copyWith(
                               color: AppColors.primary,
                             ),
@@ -273,7 +297,7 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
                       initialValue:
                           _currentForm.selectedCategory ??
                           AppStrings.selectCategoryHint,
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      autovalidateMode: AutovalidateMode.onUnfocus,
                       decoration: InputDecoration(
                         filled: true,
                         fillColor: AppColors.bgCard,

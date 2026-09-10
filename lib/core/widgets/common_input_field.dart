@@ -19,6 +19,7 @@ class CommonInputField extends StatelessWidget {
   final VoidCallback? onTap;
   final AutovalidateMode? autovalidateMode;
   final bool? isPasswordField;
+  final ValueChanged? onChanged;
 
   const CommonInputField({
     super.key,
@@ -37,6 +38,7 @@ class CommonInputField extends StatelessWidget {
     this.leadingIcon,
     this.isPasswordField,
     this.suffixIcon,
+    this.onChanged,
   });
 
   @override
@@ -58,9 +60,7 @@ class CommonInputField extends StatelessWidget {
         ),
         const SizedBox(height: 5),
         TextFormField(
-          onTapOutside: (event) {
-            FocusScope.of(context).unfocus();
-          },
+          onChanged: onChanged,
           obscureText: isPasswordField ?? false,
           controller: controller,
           validator: validator,
