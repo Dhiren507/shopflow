@@ -6,146 +6,12 @@ import 'package:shopflow/core/constants/app_images.dart';
 import 'package:shopflow/core/constants/app_strings.dart';
 import 'package:shopflow/core/constants/app_text_styles.dart';
 import 'package:shopflow/core/widgets/common_app_bar.dart';
+import 'package:shopflow/features/seller/constants/seller_constants.dart';
 import 'package:shopflow/features/seller/widgets/stat_card.dart';
 import 'package:shopflow/features/seller/widgets/stock_level_progress_indicator.dart';
 
 class SellerDashboardScreen extends StatelessWidget {
-  SellerDashboardScreen({super.key});
-
-  final List<Map<String, dynamic>> statCardData = [
-    {
-      'leadingIconPath': AppImages.productCartIcon,
-      'leadingIconBgColor': AppColors.primaryLight.withValues(alpha: 0.2),
-      'suffixIconPath': AppImages.progressUpIcon,
-      'suffixIconBgColor': AppColors.errorBg.withValues(alpha: 0.5),
-      'mainTitle': AppStrings.totalProductsText,
-      'value': 1245,
-      'progressValue': 12,
-      'isRatingCard': false,
-    },
-    {
-      'leadingIconPath': AppImages.stockBarIcon,
-      'leadingIconBgColor': AppColors.statIconRedBgColor.withValues(alpha: 0.2),
-      'suffixIconPath': AppImages.nextArrowIcon,
-      'suffixIconBgColor': AppColors.divider,
-      'mainTitle': AppStrings.totalStockText,
-      'value': 8342,
-      'progressValue': 0,
-      'isRatingCard': false,
-    },
-    {
-      'leadingIconPath': AppImages.ratingStarIcon,
-      'leadingIconBgColor': AppColors.primaryLight.withValues(alpha: 0.2),
-      'suffixIconPath': AppImages.progressUpIcon,
-      'suffixIconBgColor': AppColors.errorBg.withValues(alpha: 0.5),
-      'mainTitle': AppStrings.averageRatingText,
-      'value': 4.8,
-      'progressValue': 0.2,
-      'isRatingCard': true,
-    },
-  ];
-
-  final List<Map<String, dynamic>> productList = [
-    {
-      "id": "p1",
-      "name": "ProX Smartphone 5G",
-      "imageUrl": "assets/images/prox_smartphone.png",
-      "rating": 4.9,
-      "reviewCount": 120,
-      "price": 899.00,
-      "stockCount": 140,
-    },
-    {
-      "id": "p2",
-      "name": "AlphaTab Ultra 11",
-      "imageUrl": "assets/images/alphatab_ultra.png",
-      "rating": 4.7,
-      "reviewCount": 85,
-      "price": 649.99,
-      "stockCount": 45,
-    },
-    {
-      "id": "p3",
-      "name": "WaveSound ANC Headphones",
-      "imageUrl": "assets/images/wavesound_headphones.png",
-      "rating": 4.8,
-      "reviewCount": 312,
-      "price": 249.00,
-      "stockCount": 89,
-    },
-    {
-      "id": "p4",
-      "name": "Quantum Watch Series 4",
-      "imageUrl": "assets/images/quantum_watch.png",
-      "rating": 4.6,
-      "reviewCount": 94,
-      "price": 349.50,
-      "stockCount": 12,
-    },
-    {
-      "id": "p5",
-      "name": "Apex Charge Pad Wireless",
-      "imageUrl": "assets/images/apex_charge.png",
-      "rating": 4.4,
-      "reviewCount": 56,
-      "price": 45.00,
-      "stockCount": 210,
-    },
-  ];
-
-  final List<Map<String, dynamic>> stockData = [
-    {
-      'label': 'Smartphones',
-      'value': 2600,
-      'totalStock': 3200,
-      'barColor': AppColors.primary,
-    },
-    {
-      'label': 'Laptops',
-      'value': 1800,
-      'totalStock': 3200,
-      'barColor': AppColors.primaryLight,
-    },
-    {
-      'label': 'Accessories',
-      'value': 2200,
-      'totalStock': 3000,
-      'barColor': AppColors.textSecondary,
-    },
-    {
-      'label': 'Audio Devices',
-      'value': 150,
-      'totalStock': 1200,
-      'barColor': null,
-    },
-  ];
-
-  final List<Map<String, dynamic>> pieChartData = [
-    {
-      "id": "c1",
-      "categoryName": "Electronics",
-      "valuePercentage": 45,
-      "color": AppColors.primary,
-    },
-    {
-      "id": "c2",
-      "categoryName": "Clothing",
-      "valuePercentage": 30,
-      "color": AppColors.saleBadge,
-    },
-    {
-      "id": "c2",
-      "categoryName": "Home Goods",
-      "valuePercentage": 10,
-      "color": AppColors.brownColor,
-    },
-    {
-      "id": "c2",
-      "categoryName": "Other",
-      "valuePercentage": 15,
-      "color": AppColors.divider,
-    },
-  ];
+  const SellerDashboardScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -178,8 +44,8 @@ class SellerDashboardScreen extends StatelessWidget {
 
             const SizedBox(height: 25),
 
-            ...List.generate(statCardData.length, (index) {
-              final cardData = statCardData[index];
+            ...List.generate(SellerConstants.statCardData.length, (index) {
+              final cardData = SellerConstants.statCardData[index];
               return StatCard(
                 leadingIconPath: cardData['leadingIconPath'],
                 leadingIconBgColor: cardData['leadingIconBgColor'],
@@ -218,16 +84,20 @@ class SellerDashboardScreen extends StatelessWidget {
                               sectionsSpace: 0,
                               centerSpaceRadius: 40,
                               sections: [
-                                ...List.generate(pieChartData.length, (index) {
-                                  final item = pieChartData[index];
-                                  return PieChartSectionData(
-                                    color: item['color'],
-                                    value: double.parse(
-                                      item['valuePercentage'].toString(),
-                                    ),
-                                    showTitle: false,
-                                  );
-                                }),
+                                ...List.generate(
+                                  SellerConstants.pieChartData.length,
+                                  (index) {
+                                    final item =
+                                        SellerConstants.pieChartData[index];
+                                    return PieChartSectionData(
+                                      color: item['color'],
+                                      value: double.parse(
+                                        item['valuePercentage'].toString(),
+                                      ),
+                                      showTitle: false,
+                                    );
+                                  },
+                                ),
                               ],
                             ),
                           ),
@@ -236,31 +106,34 @@ class SellerDashboardScreen extends StatelessWidget {
 
                       Column(
                         spacing: 15,
-                        children: List.generate(pieChartData.length, (index) {
-                          final item = pieChartData[index];
-                          return Row(
-                            children: [
-                              Container(
-                                height: 12,
-                                width: 12,
-                                decoration: BoxDecoration(
-                                  color: item['color'],
-                                  shape: BoxShape.circle,
+                        children: List.generate(
+                          SellerConstants.pieChartData.length,
+                          (index) {
+                            final item = SellerConstants.pieChartData[index];
+                            return Row(
+                              children: [
+                                Container(
+                                  height: 12,
+                                  width: 12,
+                                  decoration: BoxDecoration(
+                                    color: item['color'],
+                                    shape: BoxShape.circle,
+                                  ),
                                 ),
-                              ),
-                              const SizedBox(width: 10),
-                              Text(
-                                item["categoryName"],
-                                style: AppTextStyles.bodySmall,
-                              ),
-                              const Spacer(),
-                              Text(
-                                '${item["valuePercentage"]}%',
-                                style: AppTextStyles.headingSmall,
-                              ),
-                            ],
-                          );
-                        }),
+                                const SizedBox(width: 10),
+                                Text(
+                                  item["categoryName"],
+                                  style: AppTextStyles.bodySmall,
+                                ),
+                                const Spacer(),
+                                Text(
+                                  '${item["valuePercentage"]}%',
+                                  style: AppTextStyles.headingSmall,
+                                ),
+                              ],
+                            );
+                          },
+                        ),
                       ),
                     ],
                   ),
@@ -296,22 +169,25 @@ class SellerDashboardScreen extends StatelessWidget {
 
                     Column(
                       spacing: 15,
-                      children: List.generate(stockData.length, (index) {
-                        final item = stockData[index];
+                      children: List.generate(
+                        SellerConstants.stockData.length,
+                        (index) {
+                          final item = SellerConstants.stockData[index];
 
-                        return StockLevelProgressIndicator(
-                          label: item['label'].toString(),
-                          value:
-                              int.tryParse(item['value']?.toString() ?? '') ??
-                              0,
-                          totalStock:
-                              int.tryParse(
-                                item['totalStock']?.toString() ?? '',
-                              ) ??
-                              0,
-                          barColor: item['color'],
-                        );
-                      }),
+                          return StockLevelProgressIndicator(
+                            label: item['label'].toString(),
+                            value:
+                                int.tryParse(item['value']?.toString() ?? '') ??
+                                0,
+                            totalStock:
+                                int.tryParse(
+                                  item['totalStock']?.toString() ?? '',
+                                ) ??
+                                0,
+                            barColor: item['color'],
+                          );
+                        },
+                      ),
                     ),
                   ],
                 ),
@@ -344,7 +220,7 @@ class SellerDashboardScreen extends StatelessWidget {
                   child: ListView.separated(
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) {
-                      final product = productList[index];
+                      final product = SellerConstants.productList[index];
                       return SizedBox(
                         width: 320,
                         child: Card(
@@ -440,7 +316,7 @@ class SellerDashboardScreen extends StatelessWidget {
                     separatorBuilder: (context, index) {
                       return const SizedBox(width: 15);
                     },
-                    itemCount: productList.length,
+                    itemCount: SellerConstants.productList.length,
                   ),
                 ),
               ],
