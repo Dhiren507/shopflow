@@ -49,7 +49,7 @@ class CartItemCard extends StatelessWidget {
             Expanded(
               child: Column(
                 crossAxisAlignment: .start,
-                mainAxisSize: .min,
+                  mainAxisSize: .min,
                 spacing: 6,
                 children: [
                   Text(
@@ -59,6 +59,7 @@ class CartItemCard extends StatelessWidget {
                   ),
 
                   Text(
+
                     productColor,
                     style: AppTextStyles.bodySmall,
                     maxLines: 2,

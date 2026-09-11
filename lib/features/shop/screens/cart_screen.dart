@@ -19,35 +19,32 @@ class CartScreen extends StatefulWidget {
 class _CartScreenState extends State<CartScreen> {
   bool isCartEmpty = ShopConstants.cartItems.isEmpty;
 
-  double totalOriginalPrice = 0.0;
-  double totalDiscountAmount = 0.0;
-  double finalPayoutAmount = 0.0;
 
-  void calculateTotals() {
-    double tempOriginal = 0.0;
-    double tempDiscount = 0.0;
+  Map<String, num> calculateTotals(List<ProductModel> cartItems) {
+    double totalOriginalPrice = 0.0;
+    double totalDiscountAmount = 0.0;
 
-    for (var item in ShopConstants.cartItems) {
-      final num price = item.price ?? 0.0;
-      final num discountPercent = item.discount ?? 0.0;
-      final int qty = item.productQuantity ?? 1;
+    for (final item in cartItems) {
+      final price = item.price ?? 0.0;
+      final discountPercent = item.discount ?? 0.0;
+      final qty = item.productQuantity ?? 1;
 
-      tempOriginal += price * qty;
-
-      double discountPerUnit = price * (discountPercent / 100);
-      tempDiscount += discountPerUnit * qty;
+      totalOriginalPrice += price * qty;
+      totalDiscountAmount += price * (discountPercent / 100) * qty;
     }
 
-    totalOriginalPrice = tempOriginal;
-    totalDiscountAmount = tempDiscount;
+    final finalPayoutAmount = (totalOriginalPrice - totalDiscountAmount);
 
-    finalPayoutAmount = totalOriginalPrice - totalDiscountAmount;
-    if (finalPayoutAmount < 0) finalPayoutAmount = 0.0;
+    return {
+      "totalCartAmount": totalOriginalPrice,
+      "totalCartDiscount": totalDiscountAmount,
+      "payableAmount": finalPayoutAmount,
+    };
   }
+
 
   @override
   Widget build(BuildContext context) {
-    calculateTotals();
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
       child: Column(
@@ -80,7 +77,6 @@ class _CartScreenState extends State<CartScreen> {
                           if (item.productQuantity! > 1) {
                             setState(() {
                               item.productQuantity = item.productQuantity! - 1;
-                              // calculateTotals();
                             });
                           }
                         },
@@ -88,7 +84,6 @@ class _CartScreenState extends State<CartScreen> {
                           if (item.productQuantity! < 10) {
                             setState(() {
                               item.productQuantity = item.productQuantity! + 1;
-                             // calculateTotals();
                             });
                           }
                         },
@@ -96,12 +91,10 @@ class _CartScreenState extends State<CartScreen> {
                           if(index > 0) {
                             setState(() {
                               ShopConstants.cartItems.removeAt(index);
-                              // calculateTotals();
                             });
                           } else {
                             setState(() {
                               ShopConstants.cartItems.removeAt(index);
-                              calculateTotals();
                               isCartEmpty = true;
                             });
                           }
@@ -115,6 +108,7 @@ class _CartScreenState extends State<CartScreen> {
               ? CommonButton(
                   label: 'Proceed To Checkout',
                   onPressed: () {
+                    Map<String, num> totals = calculateTotals(ShopConstants.cartItems);
                     showModalBottomSheet(
                       context: context,
                       showDragHandle: false,
@@ -144,7 +138,7 @@ class _CartScreenState extends State<CartScreen> {
                                     style: AppTextStyles.bodySmall,
                                   ),
                                   Text(
-                                    '\$$totalOriginalPrice',
+                                    "\${$totals['totalCartAmount']}",
                                     style: AppTextStyles.headingMedium,
                                   ),
                                 ],
@@ -157,7 +151,7 @@ class _CartScreenState extends State<CartScreen> {
                                     style: AppTextStyles.bodySmall,
                                   ),
                                   Text(
-                                    '-\$$totalDiscountAmount',
+                                    "-\${$totals['totalCarDiscount']}",
                                     style: AppTextStyles.headingMedium.copyWith(
                                       color: AppColors.errorLabel,
                                     ),
@@ -186,7 +180,7 @@ class _CartScreenState extends State<CartScreen> {
                                     style: AppTextStyles.headingMedium,
                                   ),
                                   Text(
-                                    '\$$finalPayoutAmount',
+                                    "\${$totals['payableAmount']}",
                                     style: AppTextStyles.headingLarge.copyWith(
                                       color: AppColors.primary,
                                     ),
