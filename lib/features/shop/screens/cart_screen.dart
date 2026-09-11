@@ -138,7 +138,7 @@ class _CartScreenState extends State<CartScreen> {
                                     style: AppTextStyles.bodySmall,
                                   ),
                                   Text(
-                                    "\${$totals['totalCartAmount']}",
+                                    "\$${totals['totalCartAmount']}",
                                     style: AppTextStyles.headingMedium,
                                   ),
                                 ],
@@ -151,7 +151,7 @@ class _CartScreenState extends State<CartScreen> {
                                     style: AppTextStyles.bodySmall,
                                   ),
                                   Text(
-                                    "-\${$totals['totalCarDiscount']}",
+                                    "-\$${totals['totalCartDiscount']}",
                                     style: AppTextStyles.headingMedium.copyWith(
                                       color: AppColors.errorLabel,
                                     ),
@@ -180,7 +180,7 @@ class _CartScreenState extends State<CartScreen> {
                                     style: AppTextStyles.headingMedium,
                                   ),
                                   Text(
-                                    "\${$totals['payableAmount']}",
+                                    "\$${totals['payableAmount']}",
                                     style: AppTextStyles.headingLarge.copyWith(
                                       color: AppColors.primary,
                                     ),
