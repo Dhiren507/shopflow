@@ -91,7 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     mainAxisSpacing: 10,
                     itemBuilder: (context, index) {
                       var product = ShopConstants.mockProducts[index];
-                      final finalPrice = PriceCalculationUtils.calculateFinalPrice(
+                      final productAmounts = PriceCalculationUtils.calculateProductPrice(
                         product.price ?? 0.0,
                         product.discount ?? 0,
                       );
@@ -232,7 +232,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           WrapCrossAlignment.center,
                                       children: [
                                         Text(
-                                          '\$$finalPrice',
+                                          "\$${productAmounts['finalPrice']}",
                                           style: AppTextStyles.headingMedium,
                                         ),
                                         if ((product.discount ?? 0) > 0)

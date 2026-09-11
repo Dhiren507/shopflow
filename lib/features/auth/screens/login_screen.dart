@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 import 'package:shopflow/core/constants/app_colors.dart';
 import 'package:shopflow/core/constants/app_images.dart';
 import 'package:shopflow/core/constants/app_routes.dart';
 import 'package:shopflow/core/constants/app_strings.dart';
 import 'package:shopflow/core/constants/app_text_styles.dart';
+import 'package:shopflow/core/providers/auth_provider.dart';
+import 'package:shopflow/core/utils/validators.dart';
 import 'package:shopflow/core/widgets/common_button.dart';
 import 'package:shopflow/core/widgets/common_input_field.dart';
 
@@ -18,8 +21,13 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   bool _isPasswordVisible = true;
 
+  final _loginFormKey = GlobalKey<FormState>();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
+    final authProvider = context.watch<AuthProvider>();
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 20),
@@ -57,37 +65,52 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   const SizedBox(height: 20),
 
-                  CommonInputField(
-                    hasLabelPadding: true,
-                    labelText: AppStrings.usernameText,
-                    hintText: AppStrings.usernameHintText,
-                    leadingIcon: Icon(
-                      Icons.person_2_outlined,
-                      color: AppColors.border,
-                    ),
-                  ),
+                  Form(
+                    key: _loginFormKey,
+                    autovalidateMode: .onUnfocus,
+                    child: Column(
+                      children: [
+                        CommonInputField(
+                          hasLabelPadding: true,
+                          labelText: AppStrings.usernameText,
+                          hintText: AppStrings.usernameHintText,
+                          leadingIcon: Icon(
+                            Icons.person_2_outlined,
+                            color: AppColors.border,
+                          ),
+                          controller: _emailController,
+                          validator: Validators.validateEmail,
+                        ),
 
-                  const SizedBox(height: 20),
+                        const SizedBox(height: 20),
 
-                  CommonInputField(
-                    hasLabelPadding: true,
-                    isPasswordField: _isPasswordVisible,
-                    labelText: AppStrings.passwordText,
-                    hintText: AppStrings.passwordHintText,
-                    suffixIcon: IconButton(
-                      onPressed: () {
-                        setState(() {
-                          _isPasswordVisible = !_isPasswordVisible;
-                        });
-                      },
-                      icon: Icon(
-                        _isPasswordVisible
-                            ? Icons.visibility_off
-                            : Icons.visibility,
-                        color: AppColors.border,
-                      ),
+                        CommonInputField(
+                          controller: _passwordController,
+                          validator: Validators.validatePassword,
+                          hasLabelPadding: true,
+                          isPasswordField: _isPasswordVisible,
+                          labelText: AppStrings.passwordText,
+                          hintText: AppStrings.passwordHintText,
+                          suffixIcon: IconButton(
+                            onPressed: () {
+                              setState(() {
+                                _isPasswordVisible = !_isPasswordVisible;
+                              });
+                            },
+                            icon: Icon(
+                              _isPasswordVisible
+                                  ? Icons.visibility_off
+                                  : Icons.visibility,
+                              color: AppColors.border,
+                            ),
+                          ),
+                          leadingIcon: Icon(
+                            Icons.lock,
+                            color: AppColors.border,
+                          ),
+                        ),
+                      ],
                     ),
-                    leadingIcon: Icon(Icons.lock, color: AppColors.border),
                   ),
 
                   const SizedBox(height: 20),
@@ -114,21 +137,28 @@ class _LoginScreenState extends State<LoginScreen> {
 
                   CommonButton(
                     label: AppStrings.loginButtonText,
-                    onPressed: () {
-                      Navigator.pushReplacementNamed(
-                        context,
-                        AppRoutes.mainScreen,
+                    onPressed: () async {
+                      bool isSuccess = await context.read<AuthProvider>().login(
+                        _emailController.text.trim(),
+                        _passwordController.text.trim(),
                       );
+                      if (isSuccess) {
+                        Navigator.pushReplacementNamed(
+                          context,
+                          AppRoutes.mainScreen,
+                        );
+                      }
                     },
                     trailingIcon: const Icon(
                       Icons.arrow_forward,
                       color: AppColors.white,
                       size: 20,
                     ),
+                    isLoading: authProvider.isLoading,
                   ),
 
                   TextButton(
-                    onPressed: () {
+                    onPressed: () async {
                       Navigator.pushReplacementNamed(
                         context,
                         AppRoutes.mainScreen,

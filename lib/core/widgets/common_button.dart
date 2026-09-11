@@ -12,6 +12,7 @@ class CommonButton extends StatelessWidget {
   final Widget? trailingIcon;
   final double? elevation;
   final BorderSide? borderSide;
+  final bool isLoading;
 
   const CommonButton({
     super.key,
@@ -24,6 +25,7 @@ class CommonButton extends StatelessWidget {
     this.trailingIcon,
     this.elevation,
     this.borderSide,
+    this.isLoading = false,
   });
 
   @override
@@ -40,27 +42,36 @@ class CommonButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(borderRadius),
           ),
         ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 13),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              if (leadingIcon != null) ...[
-                leadingIcon!,
-                const SizedBox(width: 6),
-              ],
-              Text(
-                label,
-                style: AppTextStyles.headingSmall.copyWith(color: textColor),
+        child: isLoading == true
+            ? SizedBox(
+                child: FittedBox(
+                  fit: BoxFit.fitHeight,
+                  child: CircularProgressIndicator(color: AppColors.white),
+                ),
+              )
+            : Padding(
+                padding: const EdgeInsets.symmetric(vertical: 13),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    if (leadingIcon != null) ...[
+                      leadingIcon!,
+                      const SizedBox(width: 6),
+                    ],
+                    Text(
+                      label,
+                      style: AppTextStyles.headingSmall.copyWith(
+                        color: textColor,
+                      ),
+                    ),
+                    if (trailingIcon != null) ...[
+                      const SizedBox(width: 6),
+                      trailingIcon!,
+                    ],
+                  ],
+                ),
               ),
-              if (trailingIcon != null) ...[
-                const SizedBox(width: 6),
-                trailingIcon!,
-              ],
-            ],
-          ),
-        ),
       ),
     );
   }

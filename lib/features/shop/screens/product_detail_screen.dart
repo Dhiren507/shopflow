@@ -60,7 +60,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         ModalRoute.of(context)!.settings.arguments as ProductModel;
     totalReviews = selectedProduct.productReviews?.length ?? 0;
 
-    final productDiscountedPrice = PriceCalculationUtils.calculateFinalPrice(selectedProduct.price ?? 0.0, selectedProduct.discount ?? 0);
+    final productAmounts = PriceCalculationUtils.calculateProductPrice(selectedProduct.price ?? 0.0, selectedProduct.discount ?? 0);
 
     return Scaffold(
       backgroundColor: AppColors.bgScreen,
@@ -217,7 +217,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     spacing: 15,
                     children: [
                       Text(
-                        '\$$productDiscountedPrice',
+                        "\$${productAmounts['finalPrice']}",
                         style: AppTextStyles.headingLarge,
                       ),
                       Text('\$${selectedProduct.price}', style: AppTextStyles.strikethroughMedium),
@@ -231,7 +231,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           borderRadius: BorderRadiusGeometry.circular(16),
                         ),
                         child: Text(
-                          r"Save $50",
+                          "Save \$${productAmounts['finalPrice']}",
                           style: AppTextStyles.labelSmall.copyWith(
                             color: AppColors.primaryDim,
                           ),
