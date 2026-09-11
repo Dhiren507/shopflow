@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shopflow/core/constants/app_colors.dart';
 import 'package:shopflow/core/constants/app_strings.dart';
 import 'package:shopflow/core/constants/app_text_styles.dart';
+import 'package:shopflow/core/utils/price_calculation_utils.dart';
 import 'package:shopflow/core/widgets/common_button.dart';
 import 'package:shopflow/core/widgets/common_divider.dart';
 import 'package:shopflow/features/shop/constants/shop_constants.dart';
@@ -18,30 +19,6 @@ class CartScreen extends StatefulWidget {
 
 class _CartScreenState extends State<CartScreen> {
   bool isCartEmpty = ShopConstants.cartItems.isEmpty;
-
-
-  Map<String, num> calculateTotals(List<ProductModel> cartItems) {
-    double totalOriginalPrice = 0.0;
-    double totalDiscountAmount = 0.0;
-
-    for (final item in cartItems) {
-      final price = item.price ?? 0.0;
-      final discountPercent = item.discount ?? 0.0;
-      final qty = item.productQuantity ?? 1;
-
-      totalOriginalPrice += price * qty;
-      totalDiscountAmount += price * (discountPercent / 100) * qty;
-    }
-
-    final finalPayoutAmount = (totalOriginalPrice - totalDiscountAmount);
-
-    return {
-      "totalCartAmount": totalOriginalPrice,
-      "totalCartDiscount": totalDiscountAmount,
-      "payableAmount": finalPayoutAmount,
-    };
-  }
-
 
   @override
   Widget build(BuildContext context) {
@@ -108,7 +85,7 @@ class _CartScreenState extends State<CartScreen> {
               ? CommonButton(
                   label: 'Proceed To Checkout',
                   onPressed: () {
-                    Map<String, num> totals = calculateTotals(ShopConstants.cartItems);
+                    Map<String, num> totals = PriceCalculationUtils.calculateCartTotals(ShopConstants.cartItems);
                     showModalBottomSheet(
                       context: context,
                       showDragHandle: false,

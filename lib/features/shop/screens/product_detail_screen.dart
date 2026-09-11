@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:shopflow/core/constants/app_colors.dart';
 import 'package:shopflow/core/constants/app_strings.dart';
+import 'package:shopflow/core/utils/price_calculation_utils.dart';
 import 'package:shopflow/core/widgets/common_divider.dart';
 import 'package:shopflow/core/widgets/common_expansion_tile.dart';
 import 'package:shopflow/core/widgets/numeric_stepper_button.dart';
@@ -27,7 +28,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   int reviewListDefaultLength = 2;
   int? totalReviews;
   bool isReviewListExpanded = false;
-
 
   void addToCart(ProductModel chosenProduct) {
     setState(() {
@@ -59,6 +59,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     final ProductModel selectedProduct =
         ModalRoute.of(context)!.settings.arguments as ProductModel;
     totalReviews = selectedProduct.productReviews?.length ?? 0;
+
+    final productDiscountedPrice = PriceCalculationUtils.calculateFinalPrice(selectedProduct.price ?? 0.0, selectedProduct.discount ?? 0);
 
     return Scaffold(
       backgroundColor: AppColors.bgScreen,
@@ -215,10 +217,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     spacing: 15,
                     children: [
                       Text(
-                        '\$${selectedProduct.price}.00',
+                        '\$$productDiscountedPrice',
                         style: AppTextStyles.headingLarge,
                       ),
-                      Text('\$399.0', style: AppTextStyles.strikethroughMedium),
+                      Text('\$${selectedProduct.price}', style: AppTextStyles.strikethroughMedium),
                       Container(
                         padding: EdgeInsets.symmetric(
                           vertical: 2,

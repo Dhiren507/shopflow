@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shopflow/core/constants/app_colors.dart';
 import 'package:shopflow/core/constants/app_images.dart';
 import 'package:shopflow/core/constants/app_routes.dart';
+import 'package:shopflow/core/utils/price_calculation_utils.dart';
 import 'package:shopflow/features/shop/constants/shop_constants.dart';
 
 import '../../../core/constants/app_text_styles.dart';
@@ -15,9 +16,8 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-Future<void> _handleRefresh() async {
+Future<void> _handleRefresh() async {}
 
-}
 
 class _HomeScreenState extends State<HomeScreen> {
   String selectedFilterOption = 'Tech';
@@ -28,7 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: AppColors.bgScreen,
       body: RefreshIndicator(
         onRefresh: _handleRefresh,
-        color : AppColors.white,
+        color: AppColors.white,
         backgroundColor: AppColors.primary,
         child: SafeArea(
           child: Padding(
@@ -57,8 +57,13 @@ class _HomeScreenState extends State<HomeScreen> {
                             vertical: 8,
                           ),
                           decoration: BoxDecoration(
-                            color: isSelected ? AppColors.primary : AppColors.white,
-                            border: Border.all(color: AppColors.textHint, width: 1),
+                            color: isSelected
+                                ? AppColors.primary
+                                : AppColors.white,
+                            border: Border.all(
+                              color: AppColors.textHint,
+                              width: 1,
+                            ),
                             borderRadius: BorderRadius.circular(16),
                           ),
                           child: Text(
@@ -72,7 +77,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       );
                     },
-                    separatorBuilder: (context, index) => const SizedBox(width: 10),
+                    separatorBuilder: (context, index) =>
+                        const SizedBox(width: 10),
                     itemCount: ShopConstants.allowedFilterOptions.length,
                   ),
                 ),
@@ -85,6 +91,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     mainAxisSpacing: 10,
                     itemBuilder: (context, index) {
                       var product = ShopConstants.mockProducts[index];
+                      final finalPrice = PriceCalculationUtils.calculateFinalPrice(
+                        product.price ?? 0.0,
+                        product.discount ?? 0,
+                      );
                       return Container(
                         decoration: BoxDecoration(
                           color: AppColors.bgCard,
@@ -96,7 +106,9 @@ class _HomeScreenState extends State<HomeScreen> {
                               spreadRadius: 0,
                             ),
                           ],
-                          borderRadius: const BorderRadius.all(Radius.circular(12)),
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(12),
+                          ),
                         ),
                         child: Padding(
                           padding: const EdgeInsets.all(12.0),
@@ -119,10 +131,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                       child: Container(
                                         decoration: BoxDecoration(
                                           color: AppColors.black,
-                                          borderRadius: BorderRadius.circular(6),
+                                          borderRadius: BorderRadius.circular(
+                                            6,
+                                          ),
                                         ),
                                         child: ClipRRect(
-                                          borderRadius: BorderRadius.circular(6),
+                                          borderRadius: BorderRadius.circular(
+                                            6,
+                                          ),
                                           child: Image.network(
                                             'https://www.imageurlgenerator.com/_next/image?url=%2Fassets%2Ffree_tool.png&w=3840&q=75',
                                             fit: BoxFit.cover,
@@ -130,7 +146,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         ),
                                       ),
                                     ),
-          
+
                                     Positioned(
                                       top: 10,
                                       right: 10,
@@ -154,16 +170,17 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   color: AppColors.darkRed,
                                                 )
                                               : Icon(
-                                                  Icons.favorite_outline_outlined,
-                                                ),  
+                                                  Icons
+                                                      .favorite_outline_outlined,
+                                                ),
                                         ),
                                       ),
                                     ),
                                   ],
                                 ),
-          
+
                                 const SizedBox(height: 6),
-          
+
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisSize: MainAxisSize.min,
@@ -182,7 +199,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       overflow: TextOverflow.ellipsis,
                                     ),
                                     const SizedBox(height: 4),
-          
+
                                     Row(
                                       children: [
                                         SvgPicture.asset(
@@ -194,9 +211,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                         const SizedBox(width: 4),
                                         Text(
                                           '${product.ratings?.avgRating}',
-                                          style: AppTextStyles.bodyMedium.copyWith(
-                                            color: AppColors.textPrimary,
-                                          ),
+                                          style: AppTextStyles.bodyMedium
+                                              .copyWith(
+                                                color: AppColors.textPrimary,
+                                              ),
                                         ),
                                         const SizedBox(width: 4),
                                         Text(
@@ -206,32 +224,38 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ],
                                     ),
                                     const SizedBox(height: 7),
-          
+
                                     Wrap(
                                       spacing: 4,
                                       runSpacing: 2,
-                                      crossAxisAlignment: WrapCrossAlignment.center,
+                                      crossAxisAlignment:
+                                          WrapCrossAlignment.center,
                                       children: [
                                         Text(
-                                          '\$${product.price}',
+                                          '\$$finalPrice',
                                           style: AppTextStyles.headingMedium,
                                         ),
-                                        const Text(
-                                          r"$300",
-                                          style: AppTextStyles.strikethroughSmall,
-                                        ),
-                                        Container(
+                                        if ((product.discount ?? 0) > 0)
+                                          Text(
+                                            '\$${(product.price ?? 0.0)}',
+                                            style: AppTextStyles
+                                                .strikethroughSmall,
+                                          ),
+                                          Container(
                                           padding: const EdgeInsets.symmetric(
                                             horizontal: 6,
                                             vertical: 2,
                                           ),
                                           decoration: BoxDecoration(
                                             color: AppColors.errorText,
-                                            borderRadius: BorderRadius.circular(16),
+                                            borderRadius: BorderRadius.circular(
+                                              16,
+                                            ),
                                           ),
                                           child: Text(
                                             '-${product.discount}%',
-                                            style:AppTextStyles.whiteSmallLabel,
+                                            style:
+                                                AppTextStyles.whiteSmallLabel,
                                           ),
                                         ),
                                       ],
