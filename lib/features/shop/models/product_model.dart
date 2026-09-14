@@ -1,3 +1,51 @@
+List<Map<String, dynamic>> dummyReviewJsonList = [
+  {
+    "id": 1,
+    "username": "Alex Johnson",
+    "reviewText": "Absolutely love these shorts! The fabric feels premium, and the fit is spot on for a casual summer day.",
+    "rating": 5.0,
+    "userImage": "https://pravatar.cc",
+    "creationAt": "2026-09-14T10:00:00.000Z",
+    "updatedAt": "2026-09-14T10:00:00.000Z",
+  },
+  {
+    "id": 2,
+    "username": "Sarah Miller",
+    "reviewText": "Great color and nice tailored look. They run slightly small around the waist, so consider sizing up if you're between sizes.",
+    "rating": 4.2,
+    "userImage": "https://pravatar.cc",
+    "creationAt": "2026-09-13T14:22:15.000Z",
+    "updatedAt": "2026-09-13T15:30:00.000Z",
+  },
+  {
+    "id": 3,
+    "username": "Marcus Vance",
+    "reviewText": "Decent shorts, but the stitching near the front pocket started fraying after the first wash. A bit disappointed for the price.",
+    "rating": 3.0,
+    "userImage": "https://pravatar.cc",
+    "creationAt": "2026-09-11T08:45:10.000Z",
+    "updatedAt": "2026-09-11T08:45:10.000Z",
+  },
+  {
+    "id": 4,
+    "username": "Emily Chen",
+    "reviewText": "Super comfortable and highly breathable material. Perfect for outdoor events or walking around the city.",
+    "rating": 4.8,
+    "userImage": "https://pravatar.cc",
+    "creationAt": "2026-09-10T18:12:00.000Z",
+    "updatedAt": "2026-09-10T18:12:00.000Z",
+  },
+  {
+    "id": 5,
+    "username": "David K.",
+    "reviewText": "The color doesn't completely match the online photo—it looks a bit more olive green in person than what I expected. Fits well though.",
+    "rating": 3.5,
+    "userImage": "https://pravatar.cc",
+    "creationAt": "2026-09-08T09:05:00.000Z",
+    "updatedAt": "2026-09-08T09:05:00.000Z",
+  },
+];
+
 class ProductModel {
   int? id;
   String? title;
@@ -41,27 +89,40 @@ class ProductModel {
     brandName = json['brandName'];
     slug = json['slug'];
     price = json['price'];
-    discount = json['discount'];
+    discount = 10;
     description = json['description'];
     category = json['category'] != null
         ? Category.fromJson(json['category'])
         : null;
     ratings = json['ratings'] != null
         ? ProductRating.fromJson(json['ratings'])
-        : null;
-    images = json['images'] != null ? List<String>.from(json['images']) : null;
+        : ProductRating.fromJson({
+            'avgRating': 4.5,
+            'totalReviews': 1700,
+            'fiveStarReviewCount': 300,
+            'fourStarReviewCount': 400,
+            'threeStarReviewCount': 500,
+            'twoStarReviewCount': 500,
+            'oneStarReviewCount': 100,
+          });
+    images = json['images'] != null
+        ? List<String>.from(json['images'])
+        : [
+            'https://www.imageurlgenerator.com/_next/image?url=%2Fassets%2Ffree_tool.png&w=3840&q=75',
+            'https://www.imageurlgenerator.com/_next/image?url=%2Fassets%2Ffree_tool.png&w=3840&q=75',
+            'https://www.imageurlgenerator.com/_next/image?url=%2Fassets%2Ffree_tool.png&w=3840&q=75',
+          ];
     isLiked = json['isLiked'];
-    productStock = json['productStock'];
+    productStock = 300;
     productQuantity = json['productQuantity'];
     creationAt = json['creationAt'];
     updatedAt = json['updatedAt'];
 
-    if (json['productReviews'] != null) {
-      productReviews = <CustomerReview>[];
-      json['productReviews'].forEach((v) {
-        productReviews!.add(CustomerReview.fromJson(v));
-      });
-    }
+    productReviews = (json['productReviews'] != null)
+        ? List<CustomerReview>.from(
+            json['productReviews'].map((v) => CustomerReview.fromJson(v)),
+          )
+        : dummyReviewJsonList.map((v) => CustomerReview.fromJson(v)).toList();
   }
 
   Map<String, dynamic> toJson() {
