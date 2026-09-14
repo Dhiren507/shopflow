@@ -43,12 +43,10 @@ class CommonButton extends StatelessWidget {
           ),
         ),
         child: isLoading == true
-            ? SizedBox(
-                child: FittedBox(
-                  fit: BoxFit.fitHeight,
-                  child: CircularProgressIndicator(color: AppColors.white),
-                ),
-              )
+            ? Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: CircularProgressIndicator(color: AppColors.white),
+            )
             : Padding(
                 padding: const EdgeInsets.symmetric(vertical: 13),
                 child: Row(

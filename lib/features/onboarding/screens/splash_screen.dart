@@ -7,6 +7,7 @@ import 'package:shopflow/core/constants/app_images.dart';
 import 'package:shopflow/core/constants/app_routes.dart';
 import 'package:shopflow/core/constants/app_strings.dart';
 import 'package:shopflow/core/constants/app_text_styles.dart';
+import 'package:shopflow/core/services/app_storage_service.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -30,7 +31,14 @@ class _SplashScreenState extends State<SplashScreen> {
       });
 
       if (timer.tick == 5) {
-        Navigator.pushReplacementNamed(context, AppRoutes.introScreen);
+        if(AppStorageService.isIntroCompleted == true && AppStorageService.isLoggedIn) {
+          Navigator.pushReplacementNamed(context, AppRoutes.mainScreen);
+        }
+        else if(AppStorageService.isIntroCompleted == true) {
+         Navigator.pushReplacementNamed(context, AppRoutes.loginScreen);
+        } else {
+          Navigator.pushReplacementNamed(context, AppRoutes.introScreen);
+        }
       }
     });
   }

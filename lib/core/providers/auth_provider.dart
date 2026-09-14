@@ -1,32 +1,42 @@
-import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
-import 'package:http/http.dart';
 import 'package:shopflow/core/constants/api_endpoints.dart';
+import 'package:shopflow/core/constants/app_keys.dart';
+import 'package:shopflow/core/network/api_client.dart';
+import 'package:shopflow/core/services/app_storage_service.dart';
 
 class AuthProvider extends ChangeNotifier {
   bool isLoading = false;
+  bool hasError = false;
+  bool isPasswordVisible = false;
+
+  void togglePasswordVisibility() {
+    isPasswordVisible = !isPasswordVisible;
+    notifyListeners();
+  }
 
   Future<bool> login(String email, String password) async {
     isLoading = true;
+    hasError = false;
     notifyListeners();
 
     Map<String, String> loginData = {"email": email, "password": password};
 
     try {
-      Response response = await post(
-        Uri.parse(ApiEndpoints.loginEndpoint),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: jsonEncode(loginData),
+      final loginResponse = await ApiClient.getExistingInstance.postRequest(
+        ApiEndpoints.loginEndpoint,
+        loginData,
       );
 
-      if (response.statusCode == 200 || response.statusCode == 201) {
+      if (loginResponse != null) {
         isLoading = false;
-        print('log in success');
+        await AppStorageService.setAccessToken(
+          loginResponse[AppKeys.accessTokenKey],
+        );
+        await AppStorageService.setIsLoggedIn(true);
+        print('log in success $loginResponse');
         return true;
       } else {
+        hasError = true;
         print('login failed');
         return false;
       }
@@ -36,5 +46,10 @@ class AuthProvider extends ChangeNotifier {
       isLoading = false;
       notifyListeners();
     }
+  }
+
+  Future<void> logout() async {
+    await AppStorageService.removeAuthTokens();
+    notifyListeners();
   }
 }

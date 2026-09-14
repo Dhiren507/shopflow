@@ -2,11 +2,14 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 import 'package:shopflow/core/constants/app_colors.dart';
 import 'package:shopflow/core/constants/app_images.dart';
 import 'package:shopflow/core/constants/app_routes.dart';
 import 'package:shopflow/core/constants/app_strings.dart';
 import 'package:shopflow/core/constants/app_text_styles.dart';
+import 'package:shopflow/core/providers/auth_provider.dart';
+import 'package:shopflow/core/services/app_storage_service.dart';
 import 'package:shopflow/core/utils/image_picker_helper.dart';
 import 'package:shopflow/core/widgets/common_button.dart';
 import 'package:shopflow/core/widgets/common_divider.dart';
@@ -24,7 +27,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Future<void> _handleProfileSelection() async {
     final String? selectedImagePath =
-        await pickImageFromGallery();
+    await pickImageFromGallery();
 
     if (selectedImagePath != null) {
       setState(() {
@@ -138,11 +141,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
               child: CommonButton(
                 label: AppStrings.logOutButtonText,
-                onPressed: () {
+                onPressed: () async {
+                  await context.read<AuthProvider>().logout();
+                  if (!context.mounted) return;
                   Navigator.pushNamedAndRemoveUntil(
                     context,
                     AppRoutes.loginScreen,
-                    (route) => false,
+                        (route) => false,
                   );
                 },
                 leadingIcon: Icon(

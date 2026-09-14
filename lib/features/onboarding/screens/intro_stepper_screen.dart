@@ -3,6 +3,7 @@ import 'package:shopflow/core/constants/app_colors.dart';
 import 'package:shopflow/core/constants/app_routes.dart';
 import 'package:shopflow/core/constants/app_strings.dart';
 import 'package:shopflow/core/constants/app_text_styles.dart';
+import 'package:shopflow/core/services/app_storage_service.dart';
 import 'package:shopflow/core/widgets/common_button.dart';
 import 'package:shopflow/features/onboarding/constants/onboarding_screen_constants.dart';
 
@@ -19,6 +20,7 @@ class _IntroStepperScreenState extends State<IntroStepperScreen> {
 
   void _handleButtonPress() {
     if (_currentPage == OnboardingScreenConstants.stepperPages.length - 1) {
+      AppStorageService.setIsIntroCompleted(true);
       Navigator.pushReplacementNamed(context, AppRoutes.loginScreen);
     } else {
       _pageController.nextPage(

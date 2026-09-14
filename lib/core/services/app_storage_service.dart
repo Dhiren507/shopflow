@@ -1,38 +1,40 @@
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shopflow/core/constants/app_keys.dart';
 
-class SharedPreferencesService {
-  SharedPreferencesService._internal();
+class AppStorageService {
+  AppStorageService._internal();
 
   static SharedPreferences? _appPref;
+
+  static const _secureAppStorage = FlutterSecureStorage();
 
   static Future<void> init() async {
     _appPref = await SharedPreferences.getInstance();
   }
 
-  static final String _accessTokenKey = 'access_token';
-  static final String _introCompletedKey = "is_intro_completed";
-  static final String _isLoggedInKey = 'is_logged_in';
-
-  static Future<void> setAccessToken(String token) async {
-    await _appPref?.setString(_accessTokenKey, token);
-  }
-
   static Future<void> setIsIntroCompleted(bool value) async {
-    await _appPref?.setBool(_introCompletedKey, value);
+    await _appPref?.setBool(AppKeys.introCompletedKey, value);
   }
 
   static Future<void> setIsLoggedIn(bool value) async {
-    await _appPref?.setBool(_isLoggedInKey, value);
+    await _appPref?.setBool(AppKeys.isLoggedInKey, value);
   }
 
-  static String? getAccessToken = _appPref?.getString(_accessTokenKey);
+  static bool isIntroCompleted = _appPref?.getBool(AppKeys.introCompletedKey) ?? false;
 
-  static bool isIntroCompleted = _appPref?.getBool(_introCompletedKey) ?? false;
+  static Future<void> setAccessToken(String token) async {
+    await _secureAppStorage.write(key:AppKeys.accessTokenKey, value: token);
+  }
 
-  static bool isLoggedIn = _appPref?.getBool(_isLoggedInKey) ?? false;
+  static Future<String?> getAccessToken(String token) async {
+    return await _secureAppStorage.read(key: AppKeys.accessTokenKey);
+  }
+
+  static bool isLoggedIn = _appPref?.getBool(AppKeys.isLoggedInKey) ?? false;
 
   static Future<void> removeAuthTokens() async {
-      _appPref?.remove(_isLoggedInKey);
-      _appPref?.remove(_accessTokenKey);
+    _appPref?.remove(AppKeys.isLoggedInKey);
+    _secureAppStorage.delete(key: AppKeys.accessTokenKey);
   }
 }

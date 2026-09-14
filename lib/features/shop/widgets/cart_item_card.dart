@@ -33,7 +33,7 @@ class CartItemCard extends StatelessWidget {
     return Card(
       color: AppColors.white,
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
         child: Row(
           children: [
             Container(
@@ -49,7 +49,7 @@ class CartItemCard extends StatelessWidget {
             Expanded(
               child: Column(
                 crossAxisAlignment: .start,
-                  mainAxisSize: .min,
+                mainAxisSize: .min,
                 spacing: 6,
                 children: [
                   Text(
@@ -59,13 +59,13 @@ class CartItemCard extends StatelessWidget {
                   ),
 
                   Text(
-
                     productColor,
                     style: AppTextStyles.bodySmall,
                     maxLines: 2,
                     overflow: .ellipsis,
                   ),
-                  Wrap(
+                  Row(
+                    spacing: 5,
                     children: [
                       Text(
                         '\$$productPrice.00',
