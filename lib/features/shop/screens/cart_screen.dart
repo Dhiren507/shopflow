@@ -35,146 +35,146 @@ class _CartScreenState extends State<CartScreen> {
           isCartEmpty
               ? Expanded(child: EmptyCartPlaceholder())
               : Expanded(
-                  child: ListView.separated(
-                    separatorBuilder: (context, index) =>
-                        const SizedBox(height: 5),
-                    itemCount: ShopConstants.cartItems.length,
+            child: ListView.separated(
+              separatorBuilder: (context, index) =>
+              const SizedBox(height: 5),
+              itemCount: ShopConstants.cartItems.length,
 
-                    itemBuilder: (context, index) {
-                      final ProductModel item = ShopConstants.cartItems[index];
+              itemBuilder: (context, index) {
+                final ProductModel item = ShopConstants.cartItems[index];
 
-                      return CartItemCard(
-                        productTitle: item.title ?? '',
-                        productColor: item.category?.name ?? '',
-                        productPrice: item.price ?? 0,
-                        productImagePath: item.images?.first ?? '',
-                        productQuantity: item.productQuantity ?? 1,
-                        productDiscount: item.discount ?? 0,
-                        onDecrement: () {
-                          if (item.productQuantity! > 1) {
-                            setState(() {
-                              item.productQuantity = item.productQuantity! - 1;
-                            });
-                          }
-                        },
-                        onIncrement: () {
-                          if (item.productQuantity! < 10) {
-                            setState(() {
-                              item.productQuantity = item.productQuantity! + 1;
-                            });
-                          }
-                        },
-                        onClose: () {
-                          if(index > 0) {
-                            setState(() {
-                              ShopConstants.cartItems.removeAt(index);
-                            });
-                          } else {
-                            setState(() {
-                              ShopConstants.cartItems.removeAt(index);
-                              isCartEmpty = true;
-                            });
-                          }
-                        },
-                      );
-                    },
-                  ),
-                ),
+                return CartItemCard(
+                  productTitle: item.title ?? '',
+                  productColor: item.category?.name ?? '',
+                  productPrice: item.price ?? 0,
+                  productImagePath: item.images?.first ?? '',
+                  productQuantity: item.productQuantity ?? 1,
+                  productDiscount: item.discount ?? 0,
+                  onDecrement: () {
+                    if (item.productQuantity! > 1) {
+                      setState(() {
+                        item.productQuantity = item.productQuantity! - 1;
+                      });
+                    }
+                  },
+                  onIncrement: () {
+                    if (item.productQuantity! < 10) {
+                      setState(() {
+                        item.productQuantity = item.productQuantity! + 1;
+                      });
+                    }
+                  },
+                  onClose: () {
+                    if(index > 0) {
+                      setState(() {
+                        ShopConstants.cartItems.removeAt(index);
+                      });
+                    } else {
+                      setState(() {
+                        ShopConstants.cartItems.removeAt(index);
+                        isCartEmpty = true;
+                      });
+                    }
+                  },
+                );
+              },
+            ),
+          ),
           const SizedBox(height: 10),
           !isCartEmpty
               ? CommonButton(
-                  label: 'Proceed To Checkout',
-                  onPressed: () {
-                    Map<String, num> totals = PriceCalculationUtils.calculateCartTotals(ShopConstants.cartItems);
-                    showModalBottomSheet(
-                      context: context,
-                      showDragHandle: false,
-                      builder: (context) {
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 20,
-                            vertical: 24,
+            label: 'Proceed To Checkout',
+            onPressed: () {
+              Map<String, num> totals = PriceCalculationUtils.calculateCartTotals(ShopConstants.cartItems);
+              showModalBottomSheet(
+                context: context,
+                showDragHandle: false,
+                builder: (context) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 24,
+                    ),
+                    child: Column(
+                      spacing: 15,
+                      mainAxisSize: .min,
+                      children: [
+                        Container(
+                          width: 48,
+                          height: 6,
+                          decoration: BoxDecoration(
+                            color: AppColors.border,
+                            borderRadius: BorderRadius.circular(10),
                           ),
-                          child: Column(
-                            spacing: 15,
-                            mainAxisSize: .min,
-                            children: [
-                              Container(
-                                width: 48,
-                                height: 6,
-                                decoration: BoxDecoration(
-                                  color: AppColors.border,
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
+                        ),
+                        Row(
+                          mainAxisAlignment: .spaceBetween,
+                          children: [
+                            Text(
+                              AppStrings.subTotalText,
+                              style: AppTextStyles.bodySmall,
+                            ),
+                            Text(
+                              "\$${totals['totalCartAmount']}",
+                              style: AppTextStyles.headingMedium,
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: .spaceBetween,
+                          children: [
+                            Text(
+                              AppStrings.discountText,
+                              style: AppTextStyles.bodySmall,
+                            ),
+                            Text(
+                              "-\$${totals['totalCartDiscount']}",
+                              style: AppTextStyles.headingMedium.copyWith(
+                                color: AppColors.errorLabel,
                               ),
-                              Row(
-                                mainAxisAlignment: .spaceBetween,
-                                children: [
-                                  Text(
-                                    AppStrings.subTotalText,
-                                    style: AppTextStyles.bodySmall,
-                                  ),
-                                  Text(
-                                    "\$${totals['totalCartAmount']}",
-                                    style: AppTextStyles.headingMedium,
-                                  ),
-                                ],
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: .spaceBetween,
+                          children: [
+                            Text(
+                              AppStrings.deliveryText,
+                              style: AppTextStyles.bodySmall,
+                            ),
+                            Text(
+                              AppStrings.freeText,
+                              style: AppTextStyles.strikethroughMedium,
+                            ),
+                          ],
+                        ),
+                        CommonDivider(),
+                        Row(
+                          mainAxisAlignment: .spaceBetween,
+                          children: [
+                            Text(
+                              AppStrings.totalText,
+                              style: AppTextStyles.headingMedium,
+                            ),
+                            Text(
+                              "\$${totals['payableAmount']}",
+                              style: AppTextStyles.headingLarge.copyWith(
+                                color: AppColors.primary,
                               ),
-                              Row(
-                                mainAxisAlignment: .spaceBetween,
-                                children: [
-                                  Text(
-                                    AppStrings.discountText,
-                                    style: AppTextStyles.bodySmall,
-                                  ),
-                                  Text(
-                                    "-\$${totals['totalCartDiscount']}",
-                                    style: AppTextStyles.headingMedium.copyWith(
-                                      color: AppColors.errorLabel,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment: .spaceBetween,
-                                children: [
-                                  Text(
-                                    AppStrings.deliveryText,
-                                    style: AppTextStyles.bodySmall,
-                                  ),
-                                  Text(
-                                    AppStrings.freeText,
-                                    style: AppTextStyles.strikethroughMedium,
-                                  ),
-                                ],
-                              ),
-                              CommonDivider(),
-                              Row(
-                                mainAxisAlignment: .spaceBetween,
-                                children: [
-                                  Text(
-                                    AppStrings.totalText,
-                                    style: AppTextStyles.headingMedium,
-                                  ),
-                                  Text(
-                                    "\$${totals['payableAmount']}",
-                                    style: AppTextStyles.headingLarge.copyWith(
-                                      color: AppColors.primary,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              CommonButton(
-                                label: AppStrings.checkoutNowButtonText,
-                                onPressed: () {},
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                    );
-                  },
-                )
+                            ),
+                          ],
+                        ),
+                        CommonButton(
+                          label: AppStrings.checkoutNowButtonText,
+                          onPressed: () {},
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              );
+            },
+          )
               : const SizedBox(),
         ],
       ),

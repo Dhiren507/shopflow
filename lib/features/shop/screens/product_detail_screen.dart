@@ -57,10 +57,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   @override
   Widget build(BuildContext context) {
     final ProductModel selectedProduct =
-        ModalRoute.of(context)!.settings.arguments as ProductModel;
+    ModalRoute.of(context)!.settings.arguments as ProductModel;
     totalReviews = selectedProduct.productReviews?.length ?? 0;
 
-    final productDiscountedPrice = PriceCalculationUtils.calculateFinalPrice(selectedProduct.price ?? 0.0, selectedProduct.discount ?? 0);
+    final productAmounts = PriceCalculationUtils.calculateProductPrice(selectedProduct.price ?? 0.0, selectedProduct.discount ?? 0);
 
     return Scaffold(
       backgroundColor: AppColors.bgScreen,
@@ -73,15 +73,15 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   items: imgList
                       .map(
                         (image) => Container(
-                          color: AppColors.bgTile,
-                          child: Image.network(
-                            image,
-                            fit: BoxFit.cover,
-                            width: double.infinity,
-                            height: 450,
-                          ),
-                        ),
-                      )
+                      color: AppColors.bgTile,
+                      child: Image.network(
+                        image,
+                        fit: BoxFit.cover,
+                        width: double.infinity,
+                        height: 450,
+                      ),
+                    ),
+                  )
                       .toList(),
                   options: CarouselOptions(
                     height: null,
@@ -142,7 +142,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: List.generate(
                       imgList.length,
-                      (index) => Container(
+                          (index) => Container(
                         margin: const EdgeInsets.symmetric(horizontal: 4.0),
                         height: 8,
                         width: 8,
@@ -217,7 +217,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     spacing: 15,
                     children: [
                       Text(
-                        '\$$productDiscountedPrice',
+                        "\$${productAmounts['finalPrice']}",
                         style: AppTextStyles.headingLarge,
                       ),
                       Text('\$${selectedProduct.price}', style: AppTextStyles.strikethroughMedium),
@@ -231,7 +231,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           borderRadius: BorderRadiusGeometry.circular(16),
                         ),
                         child: Text(
-                          r"Save $50",
+                          "Save \$${productAmounts['finalPrice']}",
                           style: AppTextStyles.labelSmall.copyWith(
                             color: AppColors.primaryDim,
                           ),
@@ -309,85 +309,85 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       totalRating: selectedProduct.ratings?.avgRating ?? 0,
                       totalReviews: selectedProduct.ratings?.totalReviews ?? 0,
                       fiveStarReviewCount:
-                          selectedProduct.ratings?.fiveStarReviewCount ?? 0,
+                      selectedProduct.ratings?.fiveStarReviewCount ?? 0,
                       fourStarReviewCount:
-                          selectedProduct.ratings?.fourStarReviewCount ?? 0,
+                      selectedProduct.ratings?.fourStarReviewCount ?? 0,
                       threeStarReviewCount:
-                          selectedProduct.ratings?.threeStarReviewCount ?? 0,
+                      selectedProduct.ratings?.threeStarReviewCount ?? 0,
                       twoStarReviewCount:
-                          selectedProduct.ratings?.twoStarReviewCount ?? 0,
+                      selectedProduct.ratings?.twoStarReviewCount ?? 0,
                       oneStarReviewCount:
-                          selectedProduct.ratings?.oneStarReviewCount ?? 0,
+                      selectedProduct.ratings?.oneStarReviewCount ?? 0,
                     ),
                     const SizedBox(height: 20),
 
                     (totalReviews ?? 0) != 0
                         ? ListView.separated(
-                            padding: EdgeInsets.zero,
-                            itemCount: isReviewListExpanded
-                                ? (totalReviews ?? 0)
-                                : min(
-                                    reviewListDefaultLength,
-                                    (totalReviews ?? 0),
-                                  ),
-                            shrinkWrap: true,
-                            physics: NeverScrollableScrollPhysics(),
-                            separatorBuilder: (context, index) =>
-                                const SizedBox(height: 5),
-                            itemBuilder: (context, index) {
-                              var reviewItem =
-                                  selectedProduct.productReviews?[index]
-                                      as CustomerReview;
-                              return Card(
-                                color: AppColors.bgCard,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(16.0),
-                                  child: Column(
-                                    children: [
-                                      Row(
-                                        crossAxisAlignment: .start,
-                                        children: [
-                                          CircleAvatar(
-                                            radius: 20,
-                                            backgroundImage: NetworkImage(
-                                              reviewItem.userImage ?? '',
-                                            ),
-                                          ),
-                                          const SizedBox(width: 10),
-                                          Column(
-                                            crossAxisAlignment: .start,
-                                            children: [
-                                              Text(
-                                                reviewItem.username ?? '',
-                                                style:
-                                                    AppTextStyles.headingSmall,
-                                              ),
-                                              Text(
-                                                'Oct 12, 2023',
-                                                style: AppTextStyles.labelSmall,
-                                              ),
-                                            ],
-                                          ),
-                                          const Spacer(),
-                                          ProductRatingStars(
-                                            rating: reviewItem.rating ?? 0,
-                                          ),
-                                        ],
+                      padding: EdgeInsets.zero,
+                      itemCount: isReviewListExpanded
+                          ? (totalReviews ?? 0)
+                          : min(
+                        reviewListDefaultLength,
+                        (totalReviews ?? 0),
+                      ),
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      separatorBuilder: (context, index) =>
+                      const SizedBox(height: 5),
+                      itemBuilder: (context, index) {
+                        var reviewItem =
+                        selectedProduct.productReviews?[index]
+                        as CustomerReview;
+                        return Card(
+                          color: AppColors.bgCard,
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Column(
+                              children: [
+                                Row(
+                                  crossAxisAlignment: .start,
+                                  children: [
+                                    CircleAvatar(
+                                      radius: 20,
+                                      backgroundImage: NetworkImage(
+                                        reviewItem.userImage ?? '',
                                       ),
-
-                                      Padding(
-                                        padding: const EdgeInsets.all(8),
-                                        child: Text(
-                                          reviewItem.reviewText ?? '',
-                                          style: AppTextStyles.bodySmall,
+                                    ),
+                                    const SizedBox(width: 10),
+                                    Column(
+                                      crossAxisAlignment: .start,
+                                      children: [
+                                        Text(
+                                          reviewItem.username ?? '',
+                                          style:
+                                          AppTextStyles.headingSmall,
                                         ),
-                                      ),
-                                    ],
+                                        Text(
+                                          'Oct 12, 2023',
+                                          style: AppTextStyles.labelSmall,
+                                        ),
+                                      ],
+                                    ),
+                                    const Spacer(),
+                                    ProductRatingStars(
+                                      rating: reviewItem.rating ?? 0,
+                                    ),
+                                  ],
+                                ),
+
+                                Padding(
+                                  padding: const EdgeInsets.all(8),
+                                  child: Text(
+                                    reviewItem.reviewText ?? '',
+                                    style: AppTextStyles.bodySmall,
                                   ),
                                 ),
-                              );
-                            },
-                          )
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    )
                         : const Text(AppStrings.noProductReviewsText),
 
                     const SizedBox(height: 10),

@@ -13,7 +13,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-
       title: 'Shop Flow',
       theme: ThemeData(
         colorScheme: .fromSeed(seedColor: AppColors.primary),

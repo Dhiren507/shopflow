@@ -43,12 +43,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     itemBuilder: (context, index) {
                       bool isSelected =
                           selectedFilterOption ==
-                          ShopConstants.allowedFilterOptions[index];
+                              ShopConstants.allowedFilterOptions[index];
                       return GestureDetector(
                         onTap: () {
                           setState(() {
                             selectedFilterOption =
-                                ShopConstants.allowedFilterOptions[index];
+                            ShopConstants.allowedFilterOptions[index];
                           });
                         },
                         child: Container(
@@ -78,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       );
                     },
                     separatorBuilder: (context, index) =>
-                        const SizedBox(width: 10),
+                    const SizedBox(width: 10),
                     itemCount: ShopConstants.allowedFilterOptions.length,
                   ),
                 ),
@@ -91,7 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     mainAxisSpacing: 10,
                     itemBuilder: (context, index) {
                       var product = ShopConstants.mockProducts[index];
-                      final finalPrice = PriceCalculationUtils.calculateFinalPrice(
+                      final productAmounts = PriceCalculationUtils.calculateProductPrice(
                         product.price ?? 0.0,
                         product.discount ?? 0,
                       );
@@ -154,7 +154,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         onTap: () {
                                           setState(() {
                                             product.isLiked =
-                                                !(product.isLiked ?? false);
+                                            !(product.isLiked ?? false);
                                           });
                                         },
                                         child: Container(
@@ -166,13 +166,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                           ),
                                           child: (product.isLiked ?? false)
                                               ? Icon(
-                                                  Icons.favorite,
-                                                  color: AppColors.darkRed,
-                                                )
+                                            Icons.favorite,
+                                            color: AppColors.darkRed,
+                                          )
                                               : Icon(
-                                                  Icons
-                                                      .favorite_outline_outlined,
-                                                ),
+                                            Icons
+                                                .favorite_outline_outlined,
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -213,8 +213,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                           '${product.ratings?.avgRating}',
                                           style: AppTextStyles.bodyMedium
                                               .copyWith(
-                                                color: AppColors.textPrimary,
-                                              ),
+                                            color: AppColors.textPrimary,
+                                          ),
                                         ),
                                         const SizedBox(width: 4),
                                         Text(
@@ -229,10 +229,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                       spacing: 4,
                                       runSpacing: 2,
                                       crossAxisAlignment:
-                                          WrapCrossAlignment.center,
+                                      WrapCrossAlignment.center,
                                       children: [
                                         Text(
-                                          '\$$finalPrice',
+                                          "\$${productAmounts['finalPrice']}",
                                           style: AppTextStyles.headingMedium,
                                         ),
                                         if ((product.discount ?? 0) > 0)
@@ -241,7 +241,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             style: AppTextStyles
                                                 .strikethroughSmall,
                                           ),
-                                          Container(
+                                        Container(
                                           padding: const EdgeInsets.symmetric(
                                             horizontal: 6,
                                             vertical: 2,
@@ -255,7 +255,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           child: Text(
                                             '-${product.discount}%',
                                             style:
-                                                AppTextStyles.whiteSmallLabel,
+                                            AppTextStyles.whiteSmallLabel,
                                           ),
                                         ),
                                       ],
