@@ -5,8 +5,12 @@ import 'package:shopflow/features/shop/models/product_model.dart';
 
 class CategoryProvider extends ChangeNotifier {
   List<Category> categoryList = [];
+  bool isLoading = false;
 
   Future<void> fetchCategories() async {
+    isLoading = true;
+    notifyListeners();
+
     try {
       final dynamic response = await ApiClient.getExistingInstance.getRequest(
         ApiEndpoints.categoriesEndpoint,
@@ -16,6 +20,9 @@ class CategoryProvider extends ChangeNotifier {
           .toList();
     } catch (e) {
       throw Exception('error  ${e.toString()}');
+    } finally {
+      isLoading = false;
+      notifyListeners();
     }
   }
 }

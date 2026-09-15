@@ -78,7 +78,7 @@ class ProductModel {
     this.productReviews,
     this.ratings,
     this.productStock,
-    this.productQuantity = 1,
+    this.productQuantity,
     this.creationAt,
     this.updatedAt,
   });
@@ -114,7 +114,7 @@ class ProductModel {
           ];
     isLiked = json['isLiked'];
     productStock = 300;
-    productQuantity = json['productQuantity'];
+    productQuantity = 1;
     creationAt = json['creationAt'];
     updatedAt = json['updatedAt'];
 

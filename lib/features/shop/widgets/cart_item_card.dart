@@ -64,7 +64,7 @@ class CartItemCard extends StatelessWidget {
                     maxLines: 2,
                     overflow: .ellipsis,
                   ),
-                  Row(
+                  Wrap(
                     spacing: 5,
                     children: [
                       Text(

@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopflow/core/constants/app_colors.dart';
 import 'package:shopflow/core/constants/app_routes.dart';
+import 'package:shopflow/core/providers/add_product_provider.dart';
 import 'package:shopflow/core/providers/auth_provider.dart';
+import 'package:shopflow/core/providers/cart_provider.dart';
+import 'package:shopflow/core/providers/category_provider.dart';
 import 'package:shopflow/core/providers/product_detail_provider.dart';
 import 'package:shopflow/core/providers/product_listing_provider.dart';
 import 'package:shopflow/core/services/app_storage_service.dart';
@@ -24,7 +27,10 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => AuthProvider()),
         ChangeNotifierProvider(create: (_) => ProductListingProvider()),
-        ChangeNotifierProvider(create: (_) => ProductDetailProvider())
+        ChangeNotifierProvider(create: (_) => ProductDetailProvider()),
+        ChangeNotifierProvider(create: (_) => CategoryProvider()),
+        ChangeNotifierProvider(create: (_) => AddProductProvider()),
+        ChangeNotifierProvider(create: (_) => CartProvider()),
       ],
       child: MaterialApp(
         title: 'Shop Flow',

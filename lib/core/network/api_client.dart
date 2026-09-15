@@ -34,6 +34,7 @@ class ApiClient {
         headers: {'Content-Type': 'application/json'},
         body: payload,
       );
+      print(jsonDecode(response.body));
       if (response.statusCode >= 200 && response.statusCode <= 300) {
         return jsonDecode(response.body);
       } else {

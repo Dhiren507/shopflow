@@ -12,4 +12,10 @@ class Validators {
       return 'Password must be at least 5 characters';
     }
   }
+
+  static String? isRequiredField(String? value) {
+    if(value == null || value.isEmpty) {
+      return 'field is  required';
+    }
+  }
 }

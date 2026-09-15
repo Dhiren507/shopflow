@@ -7,60 +7,85 @@ class ProductListingProvider extends ChangeNotifier {
   List<ProductModel> productList = [];
   List<Category> categoryList = [];
   int? selectedCategoryId;
+  int limit = 10;
   bool isLoading = false;
+  bool isLoadingMoreProducts = false;
+  bool hasMoreData = true;
 
+  void toggleProductLike(int index) {
+    productList[index].isLiked = productList[index].isLiked == true
+        ? false
+        : true;
+    notifyListeners();
+  }
 
-  Future<void> fetchProductsHomeScreen() async {
+  Future<void> fetchProductsHomeScreen({int? categoryId, isRefresh = false}) async {
+
+    if (categoryId != null || isRefresh) {
+      selectedCategoryId = isRefresh ? null : categoryId;
+      productList.clear();
+      isLoading = false;
+      isLoadingMoreProducts = false;
+      hasMoreData = true;
+    }
+
+    if (isLoading || isLoadingMoreProducts || !hasMoreData) return;
+
+    if (productList.isEmpty) {
+      isLoading = true;
+    } else {
+      isLoadingMoreProducts = true;
+    }
     notifyListeners();
 
-    try{
-      final dynamic response = await ApiClient.getExistingInstance.getRequest(ApiEndpoints.productListingEndpoint(10));
-      if (response is List) {
-        productList = response.map((item) => ProductModel.fromJson(item)).toList();
+    int currentOffset = productList.length;
+
+    try {
+      final dynamic response = await ApiClient.getExistingInstance.getRequest(
+        selectedCategoryId != null
+            ? ApiEndpoints.productListingEndpoint(
+                limit,
+                offset: currentOffset,
+                categoryId: selectedCategoryId.toString(),
+              )
+            : ApiEndpoints.productListingEndpoint(limit, offset: currentOffset),
+      );
+
+      final List<ProductModel> newFetchedProducts = (response as List)
+          .map((item) => ProductModel.fromJson(item))
+          .toList();
+
+      productList.addAll(newFetchedProducts);
+
+      if (newFetchedProducts.length < limit) {
+        hasMoreData = false;
       }
     } catch (e) {
-      throw Exception('error  ${e.toString()}',);
+      throw Exception('error  ${e.toString()}');
     } finally {
       isLoading = false;
+      isLoadingMoreProducts = false;
       notifyListeners();
     }
   }
-
 
   Future<void> fetchCategories() async {
     isLoading = true;
     notifyListeners();
 
-    try{
-      final dynamic response = await ApiClient.getExistingInstance.getRequest(ApiEndpoints.categoriesEndpoint);
-      if (response is List) {
-        categoryList = response.map((item) => Category.fromJson(item)).toList();
-      }
+    try {
+      final dynamic response = await ApiClient.getExistingInstance.getRequest(
+        ApiEndpoints.categoriesEndpoint,
+      );
+      categoryList.clear();
+      categoryList = (response as List)
+          .map((item) => Category.fromJson(item))
+          .toList();
     } catch (e) {
-      throw Exception('error  ${e.toString()}',);
+      throw Exception('error  ${e.toString()}');
     } finally {
       isLoading = false;
       notifyListeners();
     }
   }
-
-  Future<void> fetchProductsByCategoryId(int id) async {
-    isLoading = true;
-    notifyListeners();
-
-    try{
-      selectedCategoryId = id;
-      final dynamic response = await ApiClient.getExistingInstance.getRequest(ApiEndpoints.productByCategoryIdEndpoint(10));
-      if (response is List) {
-        productList.clear();
-        productList = response.map((item) => ProductModel.fromJson(item)).toList();
-      }
-    } catch (e) {
-      throw Exception('error  ${e.toString()}',);
-    } finally {
-      isLoading = false;
-      notifyListeners();
-    }
-  }
-
 }
