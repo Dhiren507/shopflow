@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shopflow/core/constants/app_colors.dart';
 import 'package:shopflow/core/constants/app_routes.dart';
 import 'package:shopflow/core/constants/app_strings.dart';
 import 'package:shopflow/core/constants/app_text_styles.dart';
+import 'package:shopflow/core/providers/cart_provider.dart';
+import 'package:shopflow/core/providers/tab_bar_index_provider.dart';
 import 'package:shopflow/core/widgets/common_app_bar.dart';
 import 'package:shopflow/features/profile/profile_screen.dart';
 import 'package:shopflow/features/shop/screens/cart_screen.dart';
 import 'package:shopflow/features/shop/screens/home_screen.dart';
-import 'package:shopflow/features/shop/screens/my_products_listing_screen.dart';
+import 'package:shopflow/features/seller/screens/my_products_listing_screen.dart';
 
 class CommonBaseScreen extends StatefulWidget {
   const CommonBaseScreen({super.key});
@@ -19,7 +22,6 @@ class CommonBaseScreen extends StatefulWidget {
 class _CommonBaseScreenState extends State<CommonBaseScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
-  final bool isNotificaitionExists = true;
 
   @override
   void initState() {
@@ -28,7 +30,7 @@ class _CommonBaseScreenState extends State<CommonBaseScreen>
 
     _tabController.addListener(() {
       if (!_tabController.indexIsChanging) {
-        setState(() {});
+        context.read<TabBarIndexProvider>().setCurrentTabIndex(_tabController.index);
       }
     });
   }
@@ -41,7 +43,13 @@ class _CommonBaseScreenState extends State<CommonBaseScreen>
 
   @override
   Widget build(BuildContext context) {
-    int activeIndex = _tabController.index;
+    final tabIndexProvider = context.watch<TabBarIndexProvider>();
+    int activeIndex = tabIndexProvider.currentTabIndex;
+
+    if (_tabController.index != activeIndex) {
+      _tabController.animateTo(activeIndex);
+    }
+
     return Scaffold(
       appBar: CommonAppBar(),
       bottomNavigationBar: SafeArea(
@@ -69,18 +77,24 @@ class _CommonBaseScreenState extends State<CommonBaseScreen>
                   text: AppStrings.tabBarLabelOne,
                 ),
                 Tab(
-                  icon: Badge(
-                    isLabelVisible: isNotificaitionExists,
-                    backgroundColor: AppColors.errorLabel,
-                    label: Text(
-                      '2',
-                      style: AppTextStyles.whiteSmallLabel,
-                    ),
-                    child: Icon(
-                      activeIndex == 1
-                          ? Icons.shopping_cart
-                          : Icons.shopping_cart_outlined,
-                    ),
+                  icon: Consumer<CartProvider>(
+                    builder: (context, cartProvider, child) {
+                      final cartItemCount = cartProvider.cartItems.length;
+
+                      return Badge(
+                        isLabelVisible: cartItemCount > 0,
+                        backgroundColor: AppColors.errorLabel,
+                        label: Text(
+                          '$cartItemCount',
+                          style: AppTextStyles.whiteSmallLabel,
+                        ),
+                        child: Icon(
+                          activeIndex == 1
+                              ? Icons.shopping_cart
+                              : Icons.shopping_cart_outlined,
+                        ),
+                      );
+                    },
                   ),
                   text: AppStrings.tabBarLabelTwo,
                 ),
@@ -112,9 +126,8 @@ class _CommonBaseScreenState extends State<CommonBaseScreen>
           MyProductsListingScreen(),
           ProfileScreen(),
         ],
-
       ),
-      floatingActionButton: _tabController.index == 2
+      floatingActionButton: activeIndex == 2
           ? FloatingActionButton(
               onPressed: () {
                 Navigator.pushNamed(context, AppRoutes.addProductScreen);

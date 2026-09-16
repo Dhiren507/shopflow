@@ -29,7 +29,7 @@ class ProductDetailProvider extends ChangeNotifier {
     notifyListeners();
 
     try{
-      final dynamic response = await ApiClient.getExistingInstance.getRequest(ApiEndpoints.getProductDetailEndpoint(id));
+      final response = await ApiClient.getExistingInstance.getRequest(ApiEndpoints.getProductDetailEndpoint(id));
        if(response != null) {
          selectedProduct = ProductModel.fromJson(response);
        }

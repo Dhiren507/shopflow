@@ -8,13 +8,12 @@ import 'package:provider/provider.dart';
 import 'package:shopflow/core/constants/app_colors.dart';
 import 'package:shopflow/core/constants/app_strings.dart';
 import 'package:shopflow/core/providers/cart_provider.dart';
-import 'package:shopflow/core/providers/product_detail_provider.dart';
+import 'package:shopflow/features/shop/providers/product_detail_provider.dart';
 import 'package:shopflow/core/utils/price_calculation_utils.dart';
 import 'package:shopflow/core/widgets/common_divider.dart';
 import 'package:shopflow/core/widgets/common_expansion_tile.dart';
 import 'package:shopflow/core/widgets/numeric_stepper_button.dart';
 import 'package:shopflow/core/widgets/product_rating_stars.dart';
-import 'package:shopflow/features/shop/constants/shop_constants.dart';
 import 'package:shopflow/features/shop/models/product_model.dart';
 import 'package:shopflow/features/shop/widgets/rating_section.dart';
 
@@ -31,12 +30,6 @@ class ProductDetailScreen extends StatefulWidget {
 class _ProductDetailScreenState extends State<ProductDetailScreen> {
   int reviewListDefaultLength = 2;
   int? totalReviews;
-
-  void addToCart(ProductModel chosenProduct) {
-    setState(() {
-
-    });
-  }
 
   @override
   void initState() {

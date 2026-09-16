@@ -35,7 +35,7 @@ class PriceCalculationUtils {
 
     return {
       "totalCartAmount": totalOriginalPrice,
-      "totalCartDiscount": totalDiscountAmount,
+      "totalCartDiscount": totalDiscountAmount.roundToDouble(),
       "payableAmount": finalPayoutAmount,
     };
   }

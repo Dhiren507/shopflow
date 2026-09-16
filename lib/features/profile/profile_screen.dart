@@ -8,11 +8,11 @@ import 'package:shopflow/core/constants/app_images.dart';
 import 'package:shopflow/core/constants/app_routes.dart';
 import 'package:shopflow/core/constants/app_strings.dart';
 import 'package:shopflow/core/constants/app_text_styles.dart';
-import 'package:shopflow/core/providers/auth_provider.dart';
+import 'package:shopflow/core/providers/tab_bar_index_provider.dart';
+import 'package:shopflow/features/auth/provider/auth_provider.dart';
 import 'package:shopflow/core/utils/image_picker_helper.dart';
 import 'package:shopflow/core/widgets/common_button.dart';
 import 'package:shopflow/core/widgets/common_divider.dart';
-import 'package:shopflow/features/profile/constants/profile_constants.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -88,7 +88,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               clipBehavior: .none,
               physics: NeverScrollableScrollPhysics(),
               itemBuilder: (context, index) {
-                final option = ProfileConstants.profileOptions[index];
+                final option = AppStrings.profileOptions[index];
                 return GestureDetector(
                   onTap: () {
                     Navigator.pushNamed(context, option['navigateTo']);
@@ -127,7 +127,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 );
               },
               separatorBuilder: (context, index) => const SizedBox(height: 5),
-              itemCount: ProfileConstants.profileOptions.length,
+              itemCount: AppStrings.profileOptions.length,
             ),
           ),
         ),
@@ -143,6 +143,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 onPressed: () async {
                   await context.read<AuthProvider>().logout();
                   if (!context.mounted) return;
+                  context.read<TabBarIndexProvider>().setCurrentTabIndex(0);
                   Navigator.pushNamedAndRemoveUntil(
                     context,
                     AppRoutes.loginScreen,

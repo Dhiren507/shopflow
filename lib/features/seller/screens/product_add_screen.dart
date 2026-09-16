@@ -9,17 +9,18 @@ import 'package:shopflow/core/constants/app_colors.dart';
 import 'package:shopflow/core/constants/app_images.dart';
 import 'package:shopflow/core/constants/app_strings.dart';
 import 'package:shopflow/core/constants/app_text_styles.dart';
-import 'package:shopflow/core/providers/add_product_provider.dart';
 import 'package:shopflow/core/providers/category_provider.dart';
 import 'package:shopflow/core/utils/validators.dart';
 import 'package:shopflow/core/widgets/common_app_bar.dart';
 import 'package:shopflow/core/widgets/common_button.dart';
 import 'package:shopflow/core/widgets/common_divider.dart';
 import 'package:shopflow/core/widgets/common_input_field.dart';
+import 'package:shopflow/features/seller/models/product_form_model.dart';
+import 'package:shopflow/features/seller/provider/add_product_provider.dart';
 import 'package:shopflow/features/shop/models/product_model.dart';
-import 'package:shopflow/features/shop/screens/add_product/models/product_form_model.dart';
 
-import '../../../../core/utils/image_picker_helper.dart';
+
+import '../../../core/utils/image_picker_helper.dart';
 
 class ProductAddScreen extends StatefulWidget {
   const ProductAddScreen({super.key});
@@ -116,7 +117,8 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
                         if (isLastContainer) {
                           final imgPath = await pickImageFromGallery();
                           if (imgPath != null) {
-                            provider.setSelectedImages(imagePath);
+                            provider.setSelectedImages(imgPath);
+                            print(' image path is this : $imgPath');
                           }
                         }
                       },

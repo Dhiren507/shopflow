@@ -3,9 +3,8 @@ import 'package:shopflow/core/constants/api_endpoints.dart';
 import 'package:shopflow/core/network/api_client.dart';
 import 'package:shopflow/features/shop/models/product_model.dart';
 
-class ProductListingProvider extends ChangeNotifier {
+class HomeScreenProvider extends ChangeNotifier {
   List<ProductModel> productList = [];
-  List<Category> categoryList = [];
   int? selectedCategoryId;
   int limit = 10;
   bool isLoading = false;
@@ -19,10 +18,13 @@ class ProductListingProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> fetchProductsHomeScreen({int? categoryId, isRefresh = false}) async {
-
-    if (categoryId != null || isRefresh) {
-      selectedCategoryId = isRefresh ? null : categoryId;
+  Future<void> fetchProductsHomeScreen({
+    int? categoryId,
+    isRefresh = false,
+    isAll = false,
+  }) async {
+    if (categoryId != null || isRefresh || isAll) {
+      selectedCategoryId = isAll ? null : (categoryId ?? selectedCategoryId);
       productList.clear();
       isLoading = false;
       isLoadingMoreProducts = false;
@@ -41,7 +43,7 @@ class ProductListingProvider extends ChangeNotifier {
     int currentOffset = productList.length;
 
     try {
-      final dynamic response = await ApiClient.getExistingInstance.getRequest(
+      final response = await ApiClient.getExistingInstance.getRequest(
         selectedCategoryId != null
             ? ApiEndpoints.productListingEndpoint(
                 limit,
@@ -65,26 +67,6 @@ class ProductListingProvider extends ChangeNotifier {
     } finally {
       isLoading = false;
       isLoadingMoreProducts = false;
-      notifyListeners();
-    }
-  }
-
-  Future<void> fetchCategories() async {
-    isLoading = true;
-    notifyListeners();
-
-    try {
-      final dynamic response = await ApiClient.getExistingInstance.getRequest(
-        ApiEndpoints.categoriesEndpoint,
-      );
-      categoryList.clear();
-      categoryList = (response as List)
-          .map((item) => Category.fromJson(item))
-          .toList();
-    } catch (e) {
-      throw Exception('error  ${e.toString()}');
-    } finally {
-      isLoading = false;
       notifyListeners();
     }
   }

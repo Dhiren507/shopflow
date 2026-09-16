@@ -50,13 +50,25 @@ class CartItemCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: .start,
                 mainAxisSize: .min,
-                spacing: 6,
                 children: [
-                  Text(
-                    productTitle,
-                    style: AppTextStyles.headingSmall,
-                    overflow: .ellipsis,
-                  ),
+                 Row(
+                   children: [
+                     Expanded(
+                       child: Text(
+                         productTitle,
+                         style: AppTextStyles.headingSmall,
+                         maxLines: 1,
+                         overflow: .ellipsis,
+                       ),
+                     ),
+                     IconButton(
+                       onPressed: () {
+                         onClose();
+                       },
+                       icon: Icon(Icons.close),
+                     )
+                   ],
+                 ),
 
                   Text(
                     productColor,
@@ -64,57 +76,52 @@ class CartItemCard extends StatelessWidget {
                     maxLines: 2,
                     overflow: .ellipsis,
                   ),
-                  Wrap(
-                    spacing: 5,
+
+                  Row(
                     children: [
-                      Text(
-                        '\$$productPrice.00',
-                        style: AppTextStyles.headingMedium.copyWith(
-                          color: AppColors.primary,
+                      Expanded(
+                        child: Wrap(
+                          crossAxisAlignment: .center,
+                          spacing: 6,
+                          runSpacing:2,
+                          children: [
+                            Text(
+                              '\$$productPrice.00',
+                              style: AppTextStyles.headingMedium.copyWith(
+                                color: AppColors.primary,
+                              ),
+                            ),
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 6,
+                                vertical: 2,
+                              ),
+                              decoration: BoxDecoration(
+                                color: AppColors.errorText,
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                              child: Text(
+                                '-$productDiscount%',
+                                style: AppTextStyles.whiteSmallLabel,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 6,
-                          vertical: 2,
-                        ),
-                        decoration: BoxDecoration(
-                          color: AppColors.errorText,
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                        child: Text(
-                          '-$productDiscount%',
-                          style: AppTextStyles.whiteSmallLabel,
-                        ),
+                      NumericStepperButton(
+                        onDecrement: () {
+                          onDecrement();
+                        },
+                        onIncrement: () {
+                          onIncrement();
+                        },
+                        value: productQuantity,
+                        isSmall: true,
                       ),
                     ],
-                  ),
+                  )
                 ],
               ),
-            ),
-            const SizedBox(width: 10),
-            Column(
-              crossAxisAlignment: .end,
-              mainAxisAlignment: .spaceBetween,
-              spacing: 10,
-              children: [
-                IconButton(
-                  onPressed: () {
-                    onClose();
-                  },
-                  icon: Icon(Icons.close),
-                ),
-                NumericStepperButton(
-                  onDecrement: () {
-                    onDecrement();
-                  },
-                  onIncrement: () {
-                    onIncrement();
-                  },
-                  value: productQuantity,
-                  isSmall: true,
-                ),
-              ],
             ),
           ],
         ),

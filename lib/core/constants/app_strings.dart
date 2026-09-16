@@ -1,3 +1,6 @@
+import 'package:shopflow/core/constants/app_images.dart';
+import 'package:shopflow/core/constants/app_routes.dart';
+
 class AppStrings {
   static const String appName = 'ShopFlow';
   static const String splashLoadingText = 'Elevating Your retail experience.';
@@ -102,4 +105,52 @@ class AppStrings {
   static const categoryBreakdownText = 'Category Breakdown';
   static const stockLevelsText = 'Stock Levels';
   static const topRatedProductsText = 'Top Rated Products';
+
+  // onboarding screen constants
+  static const List<Map<String, String>> stepperPages = [
+    {
+      'image': AppImages.introImageOne,
+      'title': AppStrings.introScreenOneTitle,
+      'subTitle': AppStrings.introScreenOneSubtitle,
+    },
+    {
+      'image': AppImages.introImageTwo,
+      'title': AppStrings.introScreenTwoTitle,
+      'subTitle': AppStrings.introScreenTwoSubTitle,
+    },
+    {
+      'image': AppImages.introImageThree,
+      'title': AppStrings.introScreenThreeTitle,
+      'subTitle': AppStrings.introScreenThreeSubtitle,
+    },
+  ];
+
+
+  static const List<Map<String, dynamic>> profileOptions = [
+    {
+      'leadingIcon' : AppImages.editProfilePerson,
+      'optionText' : 'Edit Profile',
+      'navigateTo' : AppRoutes.sellerDashboardScreen
+    },
+    {
+      'leadingIcon' : AppImages.documentPaperIcon,
+      'optionText' : 'Order History',
+      'navigateTo' : AppRoutes.sellerDashboardScreen
+    },
+    {
+      'leadingIcon' : AppImages.locationMarkIcon,
+      'optionText' : 'Addresses',
+      'navigateTo' : AppRoutes.sellerDashboardScreen
+    },
+    {
+      'leadingIcon' : AppImages.bellIcon,
+      'optionText' : 'Notifications',
+      'navigateTo' : AppRoutes.sellerDashboardScreen
+    },
+    {
+      'leadingIcon' : AppImages.helperTooltipIcon,
+      'optionText' : 'Help & Support',
+      'navigateTo' : AppRoutes.sellerDashboardScreen
+    },
+  ];
 }

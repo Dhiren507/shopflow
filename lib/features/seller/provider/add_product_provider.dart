@@ -4,33 +4,32 @@ import 'package:shopflow/core/network/api_client.dart';
 
 class AddProductProvider extends ChangeNotifier {
   bool isLoading = false;
-  bool hasError = false;
   num finalPrice = 0.0;
   int productStock = 1;
   int? selectedCategoryId;
   List<String> selectedImages = [];
 
-  void setFinalPrice(num value){
+  void setFinalPrice(num value) {
     finalPrice = value;
     notifyListeners();
   }
 
-  void setSelectedImages(String value){
+  void setSelectedImages(String value) {
     selectedImages.add(value);
     notifyListeners();
   }
 
-  void removeSelectedImages(int index){
+  void removeSelectedImages(int index) {
     selectedImages.removeAt(index);
     notifyListeners();
   }
 
-  void setProductStock(int value){
+  void setProductStock(int value) {
     productStock = value;
     notifyListeners();
   }
 
-  void setCategoryId(int value){
+  void setCategoryId(int value) {
     selectedCategoryId = value;
     notifyListeners();
   }
@@ -43,7 +42,7 @@ class AddProductProvider extends ChangeNotifier {
     required List<String> images,
   }) async {
     isLoading = true;
-    hasError = false;
+
     notifyListeners();
 
     final Map<String, dynamic> productData = {
@@ -62,14 +61,17 @@ class AddProductProvider extends ChangeNotifier {
 
       if (response != null) {
         print('Product :  $response');
+
+        selectedImages.clear();
+        finalPrice = 0.0;
+        productStock = 1;
+
         return true;
       } else {
-        hasError = true;
         print('error');
         return false;
       }
     } catch (e) {
-      hasError = true;
       debugPrint('Error : ${e.toString()}');
       return false;
     } finally {
@@ -77,5 +79,4 @@ class AddProductProvider extends ChangeNotifier {
       notifyListeners();
     }
   }
-
 }

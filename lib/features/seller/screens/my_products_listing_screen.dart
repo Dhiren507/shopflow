@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shopflow/features/seller/provider/my_products_screen_provider.dart';
 
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_text_styles.dart';
@@ -105,35 +107,39 @@ class _MyProductsListingScreenState extends State<MyProductsListingScreen> {
                 color: AppColors.bgTile,
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: Row(
-                children: List.generate(tabs.length, (index) {
-                  final isSelected = activeTabIndex == index;
+              child: Consumer<MyProductsScreenProvider>(builder: (context, provider, child) {
+                return Row(
+                  children: List.generate(tabs.length, (index) {
+                    final isSelected = provider.currentTabIndex == index;
 
-                  return Expanded(
-                    child: GestureDetector(
-                      onTap: () => setState(() => activeTabIndex = index),
-                      child: Container(
-                        alignment: Alignment.center,
-                        padding: const EdgeInsets.symmetric(vertical: 8),
-                        decoration: BoxDecoration(
-                          color: isSelected
-                              ? AppColors.white
-                              : Colors.transparent,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Text(
-                          tabs[index],
-                          style: AppTextStyles.headingSmall.copyWith(
+                    return Expanded(
+                      child: GestureDetector(
+                        onTap: () {
+                          provider.setCurrentTabIndex(index);
+                        },
+                        child: Container(
+                          alignment: Alignment.center,
+                          padding: const EdgeInsets.symmetric(vertical: 8),
+                          decoration: BoxDecoration(
                             color: isSelected
-                                ? AppColors.primary
-                                : AppColors.textSecondary,
+                                ? AppColors.white
+                                : Colors.transparent,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Text(
+                            tabs[index],
+                            style: AppTextStyles.headingSmall.copyWith(
+                              color: isSelected
+                                  ? AppColors.primary
+                                  : AppColors.textSecondary,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  );
-                }),
-              ),
+                    );
+                  }),
+                );
+              },)
             ),
 
             const SizedBox(height: 24),

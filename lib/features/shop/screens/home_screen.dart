@@ -6,8 +6,10 @@ import 'package:provider/provider.dart';
 import 'package:shopflow/core/constants/app_colors.dart';
 import 'package:shopflow/core/constants/app_images.dart';
 import 'package:shopflow/core/constants/app_routes.dart';
-import 'package:shopflow/core/providers/product_listing_provider.dart';
+import 'package:shopflow/core/providers/category_provider.dart';
 import 'package:shopflow/core/utils/price_calculation_utils.dart';
+import 'package:shopflow/features/shop/models/product_model.dart';
+import 'package:shopflow/features/shop/providers/home_screen_provider.dart';
 
 import '../../../core/constants/app_text_styles.dart';
 
@@ -25,32 +27,44 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<ProductListingProvider>().fetchProductsHomeScreen();
-      context.read<ProductListingProvider>().fetchCategories();
+      final provider = context.read<HomeScreenProvider>();
+
+      if (provider.productList.isEmpty) {
+        provider.fetchProductsHomeScreen();
+      }
+
+      if (context.read<CategoryProvider>().categoryList.isEmpty) {
+        context.read<CategoryProvider>().fetchCategories();
+      }
     });
 
     _scrollController.addListener(() {
       if (_scrollController.position.pixels >=
           _scrollController.position.maxScrollExtent) {
-        context.read<ProductListingProvider>().fetchProductsHomeScreen();
+        context.read<HomeScreenProvider>().fetchProductsHomeScreen();
       }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    bool isLoadingMore = context.select<ProductListingProvider, bool>((
+    bool isLoadingMore = context.select<HomeScreenProvider, bool>((
       provider,
     ) {
       return provider.isLoadingMoreProducts;
     });
 
-    print('build method called');
+    final List<Category> categoryList = context
+        .select<CategoryProvider, List<Category>>(
+          (value) => value.categoryList,
+        );
+
     return Scaffold(
       backgroundColor: AppColors.bgScreen,
       body: RefreshIndicator(
-        onRefresh: () =>
-            context.read<ProductListingProvider>().fetchProductsHomeScreen(isRefresh: true),
+        onRefresh: () => context
+            .read<HomeScreenProvider>()
+            .fetchProductsHomeScreen(isRefresh: true),
         color: AppColors.white,
         backgroundColor: AppColors.primary,
         child: Padding(
@@ -58,58 +72,93 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             children: [
               // top filtering tiles
-                  Consumer<ProductListingProvider>(
-                    builder: (context,products, child) {
-                      return SizedBox(
-                        height: 36,
-                        child: ListView.separated(
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (context, index) {
-                            final cat = products.categoryList[index];
-                            bool isSelected = products.selectedCategoryId == cat.id;
-                            return GestureDetector(
-                              onTap: () {
-                                 products.fetchProductsHomeScreen(
-                                  categoryId: cat.id!,
-                                );
-                              },
-                              child: Container(
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: 16,
-                                  vertical: 8,
+              Consumer<HomeScreenProvider>(
+                builder: (context, products, child) {
+                  return SizedBox(
+                    height: 36,
+                    child: ListView.separated(
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) {
+                        if (index == 0) {
+                          bool isAllSelected =
+                              products.selectedCategoryId == null;
+
+                          return GestureDetector(
+                            onTap: () {
+                              products.fetchProductsHomeScreen(isAll: true);
+                            },
+                            child: Container(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 16,
+                                vertical: 8,
+                              ),
+                              decoration: BoxDecoration(
+                                color: isAllSelected
+                                    ? AppColors.primary
+                                    : AppColors.white,
+                                border: Border.all(
+                                  color: AppColors.textHint,
+                                  width: 1,
                                 ),
-                                decoration: BoxDecoration(
-                                  color: isSelected
-                                      ? AppColors.primary
-                                      : AppColors.white,
-                                  border: Border.all(
-                                    color: AppColors.textHint,
-                                    width: 1,
-                                  ),
-                                  borderRadius: BorderRadius.circular(16),
-                                ),
-                                child: Text(
-                                  cat.name ?? '',
-                                  style: AppTextStyles.labelSmall.copyWith(
-                                    color: isSelected
-                                        ? AppColors.white
-                                        : AppColors.textHint,
-                                  ),
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                              child: Text(
+                                'All',
+                                style: AppTextStyles.labelSmall.copyWith(
+                                  color: isAllSelected
+                                      ? AppColors.white
+                                      : AppColors.textHint,
                                 ),
                               ),
+                            ),
+                          );
+                        }
+
+                        final cat = categoryList[index];
+                        bool isSelected = products.selectedCategoryId == cat.id;
+                        return GestureDetector(
+                          onTap: () {
+                            products.fetchProductsHomeScreen(
+                              categoryId: cat.id!,
                             );
                           },
-                          separatorBuilder: (context, index) =>
-                              const SizedBox(width: 10),
-                          itemCount: products.categoryList.length,
-                        ),
-                      );
-                    },
-                  ),
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 16,
+                              vertical: 8,
+                            ),
+                            decoration: BoxDecoration(
+                              color: isSelected
+                                  ? AppColors.primary
+                                  : AppColors.white,
+                              border: Border.all(
+                                color: AppColors.textHint,
+                                width: 1,
+                              ),
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            child: Text(
+                              cat.name ?? '',
+                              style: AppTextStyles.labelSmall.copyWith(
+                                color: isSelected
+                                    ? AppColors.white
+                                    : AppColors.textHint,
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                      separatorBuilder: (context, index) =>
+                          const SizedBox(width: 10),
+                      itemCount: categoryList.length,
+                    ),
+                  );
+                },
+              ),
 
               const SizedBox(height: 25),
 
-              Consumer<ProductListingProvider>(
+              Consumer<HomeScreenProvider>(
                 builder: (context, provider, child) {
                   if (provider.isLoading && provider.productList.isEmpty) {
                     return Center(child: CircularProgressIndicator());
@@ -185,7 +234,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   product.images?.first ?? '',
                                               fit: BoxFit.cover,
                                               placeholder: (context, url) =>
-                                                  const Text('Loading...'),
+                                                  Center(child: const Text('Loading...')),
                                               errorWidget:
                                                   (context, url, error) {
                                                     return Icon(
