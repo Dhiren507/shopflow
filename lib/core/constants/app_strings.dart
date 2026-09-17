@@ -70,7 +70,8 @@ class AppStrings {
   static const String addProductTitle = 'Add Product';
   static const String addProductHelperText = 'Helper Test when clicked on';
   static const String productImagesText = 'Product Images';
-  static const String uploadImagesSubText = 'Upload up to 4 high-quality images.';
+  static const String uploadImagesSubText =
+      'Upload up to 4 high-quality images.';
   static const String productTitleLabel = 'Product Title';
   static const String productTitleHint = 'e.g. Minimalist Ceramic Mug';
   static const String productTitleError = 'Title is Required';
@@ -125,32 +126,31 @@ class AppStrings {
     },
   ];
 
-
   static const List<Map<String, dynamic>> profileOptions = [
     {
-      'leadingIcon' : AppImages.editProfilePerson,
-      'optionText' : 'Edit Profile',
-      'navigateTo' : AppRoutes.sellerDashboardScreen
+      'leadingIcon': AppImages.editProfilePerson,
+      'optionText': 'Edit Profile',
+      'navigateTo': AppRoutes.sellerDashboardScreen,
     },
     {
-      'leadingIcon' : AppImages.documentPaperIcon,
-      'optionText' : 'Order History',
-      'navigateTo' : AppRoutes.sellerDashboardScreen
+      'leadingIcon': AppImages.documentPaperIcon,
+      'optionText': 'Order History',
+      'navigateTo': AppRoutes.sellerDashboardScreen,
     },
     {
-      'leadingIcon' : AppImages.locationMarkIcon,
-      'optionText' : 'Addresses',
-      'navigateTo' : AppRoutes.sellerDashboardScreen
+      'leadingIcon': AppImages.locationMarkIcon,
+      'optionText': 'Addresses',
+      'navigateTo': AppRoutes.sellerDashboardScreen,
     },
     {
-      'leadingIcon' : AppImages.bellIcon,
-      'optionText' : 'Notifications',
-      'navigateTo' : AppRoutes.sellerDashboardScreen
+      'leadingIcon': AppImages.bellIcon,
+      'optionText': 'Notifications',
+      'navigateTo': AppRoutes.sellerDashboardScreen,
     },
     {
-      'leadingIcon' : AppImages.helperTooltipIcon,
-      'optionText' : 'Help & Support',
-      'navigateTo' : AppRoutes.sellerDashboardScreen
+      'leadingIcon': AppImages.helperTooltipIcon,
+      'optionText': 'Help & Support',
+      'navigateTo': AppRoutes.sellerDashboardScreen,
     },
   ];
 }

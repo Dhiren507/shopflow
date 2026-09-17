@@ -1,4 +1,4 @@
-import 'package:shopflow/features/shop/models/product_model.dart';
+import 'package:shopflow/features/home/models/product_model.dart';
 
 class PriceCalculationUtils {
   static Map<String, num> calculateProductPrice(num actualPrice, int discount) {

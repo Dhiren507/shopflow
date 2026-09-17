@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart' hide Category;
 import 'package:shopflow/core/constants/api_endpoints.dart';
 import 'package:shopflow/core/network/api_client.dart';
-import 'package:shopflow/features/shop/models/product_model.dart';
+import 'package:shopflow/features/home/models/product_model.dart';
 
 class CategoryProvider extends ChangeNotifier {
   List<Category> categoryList = [];

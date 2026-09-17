@@ -6,7 +6,7 @@ import 'package:shopflow/core/constants/app_strings.dart';
 import 'package:shopflow/core/constants/app_text_styles.dart';
 import 'package:shopflow/core/services/app_storage_service.dart';
 import 'package:shopflow/core/widgets/common_button.dart';
-import 'package:shopflow/features/onboarding/provider/onboarding_screen_provider.dart';
+import 'package:shopflow/features/onboarding/providers/onboarding_screen_provider.dart';
 
 class IntroStepperScreen extends StatefulWidget {
   const IntroStepperScreen({super.key});
