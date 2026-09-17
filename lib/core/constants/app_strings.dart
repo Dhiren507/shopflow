@@ -153,4 +153,67 @@ class AppStrings {
       'navigateTo': AppRoutes.sellerDashboardScreen,
     },
   ];
+
+
+  // my product listing screen constants
+  static const List<String> tabs = ['Active', 'Draft'];
+
+  static const List<Map<String, dynamic>> myProductsList = [
+    {
+      'id': '1',
+      'name': 'Geometric Brass Desk Lamp',
+      'quantity': '240',
+      'price': '40',
+    },
+    {
+      'id': '2',
+      'name': 'Ergonomic Leather Office Chair',
+      'quantity': '15',
+      'price': '180',
+    },
+    {
+      'id': '3',
+      'name': 'Minimalist Ceramic Coffee Mug',
+      'quantity': '3', // Less than 5
+      'price': '15',
+    },
+    {'id': '4', 'name': 'Bamboo Laptop Stand', 'quantity': '85', 'price': '35'},
+    {
+      'id': '5',
+      'name': 'Noise-Canceling Wireless Earbuds',
+      'quantity': '2', // Less than 5
+      'price': '120',
+    },
+    {
+      'id': '6',
+      'name': 'Waterproof Sports Smartwatch',
+      'quantity': '60',
+      'price': '95',
+    },
+    {
+      'id': '7',
+      'name': 'Premium Leather Journal Notebook',
+      'quantity': '1', // Less than 5
+      'price': '22',
+    },
+    {
+      'id': '8',
+      'name': 'Portable Bluetooth Speaker',
+      'quantity': '110',
+      'price': '50',
+    },
+    {
+      'id': '9',
+      'name': 'Adjustable Aluminium Tripod',
+      'quantity': '4', // Less than 5
+      'price': '45',
+    },
+    {
+      'id': '10',
+      'name': 'Dual-Port Fast Wall Charger',
+      'quantity': '350',
+      'price': '18',
+    },
+  ];
+
 }

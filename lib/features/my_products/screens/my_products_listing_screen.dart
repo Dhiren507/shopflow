@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shopflow/core/constants/app_strings.dart';
 import 'package:shopflow/features/my_products/providers/my_products_screen_provider.dart';
 
 import '../../../core/constants/app_colors.dart';
@@ -14,67 +15,6 @@ class MyProductsListingScreen extends StatefulWidget {
 }
 
 class _MyProductsListingScreenState extends State<MyProductsListingScreen> {
-  int activeTabIndex = 1;
-  final List<String> tabs = ['Active', 'Draft'];
-
-  final List<Map<String, dynamic>> myProductsList = [
-    {
-      'id': '1',
-      'name': 'Geometric Brass Desk Lamp',
-      'quantity': '240',
-      'price': '40',
-    },
-    {
-      'id': '2',
-      'name': 'Ergonomic Leather Office Chair',
-      'quantity': '15',
-      'price': '180',
-    },
-    {
-      'id': '3',
-      'name': 'Minimalist Ceramic Coffee Mug',
-      'quantity': '3', // Less than 5
-      'price': '15',
-    },
-    {'id': '4', 'name': 'Bamboo Laptop Stand', 'quantity': '85', 'price': '35'},
-    {
-      'id': '5',
-      'name': 'Noise-Canceling Wireless Earbuds',
-      'quantity': '2', // Less than 5
-      'price': '120',
-    },
-    {
-      'id': '6',
-      'name': 'Waterproof Sports Smartwatch',
-      'quantity': '60',
-      'price': '95',
-    },
-    {
-      'id': '7',
-      'name': 'Premium Leather Journal Notebook',
-      'quantity': '1', // Less than 5
-      'price': '22',
-    },
-    {
-      'id': '8',
-      'name': 'Portable Bluetooth Speaker',
-      'quantity': '110',
-      'price': '50',
-    },
-    {
-      'id': '9',
-      'name': 'Adjustable Aluminium Tripod',
-      'quantity': '4', // Less than 5
-      'price': '45',
-    },
-    {
-      'id': '10',
-      'name': 'Dual-Port Fast Wall Charger',
-      'quantity': '350',
-      'price': '18',
-    },
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -86,7 +26,7 @@ class _MyProductsListingScreenState extends State<MyProductsListingScreen> {
             Row(
               spacing: 5,
               children: [
-                Text('12 items', style: AppTextStyles.bodySmall),
+                Text('${AppStrings.myProductsList.length} items', style: AppTextStyles.bodySmall),
                 Container(
                   height: 4,
                   width: 4,
@@ -109,7 +49,7 @@ class _MyProductsListingScreenState extends State<MyProductsListingScreen> {
               ),
               child: Consumer<MyProductsScreenProvider>(builder: (context, provider, child) {
                 return Row(
-                  children: List.generate(tabs.length, (index) {
+                  children: List.generate(AppStrings.tabs.length, (index) {
                     final isSelected = provider.currentTabIndex == index;
 
                     return Expanded(
@@ -127,7 +67,7 @@ class _MyProductsListingScreenState extends State<MyProductsListingScreen> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Text(
-                            tabs[index],
+                            AppStrings.tabs[index],
                             style: AppTextStyles.headingSmall.copyWith(
                               color: isSelected
                                   ? AppColors.primary
@@ -147,7 +87,7 @@ class _MyProductsListingScreenState extends State<MyProductsListingScreen> {
             Expanded(
               child: ListView.separated(
                 itemBuilder: (context, index) {
-                  final item = myProductsList[index];
+                  final item = AppStrings.myProductsList[index];
                   return Card(
                     color: AppColors.white,
                     child: Padding(
@@ -233,7 +173,7 @@ class _MyProductsListingScreenState extends State<MyProductsListingScreen> {
                 },
                 separatorBuilder: (context, index) =>
                     const SizedBox(height: 12),
-                itemCount: myProductsList.length,
+                itemCount: AppStrings.myProductsList.length,
               ),
             ),
           ],

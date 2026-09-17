@@ -442,13 +442,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           );
         },
       ),
-      bottomNavigationBar: Consumer2<ProductDetailProvider, CartProvider>(
-        builder: (context, provider, cartProvider, child) {
-          final selectedProduct = provider.selectedProduct;
-
+      bottomNavigationBar: Consumer<ProductDetailProvider>(
+        builder: (context, provider, child) {
           if (provider.isLoading) {
             return const SizedBox();
           }
+
+          final selectedProduct = provider.selectedProduct;
 
           return BottomAppBar(
             color: AppColors.bgCard,
@@ -457,6 +457,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               child: Row(
                 children: [
                   Column(
+                    crossAxisAlignment: CrossAxisAlignment.start, // Cleaner text alignment
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
                         AppStrings.totalPriceText,
@@ -475,9 +477,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       onPressed: () {
                         if (selectedProduct == null) return;
 
-                        final bool isNewItem = cartProvider.addProduct(
-                          selectedProduct,
-                        );
+                        final cartProvider = context.read<CartProvider>();
+
+                        final bool isNewItem = cartProvider.addProduct(selectedProduct);
 
                         ScaffoldMessenger.of(context).clearSnackBars();
                         ScaffoldMessenger.of(context).showSnackBar(
