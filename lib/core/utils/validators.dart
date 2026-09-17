@@ -1,10 +1,20 @@
 class Validators {
   static String? validateEmail(String? email) {
     if (email == null || email.isEmpty) {
-      return 'email is required';
+      return 'Email is required';
     }
+
+    final RegExp emailRegex = RegExp(
+      r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
+    );
+
+    if (!emailRegex.hasMatch(email)) {
+      return 'Enter a valid email address';
+    }
+
     return null;
   }
+
 
   static String? validatePassword(String? password) {
     if (password == null || password.isEmpty) {
