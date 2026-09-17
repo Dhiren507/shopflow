@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:shopflow/features/home/models/product_model.dart';
+import 'package:shopflow/core/models/product_model.dart';
 
 class CartProvider extends ChangeNotifier {
   List<ProductModel> cartItems = [];

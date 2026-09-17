@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:shopflow/core/constants/api_endpoints.dart';
 import 'package:shopflow/core/network/api_client.dart';
-import 'package:shopflow/features/home/models/product_model.dart';
+import 'package:shopflow/core/models/product_model.dart';
 
 class HomeScreenProvider extends ChangeNotifier {
   List<ProductModel> productList = [];

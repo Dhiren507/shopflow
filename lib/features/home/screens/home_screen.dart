@@ -8,7 +8,7 @@ import 'package:shopflow/core/constants/app_images.dart';
 import 'package:shopflow/core/constants/app_routes.dart';
 import 'package:shopflow/core/providers/category_provider.dart';
 import 'package:shopflow/core/utils/price_calculation_utils.dart';
-import 'package:shopflow/features/home/models/product_model.dart';
+import 'package:shopflow/core/models/product_model.dart';
 import 'package:shopflow/features/home/providers/home_screen_provider.dart';
 
 import '../../../core/constants/app_text_styles.dart';

@@ -7,7 +7,7 @@ import 'package:shopflow/features/cart/providers/cart_provider.dart';
 import 'package:shopflow/core/utils/price_calculation_utils.dart';
 import 'package:shopflow/core/widgets/common_button.dart';
 import 'package:shopflow/core/widgets/common_divider.dart';
-import 'package:shopflow/features/home/models/product_model.dart';
+import 'package:shopflow/core/models/product_model.dart';
 import 'package:shopflow/features/cart/widgets/cart_item_card.dart';
 import 'package:shopflow/features/cart/widgets/empty_cart_placeholder.dart';
 

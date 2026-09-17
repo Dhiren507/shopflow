@@ -15,7 +15,7 @@ import 'package:shopflow/core/widgets/common_app_bar.dart';
 import 'package:shopflow/core/widgets/common_button.dart';
 import 'package:shopflow/core/widgets/common_divider.dart';
 import 'package:shopflow/core/widgets/common_input_field.dart';
-import 'package:shopflow/features/home/models/product_model.dart';
+import 'package:shopflow/core/models/product_model.dart';
 import 'package:shopflow/features/my_products/models/product_form_model.dart';
 import 'package:shopflow/features/my_products/providers/add_product_provider.dart';
 
@@ -317,7 +317,7 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
 
                         return DropdownButtonFormField<int>(
                           isExpanded: true,
-                          value: hasValidCategory ? selectedId : null,
+                          initialValue: hasValidCategory ? selectedId : null,
                           hint: Text(
                             AppStrings.selectCategoryHint,
                             style: AppTextStyles.labelSmall.copyWith(

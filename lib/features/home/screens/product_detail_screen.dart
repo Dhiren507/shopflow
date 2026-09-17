@@ -14,7 +14,7 @@ import 'package:shopflow/core/widgets/common_divider.dart';
 import 'package:shopflow/core/widgets/common_expansion_tile.dart';
 import 'package:shopflow/core/widgets/numeric_stepper_button.dart';
 import 'package:shopflow/core/widgets/product_rating_stars.dart';
-import 'package:shopflow/features/home/models/product_model.dart';
+import 'package:shopflow/core/models/product_model.dart';
 import 'package:shopflow/features/home/widgets/rating_section.dart';
 
 import '../../../core/constants/app_text_styles.dart';
