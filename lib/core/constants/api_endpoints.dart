@@ -9,7 +9,5 @@ class ApiEndpoints {
 
   static const String categoriesEndpoint = '$baseApiUrl/categories';
 
-  static String productByCategoryIdEndpoint(int id) => '$baseApiUrl/categoryId=$id';
-
   static String addProductEndpoint ='$baseApiUrl/products';
 }
